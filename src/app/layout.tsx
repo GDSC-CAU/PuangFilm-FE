@@ -1,8 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const cafe24 = localFont({
+  src: "./styles/fonts/cafe24.woff2",
+  display: "swap",
+  weight: "45 920",
+  variable: "--font-cafe24",
+});
+
+const sfpro = localFont({
+  src: "./styles/fonts/sfpro.ttf",
+  display: "swap",
+  weight: "45 920",
+  variable: "--font-sfpro",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="kr" className={`${cafe24.variable} ${sfpro.variable}`}>
+      <body className={cafe24.className}>{children}</body>
     </html>
   );
 }
