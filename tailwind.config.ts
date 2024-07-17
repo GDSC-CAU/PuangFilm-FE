@@ -20,6 +20,17 @@ const config: Config = {
         '2xl': '1.5rem',
        ' xl': '1.25rem',
     },
+    colors: {
+      background: '#9CCEE8',
+      theme: {
+          background: '#9CCEE8',
+          font: '#251365',
+      },
+      primary: {
+          darkblue: '#133365',
+          gray:'#E5E5EA',
+      },
+  },
     },
   },
   plugins: [],

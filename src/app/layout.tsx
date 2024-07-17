@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr" className={`${cafe24.variable} ${sfpro.variable}`}>
-      <body className={cafe24.className}>{children}</body>
+      <body className=" h-screen max-h-screen min-h-screen bg-background font-cafe24">{children}</body>
     </html>
   );
 }
