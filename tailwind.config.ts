@@ -8,11 +8,29 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      fontFamily: {
+        cafe24: ['var(--font-cafe24)'],
+        sfpro: ['var(--font-sfpro)'],
+    },
+    fontSize: {
+        '8xl': '6rem',
+        '6xl': '3.75rem',
+        '5xl': '3rem',
+        '3xl': '1.875rem',
+        '2xl': '1.5rem',
+       ' xl': '1.25rem',
+    },
+    colors: {
+      background: '#9CCEE8',
+      theme: {
+          background: '#9CCEE8',
+          font: '#251365',
       },
+      primary: {
+          darkblue: '#133365',
+          gray:'#E5E5EA',
+      },
+  },
     },
   },
   plugins: [],
