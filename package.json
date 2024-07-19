@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --cache --write .",
-    "lint": "next lint --cache .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "next lint --cache ."
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,scss}": [
