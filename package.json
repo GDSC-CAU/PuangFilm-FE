@@ -6,7 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "format": "prettier --cache --write .",
+    "lint": "next lint --cache .",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,scss}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   },
   "dependencies": {
     "next": "14.2.5",
@@ -30,6 +38,8 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.34.4",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.7",
     "postcss": "^8.4.39",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",

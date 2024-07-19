@@ -1,4 +1,5 @@
 export default function Home() {
+  console.log('dfs');
   return (
     <div>
       기본 글꼴은 cafe24
