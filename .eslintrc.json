@@ -1,3 +1,67 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "createDefaultProgram": true
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "ignorePatterns": ["node_modules/"],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-var": "error",
+    "no-console": "warn",
+    "prefer-const": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": 0,
+    "@typescript-eslint/semi": "off",
+    "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
+    "@typescript-eslint/camelcase": "off",
+    "no-useless-catch": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": true,
+        "ignoreDeclarationSort": true
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "alphabetize": { "order": "asc", "caseInsensitive": true },
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object"
+        ],
+        "newlines-between": "never",
+        "pathGroupsExcludedImportTypes": ["builtin"]
+      }
+    ],
+    "linebreak-style": 0
+  }
 }
