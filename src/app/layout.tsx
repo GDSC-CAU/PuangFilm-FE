@@ -3,14 +3,14 @@ import localFont from 'next/font/local';
 import './globals.css';
 
 const cafe24 = localFont({
-  src: './styles/fonts/cafe24.woff2',
+  src: '../styles/fonts/cafe24.woff2',
   display: 'swap',
   weight: '45 920',
   variable: '--font-cafe24',
 });
 
 const sfpro = localFont({
-  src: './styles/fonts/sfpro.ttf',
+  src: '../styles/fonts/sfpro.ttf',
   display: 'swap',
   weight: '45 920',
   variable: '--font-sfpro',
@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr" className={`${cafe24.variable} ${sfpro.variable}`}>
-      <body className="h-screen max-h-screen min-h-screen bg-background font-cafe24">
+      <body className="flex h-screen max-h-screen min-h-screen flex-1 items-center justify-center bg-background font-cafe24">
         {children}
       </body>
     </html>
