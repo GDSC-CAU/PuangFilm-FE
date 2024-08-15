@@ -18,7 +18,7 @@ const config: Config = {
         '5xl': '3rem',
         '3xl': '1.875rem',
         '2xl': '1.5rem',
-        ' xl': '1.25rem',
+        xl: '1.25rem',
       },
       colors: {
         background: '#9CCEE8',
