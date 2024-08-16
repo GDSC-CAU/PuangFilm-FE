@@ -29,6 +29,7 @@ const config: Config = {
         primary: {
           darkblue: '#133365',
           gray: '#E5E5EA',
+          lightblue: '5F9FC0',
         },
       },
       width: {

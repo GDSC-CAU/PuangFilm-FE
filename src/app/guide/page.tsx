@@ -36,15 +36,14 @@ function Guide({
 }: GuideProps) {
   return (
     <div className="flex flex-col">
-      <div className="relative flex flex-row items-center pt-8">
-        {/* <div className="h-[4.5rem] w-[4.5rem] rounded-full bg-white" /> */}
+      <div className="flex flex-row items-center pt-8">
         <Image
           src={profile}
           alt="Sample Image"
           width={72} // 이미지 너비
           height={72} // 이미지 높이
         />
-        <div className="pl-5">
+        <div className="pl-4">
           <div className="text-xl">{title}</div>
           <div className="font-sfpro text-sm text-white">{children}</div>
         </div>
@@ -62,7 +61,7 @@ function Guide({
 export default function GuideView() {
   return (
     <div>
-      <div className="left-5 top-5">
+      <div className="py-8">
         <SVGPrevious />
       </div>
       <div className="text-xl">
@@ -116,7 +115,12 @@ export default function GuideView() {
         </div>
       </div>
 
-      <h1>This is guide Page😊🔺▲</h1>
+      <div className="flex justify-center">
+        <span className="font-primary-lightblue mb-5 inline-block border-b-2 border-[#5F9FC0] pt-12 font-sfpro text-xs font-bold opacity-20">
+          개인정보 수집 및 이용 정책 {'>'}
+        </span>
+      </div>
+
       <MyButton name="사진 등록하러가기" target="/upload" />
     </div>
   );
