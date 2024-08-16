@@ -12,7 +12,7 @@ export default function MyButton({ name, target }: MyButtonProps) {
   return (
     <button
       type="button"
-      className="text-primary-foreground border-5 rounded-md border-red-500 bg-yellow-500 px-6 py-3 text-lg font-medium"
+      className="border-5 mb-12 h-12 w-full rounded-full bg-primary-darkblue text-xl text-white"
       onClick={() => {
         router.push(target);
       }}

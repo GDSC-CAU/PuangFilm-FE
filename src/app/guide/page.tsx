@@ -121,7 +121,7 @@ export default function GuideView() {
         </span>
       </div>
 
-      <MyButton name="사진 등록하러가기" target="/upload" />
+      <MyButton name="사진 등록하러 가기" target="/upload" />
     </div>
   );
 }
