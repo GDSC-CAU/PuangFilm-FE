@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import MyButton from '@/components/MyButton';
 import SVGPrevious from '@/styles/icons/previous.svg';
+import profile from '../../../public/profile.png';
 
 interface GuideProps {
   title: string;
@@ -34,8 +36,14 @@ function Guide({
 }: GuideProps) {
   return (
     <div className="flex flex-col">
-      <div className="flex flex-row items-center pt-8">
-        <div className="h-[4.5rem] w-[4.5rem] rounded-full bg-white" />
+      <div className="relative flex flex-row items-center pt-8">
+        {/* <div className="h-[4.5rem] w-[4.5rem] rounded-full bg-white" /> */}
+        <Image
+          src={profile}
+          alt="Sample Image"
+          width={72} // 이미지 너비
+          height={72} // 이미지 높이
+        />
         <div className="pl-5">
           <div className="text-xl">{title}</div>
           <div className="font-sfpro text-sm text-white">{children}</div>
