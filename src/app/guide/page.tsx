@@ -66,7 +66,7 @@ export default function GuideView() {
 
       <div>
         <Guide
-          title="이런 사진 좋아요"
+          title="이런 사진 좋아요 😀"
           description1="정면에서 찍은"
           description2="얼굴 위주 사진"
           description3="배경이 단색인"
@@ -74,9 +74,21 @@ export default function GuideView() {
         >
           모든 사진은 <span className="font-bold">고화질</span>일수록 좋아요!
         </Guide>
+        <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
+          <div>
+            이외에도{' '}
+            <span className="font-bold">비슷한 각도에서 찍은 사진</span>
+            이나
+          </div>
+          <div>
+            선명하고{' '}
+            <span className="font-bold">아무것도 가려지지 않은 얼굴 사진</span>
+            이 좋아요!
+          </div>
+        </div>
 
         <Guide
-          title="이런 사진은 피해주세요"
+          title="이런 사진은 피해주세요 😵"
           description1="얼굴 일부를 가린"
           description2="전신 사진"
           description3="단체 사진 크롭"
@@ -84,9 +96,19 @@ export default function GuideView() {
         >
           <span className="font-bold">흑백 사진</span>은 어렵습니다. (흑흑)
         </Guide>
+        <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
+          <div>
+            이외에도{' '}
+            <span className="font-bold">복잡한 배경에서 촬영한 사진</span>
+            이나
+          </div>
+          <div>
+            <span className="font-bold">아동 사진</span>은 힘들어요!😭
+          </div>
+        </div>
       </div>
 
-      <h1>This is guide Page</h1>
+      <h1>This is guide Page😊🔺▲</h1>
       <MyButton name="사진 등록하러가기" target="/upload" />
     </div>
   );
