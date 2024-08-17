@@ -1,4 +1,4 @@
-import MyButton from '@/components/MyButton';
+import MyButton from '@/_components/MyButton';
 
 export default function LoginView() {
   return (

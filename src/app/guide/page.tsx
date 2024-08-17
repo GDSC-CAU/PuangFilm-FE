@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import MyButton from '@/components/MyButton';
+import MyButton from '@/_components/MyButton';
 import SVGPrevious from '@/styles/icons/previous.svg';
 import profile from '../../../public/profile.png';
 
