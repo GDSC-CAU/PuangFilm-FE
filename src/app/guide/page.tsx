@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import MyButton from '@/components/MyButton';
 import SVGPrevious from '@/styles/icons/previous.svg';
 import profile from '../../../public/profile.png';
@@ -62,7 +63,9 @@ export default function GuideView() {
   return (
     <div>
       <div className="py-8">
-        <SVGPrevious />
+        <Link href="/concept">
+          <SVGPrevious />
+        </Link>
       </div>
       <div className="text-xl">
         <div>자연스러운 AI프로필을 위해</div>
