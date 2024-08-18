@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import SVGPrevious from '@/styles/icons/previous.svg';
+import SVGTriangle from '@/styles/icons/triangle.svg';
 import profile from '../../../public/profile.png';
 import Modal from './_components/Modal';
 
@@ -23,7 +24,8 @@ function ImageWithDescription({ description }: ImageWithDescriptionProps) {
   return (
     <div className="flex flex-col items-center">
       <div className="h-[10rem] w-[10rem] bg-white" />
-      <div className="font-primary-darkblue pt-2 font-sfpro text-xs font-extrabold">
+      <div className="font-primary-darkblue flex flex-row items-center gap-1 pt-2 font-sfpro text-xs font-extrabold">
+        <SVGTriangle />
         {description}
       </div>
     </div>
