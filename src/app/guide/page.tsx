@@ -1,69 +1,11 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import SVGPrevious from '@/styles/icons/previous.svg';
-import SVGTriangle from '@/styles/icons/triangle.svg';
-import profile from '../../../public/profile.png';
+import GuideDetail from './_components/GuideDetail';
 import Modal from './_components/Modal';
 
-interface GuideProps {
-  title: string;
-  children: React.ReactNode;
-  description1: string;
-  description2: string;
-  description3: string;
-  description4: string;
-}
-
-interface ImageWithDescriptionProps {
-  description: string;
-}
-function ImageWithDescription({ description }: ImageWithDescriptionProps) {
-  return (
-    <div className="flex w-full flex-col items-center">
-      <div className="h-12 w-full bg-white" style={{ paddingTop: '100%' }} />
-      <div className="font-primary-darkblue flex flex-row items-center gap-1 pt-2 font-sfpro text-xs font-extrabold">
-        <SVGTriangle />
-        {description}
-      </div>
-    </div>
-  );
-}
-
-function Guide({
-  title,
-  children,
-  description1,
-  description2,
-  description3,
-  description4,
-}: GuideProps) {
-  return (
-    <div className="flex flex-col">
-      <div className="flex flex-row items-center pt-8">
-        <Image
-          src={profile}
-          alt="Sample Image"
-          width={72} // 이미지 너비
-          height={72} // 이미지 높이
-        />
-        <div className="pl-4">
-          <div className="text-xl">{title}</div>
-          <div className="font-sfpro text-sm text-white">{children}</div>
-        </div>
-      </div>
-
-      <div className="flex grid grid-cols-2 justify-center gap-x-4 gap-y-4 pt-4">
-        <ImageWithDescription description={description1} />
-        <ImageWithDescription description={description2} />
-        <ImageWithDescription description={description3} />
-        <ImageWithDescription description={description4} />
-      </div>
-    </div>
-  );
-}
 export default function GuideView() {
   const [isClicked, setIsClicked] = useState(false);
   const handleButtonClick = () => {
@@ -87,7 +29,7 @@ export default function GuideView() {
       </div>
 
       <div>
-        <Guide
+        <GuideDetail
           title="이런 사진 좋아요 😀"
           description1="정면에서 찍은"
           description2="얼굴 위주 사진"
@@ -95,7 +37,7 @@ export default function GuideView() {
           description4="가까운 거리에서 찍은 사진"
         >
           모든 사진은 <span className="font-bold">고화질</span>일수록 좋아요!
-        </Guide>
+        </GuideDetail>
         <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
           <div>
             이외에도{' '}
@@ -109,7 +51,7 @@ export default function GuideView() {
           </div>
         </div>
 
-        <Guide
+        <GuideDetail
           title="이런 사진은 피해주세요 😵"
           description1="얼굴 일부를 가린"
           description2="전신 사진"
@@ -117,7 +59,7 @@ export default function GuideView() {
           description4="노출이 심한 사진"
         >
           <span className="font-bold">흑백 사진</span>은 어렵습니다. (흑흑)
-        </Guide>
+        </GuideDetail>
         <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
           <div>
             이외에도{' '}
@@ -135,6 +77,7 @@ export default function GuideView() {
           개인정보 수집 및 이용 정책 {'>'}
         </span>
       </div>
+
       {isClicked ? (
         <div className="relative z-40 pb-4">
           <Modal onClose={handleCloseModal} />
