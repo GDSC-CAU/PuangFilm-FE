@@ -1,6 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import MyButton from '@/_components/MyButton';
+import React, { useState } from 'react';
 import SVGPrevious from '@/styles/icons/previous.svg';
 import profile from '../../../public/profile.png';
 import Modal from './_components/Modal';
@@ -61,6 +63,13 @@ function Guide({
   );
 }
 export default function GuideView() {
+  const [isClicked, setIsClicked] = useState(false);
+  const handleButtonClick = () => {
+    setIsClicked(true);
+  };
+  const handleCloseModal = () => {
+    setIsClicked(false);
+  };
   return (
     <div>
       <div className="py-8">
@@ -124,9 +133,19 @@ export default function GuideView() {
           개인정보 수집 및 이용 정책 {'>'}
         </span>
       </div>
-
-      <MyButton name="사진 등록하러 가기" target="/upload" />
-      <Modal />
+      {isClicked ? (
+        <div className="relative z-40 pb-4">
+          <Modal onClose={handleCloseModal} />
+        </div>
+      ) : (
+        <button
+          type="button"
+          className="border-5 mb-12 h-12 w-full rounded-full bg-primary-darkblue text-xl text-white"
+          onClick={handleButtonClick}
+        >
+          사진 등록하러 가기
+        </button>
+      )}
     </div>
   );
 }

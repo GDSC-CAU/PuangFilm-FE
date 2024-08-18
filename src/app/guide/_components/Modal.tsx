@@ -1,8 +1,11 @@
 import Link from 'next/link';
 
-export default function Modal() {
+interface ModalProps {
+  onClose: () => void;
+}
+export default function Modal({ onClose }: ModalProps) {
   return (
-    <div className="flex h-[17rem] w-full flex-col items-center justify-center rounded-[20px] bg-white px-6 pt-6">
+    <div className="mt-[-200px] flex h-[17rem] w-full flex-col items-center justify-center rounded-[20px] bg-white px-6 pt-6">
       <div className="text-xl">개인정보 수집 및 이용 동의</div>
       <div className="mb-4 flex justify-center pt-4">
         <span className="font-primary-lightblue inline-block border-b-2 border-[#5F9FC0] font-sfpro text-xs font-bold opacity-20">
@@ -28,6 +31,7 @@ export default function Modal() {
         </Link>
         <button
           type="button"
+          onClick={onClose}
           className="border-5 h-12 w-full rounded-full bg-white text-xl text-primary-gray"
         >
           동의 안함
