@@ -22,8 +22,8 @@ interface ImageWithDescriptionProps {
 }
 function ImageWithDescription({ description }: ImageWithDescriptionProps) {
   return (
-    <div className="flex flex-col items-center">
-      <div className="h-[10rem] w-[10rem] bg-white" />
+    <div className="flex w-full flex-col items-center">
+      <div className="h-12 w-full bg-white" style={{ paddingTop: '100%' }} />
       <div className="font-primary-darkblue flex flex-row items-center gap-1 pt-2 font-sfpro text-xs font-extrabold">
         <SVGTriangle />
         {description}
@@ -73,7 +73,7 @@ export default function GuideView() {
     setIsClicked(false);
   };
   return (
-    <div>
+    <div className="flex w-full flex-col justify-start">
       <div className="py-8">
         <Link href="/concept">
           <SVGPrevious />
