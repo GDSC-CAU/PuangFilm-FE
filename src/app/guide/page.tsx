@@ -3,6 +3,7 @@ import Link from 'next/link';
 import MyButton from '@/_components/MyButton';
 import SVGPrevious from '@/styles/icons/previous.svg';
 import profile from '../../../public/profile.png';
+import Modal from './_components/Modal';
 
 interface GuideProps {
   title: string;
@@ -125,6 +126,7 @@ export default function GuideView() {
       </div>
 
       <MyButton name="사진 등록하러 가기" target="/upload" />
+      <Modal />
     </div>
   );
 }
