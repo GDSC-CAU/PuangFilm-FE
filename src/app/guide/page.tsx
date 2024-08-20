@@ -1,8 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import React, { useState } from 'react';
-import SVGPrevious from '@/styles/icons/previous.svg';
+import PreviousPage from '@/components/PreviousPage';
 import GuideDetail from './_components/GuideDetail';
 import Modal from './_components/Modal';
 
@@ -30,11 +29,7 @@ export default function GuideView() {
   };
   return (
     <div className="flex w-full flex-col justify-start">
-      <div className="py-8">
-        <Link href="/concept">
-          <SVGPrevious />
-        </Link>
-      </div>
+      <PreviousPage target="/concept" />
       <div className="text-xl">
         <div>자연스러운 AI프로필을 위해</div>
         <div>
