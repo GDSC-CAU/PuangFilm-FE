@@ -7,10 +7,8 @@ interface PrevioiusPageProps {
 
 export default function PreviousPage({ target }: PrevioiusPageProps) {
   return (
-    <div className="py-8">
-      <Link href={target}>
-        <SVGPrevious />
-      </Link>
-    </div>
+    <Link href={target} className="pb-4 pt-8">
+      <SVGPrevious />
+    </Link>
   );
 }

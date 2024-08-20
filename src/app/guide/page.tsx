@@ -84,7 +84,7 @@ export default function GuideView() {
       ) : (
         <button
           type="button"
-          className="mb-12 h-12 w-full rounded-full bg-primary-darkblue text-xl text-white"
+          className="h-12 w-full rounded-full bg-primary-darkblue text-xl text-white"
           onClick={handleOpenModal}
         >
           사진 등록하러 가기

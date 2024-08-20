@@ -9,7 +9,7 @@ export default function MyButton({ name, target }: MyButtonProps) {
   return (
     <Link
       href={target}
-      className="mb-12 flex h-12 w-full items-center justify-center rounded-full bg-primary-darkblue text-xl text-white"
+      className="flex h-12 w-full items-center justify-center rounded-full bg-primary-darkblue text-xl text-white"
     >
       {name}
     </Link>

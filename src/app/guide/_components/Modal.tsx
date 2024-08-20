@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { useEffect } from 'react';
+import MyButton from '@/components/MyButton';
 
 interface ModalProps {
   onClose: () => void;
@@ -30,12 +30,7 @@ export default function Modal({ onClose }: ModalProps) {
       </div>
 
       <div className="flex w-full flex-col">
-        <Link
-          href="/upload"
-          className="flex h-12 w-full items-center justify-center rounded-full bg-primary-darkblue text-xl text-white"
-        >
-          동의{' '}
-        </Link>
+        <MyButton target="/upload" name="동의" />
         <button
           type="button"
           onClick={onClose}
