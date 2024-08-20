@@ -21,18 +21,16 @@ export default function Modal({ onClose }: ModalProps) {
       </div>
 
       <div className="flex w-full flex-col">
-        <Link href="/upload">
-          <button
-            type="button"
-            className="border-5 h-12 w-full rounded-full bg-primary-darkblue text-xl text-white"
-          >
-            동의
-          </button>
+        <Link
+          href="/upload"
+          className="flex h-12 w-full items-center justify-center rounded-full bg-primary-darkblue text-xl text-white"
+        >
+          동의{' '}
         </Link>
         <button
           type="button"
           onClick={onClose}
-          className="border-5 h-12 w-full rounded-full bg-white text-xl text-primary-gray"
+          className="h-12 w-full rounded-full bg-white text-xl text-primary-gray"
         >
           동의 안함
         </button>

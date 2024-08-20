@@ -85,7 +85,7 @@ export default function GuideView() {
       ) : (
         <button
           type="button"
-          className="border-5 mb-12 h-12 w-full rounded-full bg-primary-darkblue text-xl text-white"
+          className="mb-12 h-12 w-full rounded-full bg-primary-darkblue text-xl text-white"
           onClick={handleButtonClick}
         >
           사진 등록하러 가기
