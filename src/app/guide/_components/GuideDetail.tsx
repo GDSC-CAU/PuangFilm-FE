@@ -2,12 +2,16 @@ import Image from 'next/image';
 import SVGTriangle from '@/styles/icons/triangle.svg';
 
 interface ImageWithDescriptionProps {
+  src: string;
   description: string;
 }
-function ImageWithDescription({ description }: ImageWithDescriptionProps) {
+function ImageWithDescription({ src, description }: ImageWithDescriptionProps) {
   return (
     <div className="flex w-full flex-col items-center">
-      <div className="h-12 w-full bg-white" style={{ paddingTop: '100%' }} />
+      <div className="relative w-full" style={{ paddingTop: '100%' }}>
+        <Image src={src} alt={description} layout="fill" objectFit="cover" />
+      </div>
+
       <div className="font-primary-darkblue flex flex-row items-center gap-1 pt-2 font-sfpro text-xs font-extrabold">
         <SVGTriangle />
         {description}
@@ -19,19 +23,13 @@ function ImageWithDescription({ description }: ImageWithDescriptionProps) {
 interface GuideDetailProps {
   title: string;
   children: React.ReactNode;
-  description1: string;
-  description2: string;
-  description3: string;
-  description4: string;
+  examples: { id: string; src: string; description: string }[];
 }
 
 export default function GuideDetail({
   title,
   children,
-  description1,
-  description2,
-  description3,
-  description4,
+  examples,
 }: GuideDetailProps) {
   return (
     <div className="flex flex-col">
@@ -43,11 +41,14 @@ export default function GuideDetail({
         </div>
       </div>
 
-      <div className="flex grid grid-cols-2 justify-center gap-x-4 gap-y-4 pt-4">
-        <ImageWithDescription description={description1} />
-        <ImageWithDescription description={description2} />
-        <ImageWithDescription description={description3} />
-        <ImageWithDescription description={description4} />
+      <div className="grid grid-cols-2 justify-center gap-x-4 gap-y-4 pt-4">
+        {examples.map((example) => (
+          <ImageWithDescription
+            key={example.id}
+            src={example.src}
+            description={example.description}
+          />
+        ))}{' '}
       </div>
     </div>
   );

@@ -6,6 +6,20 @@ import SVGPrevious from '@/styles/icons/previous.svg';
 import GuideDetail from './_components/GuideDetail';
 import Modal from './_components/Modal';
 
+const goodexamples = [
+  { id: '1', src: '/example1.png', description: '정면에서 찍은' },
+  { id: '2', src: '/example2.png', description: '얼굴 위주 사진' },
+  { id: '3', src: '/example3.png', description: '배경이 단색인' },
+  { id: '4', src: '/example4.png', description: '가까운 거리에서 찍은 사진' },
+];
+
+const badexamples = [
+  { id: '5', src: '/example5.png', description: '얼굴 일부를 가린' },
+  { id: '6', src: '/example6.png', description: '전신 사진' },
+  { id: '7', src: '/example7.png', description: '단체 사진 크롭' },
+  { id: '8', src: '/example8.png', description: '노출이 심한 사진' },
+];
+
 export default function GuideView() {
   const [isClicked, setIsClicked] = useState(false);
   const handleButtonClick = () => {
@@ -29,13 +43,7 @@ export default function GuideView() {
       </div>
 
       <div>
-        <GuideDetail
-          title="이런 사진 좋아요 😀"
-          description1="정면에서 찍은"
-          description2="얼굴 위주 사진"
-          description3="배경이 단색인"
-          description4="가까운 거리에서 찍은 사진"
-        >
+        <GuideDetail title="이런 사진 좋아요 😀" examples={goodexamples}>
           모든 사진은 <span className="font-bold">고화질</span>일수록 좋아요!
         </GuideDetail>
         <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
@@ -51,13 +59,7 @@ export default function GuideView() {
           </div>
         </div>
 
-        <GuideDetail
-          title="이런 사진은 피해주세요 😵"
-          description1="얼굴 일부를 가린"
-          description2="전신 사진"
-          description3="단체 사진 크롭"
-          description4="노출이 심한 사진"
-        >
+        <GuideDetail title="이런 사진은 피해주세요 😵" examples={badexamples}>
           <span className="font-bold">흑백 사진</span>은 어렵습니다. (흑흑)
         </GuideDetail>
         <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
