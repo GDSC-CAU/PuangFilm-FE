@@ -1,4 +1,4 @@
-import MyButton from '@/_components/MyButton';
+import MyButton from '@/components/MyButton';
 
 export default function PhotoUploadView() {
   return (
