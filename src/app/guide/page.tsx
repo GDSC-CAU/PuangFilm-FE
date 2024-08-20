@@ -20,12 +20,12 @@ const badexamples = [
 ];
 
 export default function GuideView() {
-  const [isClicked, setIsClicked] = useState(false);
-  const handleButtonClick = () => {
-    setIsClicked(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpenModal = () => {
+    setIsOpen(true);
   };
   const handleCloseModal = () => {
-    setIsClicked(false);
+    setIsOpen(false);
   };
   return (
     <div className="flex w-full flex-col justify-start">
@@ -75,7 +75,7 @@ export default function GuideView() {
         </span>
       </div>
 
-      {isClicked ? (
+      {isOpen ? (
         <div className="relative z-40 pb-4">
           <Modal onClose={handleCloseModal} />
         </div>
@@ -83,7 +83,7 @@ export default function GuideView() {
         <button
           type="button"
           className="mb-12 h-12 w-full rounded-full bg-primary-darkblue text-xl text-white"
-          onClick={handleButtonClick}
+          onClick={handleOpenModal}
         >
           사진 등록하러 가기
         </button>
