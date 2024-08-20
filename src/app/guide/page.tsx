@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import Modal from '@/components/Modal';
 import PreviousPage from '@/components/PreviousPage';
+import useModal from '../hooks/useModal';
 import GuideDetail from './_components/GuideDetail';
-import Modal from './_components/Modal';
 
 const goodexamples = [
   { id: '1', src: '/example1.png', description: '정면에서 찍은' },
@@ -20,13 +20,7 @@ const badexamples = [
 ];
 
 export default function GuideView() {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleOpenModal = () => {
-    setIsOpen(true);
-  };
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   return (
     <div className="flex w-full flex-col justify-start">
       <PreviousPage target="/concept" />
@@ -78,7 +72,23 @@ export default function GuideView() {
       {isOpen ? (
         <div className="fixed inset-0 z-40 flex items-end justify-center bg-black bg-opacity-50">
           <div className="w-full max-w-[420px] px-6">
-            <Modal onClose={handleCloseModal} />
+            <Modal
+              onClose={handleCloseModal}
+              title="개인정보 수집 및 이용 동의"
+              description={
+                <>
+                  푸앙이 사진관은 개인 정보 처리 방침에 따라
+                  <br />
+                  개인 정보를 처리하고 있습니다. 원활한 서비스
+                  <br />
+                  이용을 위해 위 내용에 동의해주세요
+                </>
+              }
+              showPolicy
+              target="/upload"
+              button1="동의"
+              button2="동의 안함"
+            />
           </div>
         </div>
       ) : (
