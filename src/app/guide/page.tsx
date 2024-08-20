@@ -76,8 +76,10 @@ export default function GuideView() {
       </div>
 
       {isOpen ? (
-        <div className="relative z-40 pb-4">
-          <Modal onClose={handleCloseModal} />
+        <div className="fixed inset-0 z-40 flex items-end justify-center bg-black bg-opacity-50">
+          <div className="w-full max-w-[420px] px-6">
+            <Modal onClose={handleCloseModal} />
+          </div>
         </div>
       ) : (
         <button
