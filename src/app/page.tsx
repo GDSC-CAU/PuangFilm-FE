@@ -11,13 +11,13 @@ import login_character from '../../public/login_page_img.png';
 export default function LoginView() {
   return (
     <div className="flex h-640 w-360 flex-col items-center justify-between bg-background">
-      <div className="flex w-full flex-grow flex-col items-center justify-center border-2 border-black">
-        <span className="text-2xl text-theme-font">
+      <div className="ml-10 flex w-full flex-grow flex-col items-start justify-center border-2 border-black">
+        <span className="mb-2 text-2xl text-theme-font">
           어서오세요!
           <br />
           푸앙이 사진관입니다 :)
         </span>
-        <span className="font-sfpro font-bold text-white">
+        <span className="mb-2 font-sfpro font-bold text-white">
           AI 프로필을 찍는 푸앙이의 특별한 사진관!
         </span>
         <span className="font-sfpro text-white">
@@ -27,7 +27,7 @@ export default function LoginView() {
         </span>
       </div>
       {/* <MyButton target="/list" name="이미 로그인 한 경우" /> */}
-      <div className="relative w-full border-2 border-black">
+      <div className="relative w-full">
         <Image
           src={login_character}
           alt="puang login"
