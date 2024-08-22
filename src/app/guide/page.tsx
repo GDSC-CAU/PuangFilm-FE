@@ -32,7 +32,11 @@ export default function GuideView() {
       </div>
 
       <div>
-        <GuideDetail title="이런 사진 좋아요 😀" examples={goodexamples}>
+        <GuideDetail
+          puang="/happy-puang.png"
+          title="이런 사진 좋아요 😀"
+          examples={goodexamples}
+        >
           모든 사진은 <span className="font-bold">고화질</span>일수록 좋아요!
         </GuideDetail>
         <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
@@ -48,7 +52,11 @@ export default function GuideView() {
           </div>
         </div>
 
-        <GuideDetail title="이런 사진은 피해주세요 😵" examples={badexamples}>
+        <GuideDetail
+          puang="/sad-puang.png"
+          title="이런 사진은 피해주세요 😵"
+          examples={badexamples}
+        >
           <span className="font-bold">흑백 사진</span>은 어렵습니다. (흑흑)
         </GuideDetail>
         <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
