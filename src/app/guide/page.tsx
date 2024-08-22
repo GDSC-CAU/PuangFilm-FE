@@ -40,11 +40,17 @@ export default function GuideView() {
             <>
               <div>
                 이외에도{' '}
-                <span className="font-bold">복잡한 배경에서 촬영한 사진</span>
+                <span className="font-bold">
+                  비슷한 각도에서 찍은 사진이나{' '}
+                </span>
                 이나
               </div>
               <div>
-                <span className="font-bold">아동 사진</span>은 힘들어요!😭
+                선명하고{' '}
+                <span className="font-bold">
+                  아무것도 가려지지 않은 얼굴 사진
+                </span>
+                이 좋아요!
               </div>
             </>
           }
