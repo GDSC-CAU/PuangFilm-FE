@@ -32,6 +32,7 @@ interface GuideDetailProps {
   title: string;
   children: React.ReactNode;
   examples: { id: string; src: string; description: string }[];
+  explanation: React.ReactNode;
 }
 
 export default function GuideDetail({
@@ -39,6 +40,7 @@ export default function GuideDetail({
   title,
   children,
   examples,
+  explanation,
 }: GuideDetailProps) {
   return (
     <div className="flex flex-col">
@@ -58,6 +60,10 @@ export default function GuideDetail({
             description={example.description}
           />
         ))}{' '}
+      </div>
+
+      <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
+        {explanation}
       </div>
     </div>
   );

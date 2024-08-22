@@ -36,39 +36,41 @@ export default function GuideView() {
           puang="/happy-puang.png"
           title="이런 사진 좋아요 😀"
           examples={goodexamples}
+          explanation={
+            <>
+              <div>
+                이외에도{' '}
+                <span className="font-bold">복잡한 배경에서 촬영한 사진</span>
+                이나
+              </div>
+              <div>
+                <span className="font-bold">아동 사진</span>은 힘들어요!😭
+              </div>
+            </>
+          }
         >
           모든 사진은 <span className="font-bold">고화질</span>일수록 좋아요!
         </GuideDetail>
-        <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
-          <div>
-            이외에도{' '}
-            <span className="font-bold">비슷한 각도에서 찍은 사진</span>
-            이나
-          </div>
-          <div>
-            선명하고{' '}
-            <span className="font-bold">아무것도 가려지지 않은 얼굴 사진</span>
-            이 좋아요!
-          </div>
-        </div>
 
         <GuideDetail
           puang="/sad-puang.png"
           title="이런 사진은 피해주세요 😵"
           examples={badexamples}
+          explanation={
+            <>
+              <div>
+                이외에도{' '}
+                <span className="font-bold">복잡한 배경에서 촬영한 사진</span>
+                이나
+              </div>
+              <div>
+                <span className="font-bold">아동 사진</span>은 힘들어요!😭
+              </div>
+            </>
+          }
         >
           <span className="font-bold">흑백 사진</span>은 어렵습니다. (흑흑)
         </GuideDetail>
-        <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
-          <div>
-            이외에도{' '}
-            <span className="font-bold">복잡한 배경에서 촬영한 사진</span>
-            이나
-          </div>
-          <div>
-            <span className="font-bold">아동 사진</span>은 힘들어요!😭
-          </div>
-        </div>
       </div>
 
       <div className="flex justify-center">
