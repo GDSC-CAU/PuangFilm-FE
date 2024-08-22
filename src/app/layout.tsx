@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr" className={`${cafe24.variable} ${sfpro.variable}`}>
-      <body className="flex h-screen max-h-screen min-h-screen flex-1 items-center justify-center bg-background font-cafe24">
+      <body className="mx-auto flex min-h-screen min-w-[390px] max-w-[420px] flex-1 items-center justify-center overflow-y-auto bg-background px-6 pb-10 font-cafe24 text-primary-darkblue">
         {children}
       </body>
     </html>
