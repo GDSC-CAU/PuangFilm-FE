@@ -9,7 +9,14 @@ function ImageWithDescription({ src, description }: ImageWithDescriptionProps) {
   return (
     <div className="flex w-full flex-col items-center">
       <div className="relative w-full" style={{ paddingTop: '100%' }}>
-        <Image src={src} alt={description} layout="fill" objectFit="cover" />
+        <Image
+          src={src}
+          alt={description}
+          fill
+          style={{ objectFit: 'cover' }}
+          sizes="(max-width: 390px) 100vw"
+          priority
+        />
       </div>
 
       <div className="font-primary-darkblue flex flex-row items-center gap-1 pt-2 font-sfpro text-xs font-extrabold">
@@ -44,7 +51,7 @@ export default function GuideDetail({
       <div className="grid grid-cols-2 justify-center gap-x-4 gap-y-4 pt-4">
         {examples.map((example) => (
           <ImageWithDescription
-            key={example.id}
+            key={`guide-detail-${example.id}`}
             src={example.src}
             description={example.description}
           />
