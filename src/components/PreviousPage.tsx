@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import SVGPrevious from '@/styles/icons/previous.svg';
 
-interface PrevioiusPageProps {
+interface PreviousPageProps {
   target: string;
 }
 
-export default function PreviousPage({ target }: PrevioiusPageProps) {
+export default function PreviousPage({ target }: PreviousPageProps) {
   return (
-    <Link href={target} className="pb-4 pt-8">
+    <Link href={target}>
       <SVGPrevious />
     </Link>
   );

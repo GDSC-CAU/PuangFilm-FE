@@ -28,7 +28,10 @@ export default function Modal({
   }, []);
 
   return (
-    <div className="flex h-[17rem] w-full flex-col items-center justify-evenly gap-y-4 rounded-[20px] bg-white px-6 pt-6">
+    <div
+      className="flex h-[17rem] w-full flex-col items-center justify-evenly gap-y-4 bg-white px-6 pt-6"
+      style={{ borderRadius: '20px' }}
+    >
       <div className="text-xl">{title}</div>
       {showPolicy && (
         <div className="flex justify-center">

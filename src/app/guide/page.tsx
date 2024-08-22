@@ -24,7 +24,7 @@ export default function GuideView() {
   return (
     <div className="flex w-full flex-col justify-start">
       <PreviousPage target="/concept" />
-      <div className="text-xl">
+      <div className="pt-6 text-xl">
         <div>자연스러운 AI프로필을 위해</div>
         <div>
           <span className="bg-white">적합한 사진들</span>로만 제출해주세요!
