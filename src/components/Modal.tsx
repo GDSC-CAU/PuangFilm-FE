@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import MyButton from '@/components/MyButton';
+import NextButton from '@/components/NextButton';
 
 interface ModalProps {
   onClose: () => void;
@@ -42,7 +42,7 @@ export default function Modal({
       </div>
 
       <div className="flex w-full flex-col">
-        <MyButton target={target} name={button1} />
+        <NextButton target={target} name={button1} />
         <button
           type="button"
           onClick={onClose}
