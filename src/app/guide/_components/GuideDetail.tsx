@@ -28,27 +28,31 @@ function ImageWithDescription({ src, description }: ImageWithDescriptionProps) {
 }
 
 interface GuideDetailProps {
+  puang: string;
   title: string;
   children: React.ReactNode;
   examples: { id: string; src: string; description: string }[];
+  explanation: React.ReactNode;
 }
 
 export default function GuideDetail({
+  puang,
   title,
   children,
   examples,
+  explanation,
 }: GuideDetailProps) {
   return (
     <div className="flex flex-col">
       <div className="flex flex-row items-center pt-8">
-        <Image src="/profile.png" alt="Sample Image" width={72} height={72} />
+        <Image src={puang} alt="Sample Image" width={72} height={72} />
         <div className="pl-4">
           <div className="text-xl">{title}</div>
           <div className="font-sfpro text-sm text-white">{children}</div>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 justify-center gap-x-4 gap-y-4 pt-4">
+      <div className="grid grid-cols-2 justify-center gap-x-3 gap-y-4 pt-4">
         {examples.map((example) => (
           <ImageWithDescription
             key={`guide-detail-${example.id}`}
@@ -56,6 +60,10 @@ export default function GuideDetail({
             description={example.description}
           />
         ))}{' '}
+      </div>
+
+      <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
+        {explanation}
       </div>
     </div>
   );
