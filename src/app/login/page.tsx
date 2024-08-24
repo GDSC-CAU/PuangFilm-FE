@@ -37,7 +37,6 @@ export default function LoginView() {
             height: 'auto',
           }}
         />
-        {/* TODO MyButton 이 link component 로 변경 */}
         <div className="absolute bottom-5 left-1/2 w-4/5 -translate-x-1/2">
           <LoginButton />
         </div>
