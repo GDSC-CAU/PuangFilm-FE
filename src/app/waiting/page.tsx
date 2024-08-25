@@ -1,7 +1,23 @@
+'use client';
+
 import Image from 'next/image';
 import SVGLink from '@/styles/icons/link.svg';
 
 export default function WaitingView() {
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      console.log('복사 성공');
+    } catch (error) {
+      console.error('복사 실패:', error);
+    }
+  };
+
+  const handleLinkCopy = () => {
+    const currentUrl = window.location.href;
+    copyToClipboard(currentUrl);
+  };
+
   return (
     <div className="flex w-full flex-col items-center gap-y-8">
       <div className="text-center text-xl">
@@ -26,10 +42,14 @@ export default function WaitingView() {
         <div className="text-2xs font-sfpro font-bold">
           링크를 복사해두면 완성된 프로필을 <br />더 편하게 받아볼 수 있어요
         </div>
-        <div className="flex h-12 flex-row items-center justify-center gap-1 rounded-full bg-primary-darkblue px-6 font-cafe24 text-xl text-white">
+        <button
+          type="button"
+          onClick={handleLinkCopy}
+          className="flex h-12 flex-row items-center justify-center gap-1 rounded-full bg-primary-darkblue px-6 font-cafe24 text-xl text-white"
+        >
           링크복사
           <SVGLink />
-        </div>
+        </button>
       </div>
     </div>
   );
