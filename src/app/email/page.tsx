@@ -55,7 +55,7 @@ export default function EmailEnterView() {
           priority
         />
 
-        <div className="text-2xs text-center font-sfpro text-white">
+        <div className="text-center font-sfpro text-2xs text-white">
           <span className="font-bold">
             이메일을 입력하면 완료 알림을 보내드립니다. <br />
           </span>
@@ -67,7 +67,7 @@ export default function EmailEnterView() {
           className={`h-12 w-full rounded-full text-center text-xl ${
             isEmailValid
               ? 'bg-primary-darkblue text-white'
-              : 'text-primary-darkgray bg-primary-gray'
+              : 'bg-primary-gray text-primary-darkgray'
           }`}
           disabled={!isEmailValid}
         >
