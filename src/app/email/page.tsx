@@ -40,7 +40,7 @@ export default function EmailEnterView() {
       >
         <input
           placeholder="이메일을 입력해주세요"
-          className="h-12 w-full rounded-full border-2 border-primary-darkblue bg-background text-center font-sfpro text-[1.1rem] font-bold placeholder-primary-darkblue placeholder-opacity-20"
+          className="h-12 w-full rounded-full border-2 border-primary-darkblue bg-background text-center font-sfpro text-xs font-bold placeholder-primary-darkblue placeholder-opacity-20"
           type="email"
           required
           value={email}
@@ -55,7 +55,7 @@ export default function EmailEnterView() {
           priority
         />
 
-        <div className="text-center font-sfpro text-white">
+        <div className="text-2xs text-center font-sfpro text-white">
           <span className="font-bold">
             이메일을 입력하면 완료 알림을 보내드립니다. <br />
           </span>

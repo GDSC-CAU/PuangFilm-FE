@@ -19,7 +19,7 @@ function ImageWithDescription({ src, description }: ImageWithDescriptionProps) {
         />
       </div>
 
-      <div className="font-primary-darkblue flex flex-row items-center gap-1 pt-2 font-sfpro text-xs font-extrabold">
+      <div className="font-primary-darkblue text-3xs flex flex-row items-center gap-1 pt-2 font-sfpro font-extrabold">
         <SVGTriangle />
         {description}
       </div>
@@ -48,7 +48,7 @@ export default function GuideDetail({
         <Image src={puang} alt="Sample Image" width={72} height={72} />
         <div className="pl-4">
           <div className="text-xl">{title}</div>
-          <div className="font-sfpro text-sm text-white">{children}</div>
+          <div className="text-2xs font-sfpro text-white">{children}</div>
         </div>
       </div>
 
@@ -62,7 +62,7 @@ export default function GuideDetail({
         ))}{' '}
       </div>
 
-      <div className="flex flex-col gap-1 py-4 font-sfpro text-xs text-white">
+      <div className="text-3xs flex flex-col gap-1 py-4 font-sfpro text-white">
         {explanation}
       </div>
     </div>

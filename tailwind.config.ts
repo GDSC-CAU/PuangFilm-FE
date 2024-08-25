@@ -20,8 +20,9 @@ const config: Config = {
         '3xl': '1.875rem',
         '2xl': '1.5rem',
         xl: '1.25rem',
-        xs: '1.063rem',
-        '2xs': '0.875rem',
+        xs: '1.063rem', // fontsize : 17px
+        '2xs': '0.875rem', // 14px
+        '3xs': '0.75rem', // 12px
       },
       colors: {
         background: '#9CCEE8',
