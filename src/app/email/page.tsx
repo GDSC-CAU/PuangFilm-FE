@@ -1,11 +1,14 @@
 'use client';
 
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 
 export default function EmailEnterView() {
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const router = useRouter();
 
   const handleEmailEntered = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value;
@@ -19,17 +22,22 @@ export default function EmailEnterView() {
     event.preventDefault();
     if (isEmailValid) {
       console.log('what is your email:', email);
+      router.push('/waiting');
     }
   };
+
   return (
     <div className="w-full">
       <PreviousPage target="/upload" />
-      <div className="text-center text-xl">
+      <div className="mb-8 text-center text-xl">
         프로필을 생성하는데 <br />
         다소 시간이 걸릴 수 있어요!
       </div>
 
-      <form onSubmit={handleEmailSubmit}>
+      <form
+        onSubmit={handleEmailSubmit}
+        className="flex w-full flex-col items-center gap-y-12"
+      >
         <input
           placeholder="이메일을 입력해주세요"
           className="h-12 w-full rounded-full border-2 border-primary-darkblue bg-background text-center font-sfpro text-[1.1rem] font-bold placeholder-primary-darkblue placeholder-opacity-20"
@@ -38,9 +46,29 @@ export default function EmailEnterView() {
           value={email}
           onChange={handleEmailEntered}
         />
+
+        <Image
+          src="/unlocked-profile.png"
+          alt="Sample Image"
+          width={205}
+          height={205}
+          priority
+        />
+
+        <div className="text-center font-sfpro text-white">
+          <span className="font-bold">
+            이메일을 입력하면 완료 알림을 보내드립니다. <br />
+          </span>
+          페이지를 종료하고 다른 일을 해도 괜찮아요!
+        </div>
+
         <button
           type="submit"
-          className={`h-12 w-full rounded-full text-center text-xl ${isEmailValid ? 'bg-primary-darkblue text-white' : 'text-primary-darkgray bg-primary-gray'}`}
+          className={`h-12 w-full rounded-full text-center text-xl ${
+            isEmailValid
+              ? 'bg-primary-darkblue text-white'
+              : 'text-primary-darkgray bg-primary-gray'
+          }`}
           disabled={!isEmailValid}
         >
           확인
