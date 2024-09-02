@@ -23,7 +23,8 @@
   ],
   "rules": {
     "no-var": "error",
-    "no-console": "warn",
+    "no-console": "off",
+    "no-alert": "off",
     "prefer-const": "warn",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": 0,
@@ -31,6 +32,7 @@
     "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
     "@typescript-eslint/camelcase": "off",
     "no-useless-catch": "off",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {
