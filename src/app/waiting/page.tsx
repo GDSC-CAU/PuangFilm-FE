@@ -1,25 +1,18 @@
 'use client';
 
 import Image from 'next/image';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import SVGLink from '@/styles/icons/link.svg';
+import { useRef } from 'react';
 
 export default function WaitingView() {
-  const copyToClipboard = async (text: string) => {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      try {
-        await navigator.clipboard.writeText(text);
-        alert('클립보드에 복사되었습니다.');
-      } catch (error) {
-        throw new Error('텍스트를 클립보드에 복사하는 중 에러 발생');
-      }
-    } else {
-      alert('이 브라우저에서는 클립보드 복사가 지원되지 않습니다.');
+  const copyRef = useRef<HTMLButtonElement>(null);
+  const copyToClipboardFunc = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    if (copyRef.current) {
+      copyRef.current.click();
     }
-  };
-
-  const handleLinkCopy = () => {
-    const currentUrl = window.location.href;
-    copyToClipboard(currentUrl);
   };
 
   return (
@@ -48,12 +41,20 @@ export default function WaitingView() {
         </div>
         <button
           type="button"
-          onClick={handleLinkCopy}
+          onClick={copyToClipboardFunc}
           className="flex h-12 flex-row items-center justify-center gap-1 rounded-full bg-primary-darkblue px-6 font-cafe24 text-xl text-white"
         >
           링크복사
           <SVGLink />
         </button>
+        <CopyToClipboard
+          text={window.location.href}
+          onCopy={() => {
+            alert('클립보드에 복사되었습니다.');
+          }}
+        >
+          <button ref={copyRef} style={{ display: 'none' }} />
+        </CopyToClipboard>
       </div>
     </div>
   );
