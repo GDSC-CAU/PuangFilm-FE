@@ -80,7 +80,7 @@ export default function GuideView() {
       </div>
 
       <div className="flex justify-center">
-        <span className="font-primary-lightblue mb-5 inline-block border-b-2 border-[#5F9FC0] pt-12 font-sfpro text-xs font-bold opacity-20">
+        <span className="font-primary-lightblue mb-5 inline-block border-b-2 border-[#5F9FC0] pt-12 font-sfpro text-2xs font-bold opacity-20">
           개인정보 수집 및 이용 정책 {'>'}
         </span>
       </div>
