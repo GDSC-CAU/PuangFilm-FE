@@ -1,5 +1,12 @@
+'use client';
+
+import { useSetAtom } from 'jotai';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import { useEffect } from 'react';
 import LoginButton from '@/app/login/_components/LoginButton';
+import NextButton from '@/components/NextButton';
+import { actionInsertToken } from '@/store/atoms/tokenActions';
 import login_character from '../../../public/login_page_img.png';
 
 /* 기본 글꼴은 cafe24 this is test */
@@ -8,7 +15,36 @@ import login_character from '../../../public/login_page_img.png';
 /* <div className="text-blue-700">글꼴 색</div> */
 /* <div>This is Login Page</div> */
 
-export default function LoginView() {
+function LoginView() {
+  const setInsertToken = useSetAtom(actionInsertToken);
+  const storedToken = window.localStorage.getItem('accessToken') || '';
+  useEffect(() => {
+    if (storedToken !== '') {
+      fetch(
+        `${process.env.NEXT_PUBLIC_CLIENT_ADDRESS}:${process.env.NEXT_PUBLIC_CLIENT_PORT}/api/validate?code=${storedToken}`,
+      )
+        .then((response) => response.json())
+        .then(async (data) => {
+          if (data.loginSuccess === false) {
+            const reissueResponse = await fetch(
+              `${process.env.NEXT_PUBLIC_CLIENT_ADDRESS}:${process.env.NEXT_PUBLIC_CLIENT_PORT}/api/reissue?code=${storedToken}`,
+            );
+            if (reissueResponse.ok) {
+              const reissueData = await reissueResponse.json();
+              setInsertToken(reissueData.accessToken);
+            } else {
+              setInsertToken('');
+            }
+          }
+        })
+        .catch(() => {
+          setInsertToken('');
+        });
+    } else {
+      setInsertToken(storedToken);
+    }
+  }, [storedToken, setInsertToken]);
+
   return (
     <div className="flex h-640 w-360 flex-col items-center justify-between bg-background">
       <div className="ml-10 flex w-full flex-grow flex-col items-start justify-center">
@@ -26,7 +62,6 @@ export default function LoginView() {
           푸앙이 프레임에 함께 담아가세요
         </span>
       </div>
-      {/* <MyButton target="/list" name="이미 로그인 한 경우" /> */}
       <div className="relative w-full">
         <Image
           src={login_character}
@@ -38,9 +73,17 @@ export default function LoginView() {
           }}
         />
         <div className="absolute bottom-5 left-1/2 w-4/5 -translate-x-1/2">
-          <LoginButton />
+          {storedToken === '' ? (
+            <LoginButton />
+          ) : (
+            <NextButton target="/list" name="다음" />
+          )}
         </div>
       </div>
     </div>
   );
 }
+
+export default dynamic(() => Promise.resolve(LoginView), {
+  ssr: false,
+});
