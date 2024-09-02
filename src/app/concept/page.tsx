@@ -4,14 +4,22 @@ import { atom, useAtom } from 'jotai';
 import Image from 'next/image';
 import MyButton from '@/components/MyButton';
 
-const selectedBoxAtom = atom<'female' | 'male' | null>(null);
+const gender = {
+  male: 'male',
+  female: 'female',
+  none: 'none',
+} as const;
+
+export type GenderStateUnion = (typeof gender)[keyof typeof gender];
+
+const selectedBoxAtom = atom<GenderStateUnion>(gender.none);
 
 export default function SelectConceptView() {
   const [selectedBox, setSelectedBox] = useAtom(selectedBoxAtom);
 
-  const handleBoxClick = (box: 'female' | 'male') => {
+  const handleBoxClick = (box: GenderStateUnion) => {
     if (selectedBox === box) {
-      setSelectedBox(null);
+      setSelectedBox(gender.none);
     } else {
       setSelectedBox(box);
     }
@@ -37,7 +45,7 @@ export default function SelectConceptView() {
               style={{
                 boxSizing: 'border-box',
                 border:
-                  selectedBox === 'female'
+                  selectedBox === gender.female
                     ? '4px solid #133365'
                     : '4px solid transparent',
               }}
@@ -55,7 +63,7 @@ export default function SelectConceptView() {
               style={{
                 boxSizing: 'border-box',
                 border:
-                  selectedBox === 'male'
+                  selectedBox === gender.male
                     ? '4px solid #133365'
                     : '4px solid transparent',
               }}
@@ -66,7 +74,11 @@ export default function SelectConceptView() {
           </div>
         </div>
       </div>
-      <MyButton name="다 음" target="/guide" enabled={selectedBox != null} />
+      <MyButton
+        name="다 음"
+        target="/guide"
+        enabled={selectedBox !== gender.none}
+      />
 
       <div className="absolute right-0 top-0 h-40 w-40">
         <Image
