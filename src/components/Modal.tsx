@@ -32,12 +32,12 @@ export default function Modal({
       <div className="text-xl">{title}</div>
       {showPolicy && (
         <div className="flex justify-center">
-          <span className="font-primary-lightblue text-2xs inline-block border-b-2 border-[#5F9FC0] font-sfpro font-bold opacity-20">
+          <span className="font-primary-lightblue inline-block border-b-2 border-[#5F9FC0] font-sfpro text-2xs font-bold opacity-20">
             개인정보 수집 및 이용 정책 {'>'}
           </span>
         </div>
       )}
-      <div className="text-3xs text-center font-sfpro font-bold">
+      <div className="text-center font-sfpro text-3xs font-bold">
         {description}
       </div>
 

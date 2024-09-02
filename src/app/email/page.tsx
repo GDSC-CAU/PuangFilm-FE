@@ -21,7 +21,6 @@ export default function EmailEnterView() {
   const handleEmailSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isEmailValid) {
-      console.log('what is your email:', email);
       router.push('/waiting');
     }
   };
