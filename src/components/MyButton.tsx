@@ -13,8 +13,9 @@ export default function MyButton({
 }: MyButtonProps) {
   return (
     <Link
-      href={enabled ? target : '#'}
-      className={`flex h-12 w-full items-center justify-center rounded-full text-xl ${enabled ? 'bg-primary-darkblue text-white' : 'text-primary-darkgray cursor-not-allowed bg-primary-gray'}`}
+      href={target}
+      className={`flex h-12 w-full items-center justify-center rounded-full text-xl ${enabled ? 'bg-primary-darkblue text-white' : 'cursor-not-allowed bg-primary-gray text-primary-darkgray'}`}
+      style={{ pointerEvents: enabled ? 'auto' : 'none' }}
     >
       {name}
     </Link>
