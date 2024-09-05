@@ -1,15 +1,7 @@
 import { useEffect } from 'react';
 import MyButton from '@/components/MyButton';
+import { ModalProps } from '@/interfaces';
 
-interface ModalProps {
-  onClose: () => void;
-  title: string;
-  description: React.ReactNode;
-  showPolicy: boolean;
-  target: string;
-  button1: string;
-  button2: string;
-}
 export default function Modal({
   onClose,
   title,
