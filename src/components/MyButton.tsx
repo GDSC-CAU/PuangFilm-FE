@@ -1,10 +1,5 @@
 import Link from 'next/link';
-
-interface MyButtonProps {
-  name: string;
-  target: string;
-  enabled: boolean;
-}
+import { MyButtonProps } from '@/interfaces';
 
 export default function MyButton({
   name,
