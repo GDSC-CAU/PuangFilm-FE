@@ -29,6 +29,7 @@ function LoginView() {
             const reissueResponse = await fetch(
               `${process.env.NEXT_PUBLIC_CLIENT_ADDRESS}:${process.env.NEXT_PUBLIC_CLIENT_PORT}/api/reissue?code=${storedToken}`,
             );
+            // TODO- ok가 아닌경우, ok이지만 accessToken이 없는 경우 fail page로 이동 필요
             if (reissueResponse.ok) {
               const reissueData = await reissueResponse.json();
               setInsertToken(reissueData.accessToken);
