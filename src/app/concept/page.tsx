@@ -1,18 +1,13 @@
 'use client';
 
-import { atom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import MyButton from '@/components/MyButton';
-
-const gender = {
-  male: 'male',
-  female: 'female',
-  none: 'none',
-} as const;
-
-export type GenderStateUnion = (typeof gender)[keyof typeof gender];
-
-const selectedBoxAtom = atom<GenderStateUnion>(gender.none);
+import {
+  gender,
+  GenderStateUnion,
+  selectedBoxAtom,
+} from '@/store/atoms/selectedBoxAtom';
 
 export default function SelectConceptView() {
   const [selectedBox, setSelectedBox] = useAtom(selectedBoxAtom);
