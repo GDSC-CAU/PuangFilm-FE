@@ -1,10 +1,7 @@
 import Image from 'next/image';
+import { ImageWithDescriptionProps } from '@/interfaces';
 import SVGTriangle from '@/styles/icons/triangle.svg';
 
-interface ImageWithDescriptionProps {
-  src: string;
-  description: string;
-}
 function ImageWithDescription({ src, description }: ImageWithDescriptionProps) {
   return (
     <div className="flex w-full flex-col items-center">

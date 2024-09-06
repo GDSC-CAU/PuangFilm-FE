@@ -1,4 +1,4 @@
-import MyButton from '@/components/NextButton';
+import MyButton from '@/components/MyButton';
 
 export default function FrameSelectView() {
   return (

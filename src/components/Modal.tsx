@@ -1,15 +1,7 @@
 import { useEffect } from 'react';
-import NextButton from '@/components/NextButton';
+import MyButton from '@/components/MyButton';
+import { ModalProps } from '@/interfaces';
 
-interface ModalProps {
-  onClose: () => void;
-  title: string;
-  description: React.ReactNode;
-  showPolicy: boolean;
-  target: string;
-  button1: string;
-  button2: string;
-}
 export default function Modal({
   onClose,
   title,
@@ -42,7 +34,7 @@ export default function Modal({
       </div>
 
       <div className="flex w-full flex-col">
-        <NextButton target={target} name={button1} />
+        <MyButton target={target} name={button1} />
         <button
           type="button"
           onClick={onClose}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useAtomValue } from 'jotai';
-import MyButton from '@/components/NextButton';
+import MyButton from '@/components/MyButton';
 import { tokenAtom } from '@/store/atoms/tokenAtom';
 
 export default function ListView() {
