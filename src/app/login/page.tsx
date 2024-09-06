@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import LoginButton from '@/app/login/_components/LoginButton';
-import NextButton from '@/components/NextButton';
+import MyButton from '@/components/MyButton';
 import { actionInsertToken } from '@/store/atoms/tokenActions';
 import login_character from '../../../public/login_page_img.png';
 
@@ -17,7 +17,7 @@ import login_character from '../../../public/login_page_img.png';
 
 function LoginView() {
   const setInsertToken = useSetAtom(actionInsertToken);
-  const storedToken = window.localStorage.getItem('accessToken') || '';
+  const storedToken = window.sessionStorage.getItem('accessToken') || '';
   useEffect(() => {
     if (storedToken !== '') {
       fetch(
@@ -76,7 +76,7 @@ function LoginView() {
           {storedToken === '' ? (
             <LoginButton />
           ) : (
-            <NextButton target="/list" name="다음" />
+            <MyButton target="/list" name="다음" />
           )}
         </div>
       </div>

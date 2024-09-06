@@ -22,6 +22,7 @@ export default function LoginCodePage() {
           router.push('/concept');
         })
         .catch(() => {
+          // TODO - fail page로 이동
           router.push('/login');
         });
     }
