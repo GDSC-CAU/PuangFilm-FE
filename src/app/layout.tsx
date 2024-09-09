@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import { Providers } from '@/components/Providers';
+import { Providers as JotaiProvider } from '@/components/Providers';
 
 const cafe24 = localFont({
   src: '../styles/fonts/cafe24.woff2',
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="kr" className={`${cafe24.variable} ${sfpro.variable}`}>
       <body className="mx-auto flex min-h-screen min-w-[390px] max-w-[420px] flex-1 items-center justify-center overflow-y-auto bg-background px-6 pb-10 pt-8 font-cafe24 text-primary-darkblue">
-        <Providers>{children}</Providers>
+        <JotaiProvider>{children}</JotaiProvider>
       </body>
     </html>
   );
