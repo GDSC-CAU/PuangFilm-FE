@@ -34,7 +34,7 @@ export default function Modal({
       </div>
 
       <div className="flex w-full flex-col">
-        <MyButton target={target} name={button1} />
+        <MyButton target={target} name={button1} enabled />
         <button
           type="button"
           onClick={onClose}
