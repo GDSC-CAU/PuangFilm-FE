@@ -1,10 +1,16 @@
-import MyButton from '@/components/MyButton';
+import Link from 'next/link';
+import PreviousPage from '@/components/PreviousPage';
+import SVGGoToList from '@/styles/icons/gotolist.svg';
 
 export default function FrameSelectView() {
   return (
-    <div>
-      <h1>This is 프레임 선택 Page</h1>
-      <MyButton name="다운로드" target="/" enabled />
+    <div className="w-full">
+      <div className="flex flex-row justify-between">
+        <PreviousPage target="/" />
+        <Link href="/list" className="pr-4">
+          <SVGGoToList />
+        </Link>
+      </div>
     </div>
   );
 }
