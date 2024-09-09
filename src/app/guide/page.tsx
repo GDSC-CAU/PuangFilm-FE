@@ -22,7 +22,7 @@ const badexamples = [
 export default function GuideView() {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   return (
-    <div className="flex w-full flex-col justify-start">
+    <div className="flex w-full flex-col justify-start bg-background">
       <PreviousPage target="/concept" />
       <div className="pt-6 text-xl">
         <div>자연스러운 AI프로필을 위해</div>
