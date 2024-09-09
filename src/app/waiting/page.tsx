@@ -1,15 +1,21 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import SVGLink from '@/styles/icons/link.svg';
-import { useRef } from 'react';
 
 export default function WaitingView() {
+  const [url, setUrl] = useState<string | undefined>(undefined);
   const copyRef = useRef<HTMLButtonElement>(null);
-  const copyToClipboardFunc = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setUrl(window.location.href);
+    }
+  }, []);
+
+  const copyToClipboardFunc = () => {
     if (copyRef.current) {
       copyRef.current.click();
     }
@@ -47,14 +53,21 @@ export default function WaitingView() {
           링크복사
           <SVGLink />
         </button>
-        <CopyToClipboard
-          text={window.location.href}
-          onCopy={() => {
-            alert('클립보드에 복사되었습니다.');
-          }}
-        >
-          <button ref={copyRef} style={{ display: 'none' }} />
-        </CopyToClipboard>
+        {url && (
+          <CopyToClipboard
+            text={url}
+            onCopy={() => {
+              alert('클립보드에 복사되었습니다.');
+            }}
+          >
+            <button
+              type="button"
+              ref={copyRef}
+              style={{ display: 'none' }}
+              aria-label="링크 복사 버튼"
+            />
+          </CopyToClipboard>
+        )}
       </div>
     </div>
   );
