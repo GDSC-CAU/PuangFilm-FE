@@ -1,10 +1,34 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
+import { BASIC_FRAME_DATA } from '@/constants';
 import SVGDownload from '@/styles/icons/download.svg';
 import SVGGoToList from '@/styles/icons/gotolist.svg';
 
+interface FrameProps {
+  circle: string;
+  description: string;
+  onClick: () => void;
+}
+function SelectFrame({ circle, description, onClick }: FrameProps) {
+  return (
+    <button type="button" onClick={onClick} className="cursor-pointer">
+      <Image
+        src={circle}
+        alt={description}
+        width={40}
+        height={40}
+        priority
+        className="relative"
+      />
+    </button>
+  );
+}
 export default function FrameSelectView() {
+  const [isCircleSelected, setIsCircleSelected] = useState<string>('');
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex w-full flex-row justify-between px-4">
@@ -38,65 +62,33 @@ export default function FrameSelectView() {
 
       <div className="relative flex h-[290px] w-[239px] justify-center">
         <Image
-          src="/unlocked-profile.png"
+          src="/resultsample.png"
           alt="Sample Image"
-          width={205}
-          height={205}
+          width={206}
+          height={206}
           priority
           className="absolute mt-4"
         />
-        <Image
-          src="/basicframe1.png"
-          alt="Sample Image"
-          width={239}
-          height={290}
-          priority
-          className="relative"
-        />
+        {isCircleSelected && isCircleSelected !== '' && (
+          <Image
+            src={isCircleSelected}
+            alt="Selected Frame"
+            width={239}
+            height={290}
+            priority
+            className="relative"
+          />
+        )}
       </div>
 
       <div className="flex flex-row gap-x-2.5 py-6">
-        <Image
-          src="/basicframecircle1.png"
-          alt="Sample Image"
-          width={40}
-          height={40}
-          priority
-          className="relative"
-        />
-        <Image
-          src="/basicframecircle1.png"
-          alt="Sample Image"
-          width={40}
-          height={40}
-          priority
-          className="relative"
-        />
-        <Image
-          src="/basicframecircle1.png"
-          alt="Sample Image"
-          width={40}
-          height={40}
-          priority
-          className="relative"
-        />
-
-        <Image
-          src="/basicframecircle1.png"
-          alt="Sample Image"
-          width={40}
-          height={40}
-          priority
-          className="relative"
-        />
-        <Image
-          src="/basicframecircle1.png"
-          alt="Sample Image"
-          width={40}
-          height={40}
-          priority
-          className="relative"
-        />
+        {Object.entries(BASIC_FRAME_DATA).map(([key, frame]) => (
+          <SelectFrame
+            key={key}
+            {...frame}
+            onClick={() => setIsCircleSelected(frame.frame)}
+          />
+        ))}
       </div>
 
       <button
