@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
-import { BASIC_FRAME_DATA } from '@/constants';
+import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
 import SVGDownload from '@/styles/icons/download.svg';
 import SVGGoToList from '@/styles/icons/gotolist.svg';
 
@@ -60,7 +60,9 @@ export default function FrameSelectView() {
         </div> */}
       </div>
 
-      <div className="relative flex h-[290px] w-[239px] justify-center">
+      <div
+        className={`relative flex ${isCircleSelected === '/premiumframe2.png' ? 'h-[332px] w-[283px]' : 'h-[290px] w-[239px]'} justify-center`}
+      >
         <Image
           src="/resultsample.png"
           alt="Sample Image"
@@ -73,16 +75,18 @@ export default function FrameSelectView() {
           <Image
             src={isCircleSelected}
             alt="Selected Frame"
-            width={239}
-            height={290}
+            width={isCircleSelected === '/premiumframe2.png' ? 283 : 239}
+            height={isCircleSelected === '/premiumframe2.png' ? 332 : 290}
             priority
-            className="relative"
+            className={`relative ${isCircleSelected === '/premiumframe2.png' ? '-mt-5 mb-6' : ''}`}
           />
         )}
       </div>
 
-      <div className="flex flex-row gap-x-2.5 py-6">
-        {Object.entries(BASIC_FRAME_DATA).map(([key, frame]) => (
+      <div
+        className={`flex flex-row gap-x-2.5 ${isCircleSelected === '/premiumframe2.png' ? '-mt-5 pb-6' : 'py-6'}`}
+      >
+        {Object.entries(PREMIUM_FRAME_DATA).map(([key, frame]) => (
           <SelectFrame
             key={key}
             {...frame}
