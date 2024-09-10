@@ -29,6 +29,9 @@ function SelectFrame({ circle, description, onClick }: FrameProps) {
 }
 export default function FrameSelectView() {
   const [isCircleSelected, setIsCircleSelected] = useState<string>('');
+  const [isPremiumSelected, setIsPremiumSelected] = useState<boolean>(false);
+
+  const frametype = isPremiumSelected ? PREMIUM_FRAME_DATA : BASIC_FRAME_DATA;
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex w-full flex-row justify-between px-4">
@@ -43,21 +46,33 @@ export default function FrameSelectView() {
       </h2>
       {/* frame 있으면 mb-6 */}
       <div className="text-2sx mb-6 mt-4 flex h-[35px] w-[183px] flex-row items-center justify-evenly rounded-full bg-white font-sfpro font-bold">
-        {/* 기본 선택ver  */}
-        <div className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-primary-darkblue text-white">
-          기본
-        </div>
-        <div className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-white text-primary-middlegray">
-          프리미엄{' '}
-        </div>
-
-        {/* 프리미엄 선택ver
-        <div className="text-primary-middlegray flex h-[27px] w-[86px] items-center justify-center rounded-full bg-white">
-          기본
-        </div>
-        <div className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-primary-darkblue text-white">
-          프리미엄{' '}
-        </div> */}
+        {isPremiumSelected ? (
+          <>
+            <button
+              type="button"
+              onClick={() => setIsPremiumSelected(false)}
+              className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-white text-primary-middlegray"
+            >
+              기본
+            </button>
+            <div className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-primary-darkblue text-white">
+              프리미엄{' '}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-primary-darkblue text-white">
+              기본
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsPremiumSelected(true)}
+              className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-white text-primary-middlegray"
+            >
+              프리미엄{' '}
+            </button>
+          </>
+        )}
       </div>
 
       <div
@@ -86,7 +101,7 @@ export default function FrameSelectView() {
       <div
         className={`flex flex-row gap-x-2.5 ${isCircleSelected === '/premiumframe2.png' ? '-mt-5 pb-6' : 'py-6'}`}
       >
-        {Object.entries(PREMIUM_FRAME_DATA).map(([key, frame]) => (
+        {Object.entries(frametype).map(([key, frame]) => (
           <SelectFrame
             key={key}
             {...frame}
