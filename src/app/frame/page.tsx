@@ -58,17 +58,19 @@ function FrameSelectView() {
       const image1 = document.createElement('img');
       const image2 = document.createElement('img');
       image1.src = imageSrc;
-      image2.src = isCircleSelected;
+      if (isCircleSelected && isCircleSelected !== '') {
+        image2.src = isCircleSelected;
+      }
 
-      await new Promise<void>((resolve, reject) => {
-        image1.onload = () => {
-          context.drawImage(
-            image1,
-            imgX * scale,
-            imgY * scale,
-            206 * scale,
-            206 * scale,
-          );
+      image1.onload = () => {
+        context.drawImage(
+          image1,
+          imgX * scale,
+          imgY * scale,
+          206 * scale,
+          206 * scale,
+        );
+        if (isCircleSelected && isCircleSelected !== '') {
           image2.onload = () => {
             context.drawImage(image2, 0, 0, canvasWidth, canvasHeight);
             canvas.toBlob((blob) => {
@@ -82,15 +84,25 @@ function FrameSelectView() {
                 document.body.removeChild(link);
                 URL.revokeObjectURL(url);
               }
-              resolve();
             }, 'image/png');
           };
-          image2.onerror = reject;
-        };
-        image1.onerror = reject;
-      });
+        } else {
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const url = URL.createObjectURL(blob);
+              const link = document.createElement('a');
+              link.href = url;
+              link.download = 'CAU_PUANG_FILM.png';
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              URL.revokeObjectURL(url);
+            }
+          }, 'image/png');
+        }
+      };
     } catch (err) {
-      console.error('Failed to capture image:', err);
+      alert('다운로드에 실패했습니다.');
     }
   };
 
