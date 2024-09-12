@@ -3,10 +3,19 @@
 import { useSetAtom } from 'jotai';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import LoginButton from '@/app/login/_components/LoginButton';
 import MyButton from '@/components/MyButton';
+import {
+  errorCheckMessageAtom,
+  errorMessageAtom,
+} from '@/store/atoms/errorMessageAtom';
 import { actionInsertToken } from '@/store/atoms/tokenActions';
+import {
+  LOGIN_ERROR_CHECK_MSG,
+  LOGIN_ERROR_MSG,
+} from '@/store/constants/errorMessages';
 import login_character from '../../../public/login_page_img.png';
 
 /* 기본 글꼴은 cafe24 this is test */
@@ -16,8 +25,13 @@ import login_character from '../../../public/login_page_img.png';
 /* <div>This is Login Page</div> */
 
 function LoginView() {
+  const setErrorMessage = useSetAtom(errorMessageAtom);
+  const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
   const setInsertToken = useSetAtom(actionInsertToken);
+
+  const router = useRouter();
   const storedToken = window.sessionStorage.getItem('accessToken') || '';
+
   useEffect(() => {
     if (storedToken !== '') {
       fetch(
@@ -29,17 +43,22 @@ function LoginView() {
             const reissueResponse = await fetch(
               `${process.env.NEXT_PUBLIC_CLIENT_ADDRESS}:${process.env.NEXT_PUBLIC_CLIENT_PORT}/api/reissue?code=${storedToken}`,
             );
-            // TODO- ok가 아닌경우, ok이지만 accessToken이 없는 경우 fail page로 이동 필요
             if (reissueResponse.ok) {
               const reissueData = await reissueResponse.json();
               setInsertToken(reissueData.accessToken);
             } else {
               setInsertToken('');
+              setErrorMessage(LOGIN_ERROR_MSG);
+              setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
+              router.push('/error');
             }
           }
         })
         .catch(() => {
           setInsertToken('');
+          setErrorMessage(LOGIN_ERROR_MSG);
+          setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
+          router.push('/error');
         });
     } else {
       setInsertToken(storedToken);
