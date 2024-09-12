@@ -7,6 +7,7 @@ import PreviousPage from '@/components/PreviousPage';
 import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
 import SVGDownload from '@/styles/icons/download.svg';
 import SVGGoToList from '@/styles/icons/gotolist.svg';
+import DownloadImage from './_components/DownloadImage';
 
 interface FrameProps {
   circle: string;
@@ -30,80 +31,16 @@ function SelectFrame({ circle, description, onClick }: FrameProps) {
 }
 
 function FrameSelectView() {
-  const [isCircleSelected, setIsCircleSelected] = useState<string>('');
+  const [colorOfCircle, setColorOfCircle] = useState<string>('');
   const [isPremiumSelected, setIsPremiumSelected] = useState<boolean>(false);
 
   const frametype = isPremiumSelected ? PREMIUM_FRAME_DATA : BASIC_FRAME_DATA;
-  const frameWidth = isCircleSelected === '/premiumframe2.png' ? 283 : 239;
-  const frameHeight = isCircleSelected === '/premiumframe2.png' ? 332 : 290;
-  const imgX = isCircleSelected === '/premiumframe2.png' ? 37 : 16;
-  const imgY = isCircleSelected === '/premiumframe2.png' ? 37 : 16;
+  const frameWidth = colorOfCircle === '/premiumframe2.png' ? 283 : 239;
+  const frameHeight = colorOfCircle === '/premiumframe2.png' ? 332 : 290;
   const imageSrc = '/resultsample.png'; // 생성된 이미지(임시)
 
-  const onCaptureClick = async () => {
-    try {
-      const scale = 4;
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-
-      if (!context) {
-        throw new Error('Canvas context is not available.');
-      }
-
-      const canvasWidth = frameWidth * scale;
-      const canvasHeight = frameHeight * scale;
-      canvas.width = canvasWidth;
-      canvas.height = canvasHeight;
-
-      const image1 = document.createElement('img');
-      const image2 = document.createElement('img');
-      image1.src = imageSrc;
-      if (isCircleSelected && isCircleSelected !== '') {
-        image2.src = isCircleSelected;
-      }
-
-      image1.onload = () => {
-        context.drawImage(
-          image1,
-          imgX * scale,
-          imgY * scale,
-          206 * scale,
-          206 * scale,
-        );
-        if (isCircleSelected && isCircleSelected !== '') {
-          image2.onload = () => {
-            context.drawImage(image2, 0, 0, canvasWidth, canvasHeight);
-            canvas.toBlob((blob) => {
-              if (blob) {
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = 'CAU_PUANG_FILM.png';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                URL.revokeObjectURL(url);
-              }
-            }, 'image/png');
-          };
-        } else {
-          canvas.toBlob((blob) => {
-            if (blob) {
-              const url = URL.createObjectURL(blob);
-              const link = document.createElement('a');
-              link.href = url;
-              link.download = 'CAU_PUANG_FILM.png';
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-              URL.revokeObjectURL(url);
-            }
-          }, 'image/png');
-        }
-      };
-    } catch (err) {
-      alert('다운로드에 실패했습니다.');
-    }
+  const onCaptureClick = () => {
+    DownloadImage({ colorOfCircle, imageSrc, frameWidth, frameHeight });
   };
 
   return (
@@ -149,7 +86,7 @@ function FrameSelectView() {
       </div>
 
       <div
-        className={`relative flex ${isCircleSelected === '/premiumframe2.png' ? 'h-[332px] w-[283px]' : 'h-[290px] w-[239px]'} justify-center`}
+        className={`relative flex ${colorOfCircle === '/premiumframe2.png' ? 'h-[332px] w-[283px]' : 'h-[290px] w-[239px]'} justify-center`}
       >
         <Image
           src={imageSrc}
@@ -159,26 +96,26 @@ function FrameSelectView() {
           priority
           className="absolute mt-4"
         />
-        {isCircleSelected && isCircleSelected !== '' && (
+        {colorOfCircle && colorOfCircle !== '' && (
           <Image
-            src={isCircleSelected}
+            src={colorOfCircle}
             alt="Selected Frame"
             width={frameWidth}
             height={frameHeight}
             priority
-            className={`relative ${isCircleSelected === '/premiumframe2.png' ? '-mt-5 mb-6' : ''}`}
+            className={`relative ${colorOfCircle === '/premiumframe2.png' ? '-mt-5 mb-6' : ''}`}
           />
         )}
       </div>
 
       <div
-        className={`flex flex-row gap-x-2.5 ${isCircleSelected === '/premiumframe2.png' ? '-mt-5 pb-6' : 'py-6'}`}
+        className={`flex flex-row gap-x-2.5 ${colorOfCircle === '/premiumframe2.png' ? '-mt-5 pb-6' : 'py-6'}`}
       >
         {Object.entries(frametype).map(([key, frame]) => (
           <SelectFrame
             key={key}
             {...frame}
-            onClick={() => setIsCircleSelected(frame.frame)}
+            onClick={() => setColorOfCircle(frame.frame)}
           />
         ))}
       </div>
