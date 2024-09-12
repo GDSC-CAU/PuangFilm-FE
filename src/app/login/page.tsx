@@ -63,7 +63,13 @@ function LoginView() {
     } else {
       setInsertToken(storedToken);
     }
-  }, [storedToken, setInsertToken]);
+  }, [
+    router,
+    storedToken,
+    setInsertToken,
+    setErrorMessage,
+    setErrorCheckMessage,
+  ]);
 
   return (
     <div className="flex h-640 w-360 flex-col items-center justify-between bg-background">

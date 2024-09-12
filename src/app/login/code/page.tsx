@@ -37,7 +37,13 @@ export default function LoginCodePage() {
           router.push('/error');
         });
     }
-  }, [setInsertToken, searchParams, router]);
+  }, [
+    setInsertToken,
+    searchParams,
+    router,
+    setErrorCheckMessage,
+    setErrorMessage,
+  ]);
 
   return <div>로그인 처리중..</div>;
 }
