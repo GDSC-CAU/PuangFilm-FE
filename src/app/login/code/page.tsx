@@ -3,11 +3,21 @@
 import { useSetAtom } from 'jotai';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+import {
+  errorCheckMessageAtom,
+  errorMessageAtom,
+} from '@/store/atoms/errorMessageAtom';
 import { actionInsertToken } from '@/store/atoms/tokenActions';
+import {
+  LOGIN_ERROR_CHECK_MSG,
+  LOGIN_ERROR_MSG,
+} from '@/store/constants/errorMessages';
 
 export default function LoginCodePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const setErrorMessage = useSetAtom(errorMessageAtom);
+  const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
   const setInsertToken = useSetAtom(actionInsertToken);
 
   useEffect(() => {
@@ -22,8 +32,9 @@ export default function LoginCodePage() {
           router.push('/concept');
         })
         .catch(() => {
-          // TODO - fail page로 이동
-          router.push('/login');
+          setErrorMessage(LOGIN_ERROR_MSG);
+          setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
+          router.push('/error');
         });
     }
   }, [setInsertToken, searchParams, router]);
