@@ -1,10 +1,8 @@
 'use client';
 
-import { saveAs } from 'file-saver';
-import { toPng } from 'html-to-image';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
 import SVGDownload from '@/styles/icons/download.svg';
@@ -31,46 +29,70 @@ function SelectFrame({ circle, description, onClick }: FrameProps) {
   );
 }
 
-export default function FrameSelectView() {
+function FrameSelectView() {
   const [isCircleSelected, setIsCircleSelected] = useState<string>('');
   const [isPremiumSelected, setIsPremiumSelected] = useState<boolean>(false);
-  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
   const frametype = isPremiumSelected ? PREMIUM_FRAME_DATA : BASIC_FRAME_DATA;
-  const ref = useRef<HTMLDivElement>(null);
+  const frameWidth = isCircleSelected === '/premiumframe2.png' ? 283 : 239;
+  const frameHeight = isCircleSelected === '/premiumframe2.png' ? 332 : 290;
+  const imgX = isCircleSelected === '/premiumframe2.png' ? 37 : 16;
+  const imgY = isCircleSelected === '/premiumframe2.png' ? 37 : 16;
+  const imageSrc = '/resultsample.png'; // 생성된 이미지(임시)
 
-  const onCaptureClick = useCallback(async () => {
-    if (ref.current && imageLoaded) {
-      try {
-        // HTML 요소를 PNG 이미지로 변환
-        const dataUrl = await toPng(ref.current, {
-          filter: (node) => node.tagName !== 'SCRIPT', // 스크립트 태그 필터링
-          cacheBust: true, // 캐시 무효화
-        });
+  const onCaptureClick = async () => {
+    try {
+      const scale = 4;
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
 
-        // 이미지 URL을 Blob으로 변환하여 다운로드
-        fetch(dataUrl)
-          .then((res) => res.blob())
-          .then((blob) => {
-            saveAs(blob, 'CAU_PUANG_FILM.png');
-          })
-          .catch((error) => {
-            console.error('이미지 다운로드 오류:', error);
-          });
-      } catch (error) {
-        console.error('캡처 오류:', error);
+      if (!context) {
+        throw new Error('Canvas context is not available.');
       }
+
+      const canvasWidth = frameWidth * scale;
+      const canvasHeight = frameHeight * scale;
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+
+      const image1 = document.createElement('img');
+      const image2 = document.createElement('img');
+      image1.src = imageSrc;
+      image2.src = isCircleSelected;
+
+      await new Promise<void>((resolve, reject) => {
+        image1.onload = () => {
+          context.drawImage(
+            image1,
+            imgX * scale,
+            imgY * scale,
+            206 * scale,
+            206 * scale,
+          );
+          image2.onload = () => {
+            context.drawImage(image2, 0, 0, canvasWidth, canvasHeight);
+            canvas.toBlob((blob) => {
+              if (blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'CAU_PUANG_FILM.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+              }
+              resolve();
+            }, 'image/png');
+          };
+          image2.onerror = reject;
+        };
+        image1.onerror = reject;
+      });
+    } catch (err) {
+      console.error('Failed to capture image:', err);
     }
-  }, [imageLoaded]);
-
-  const onImageLoad = () => {
-    setImageLoaded(true);
   };
-
-  useEffect(() => {
-    // 모든 이미지가 로드된 후 캡처가 가능하도록 설정
-    setImageLoaded(false);
-  }, [isCircleSelected, isPremiumSelected]);
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
@@ -95,7 +117,7 @@ export default function FrameSelectView() {
               기본
             </button>
             <div className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-primary-darkblue text-white">
-              프리미엄{' '}
+              프리미엄
             </div>
           </>
         ) : (
@@ -108,34 +130,31 @@ export default function FrameSelectView() {
               onClick={() => setIsPremiumSelected(true)}
               className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-white text-primary-middlegray"
             >
-              프리미엄{' '}
+              프리미엄
             </button>
           </>
         )}
       </div>
 
       <div
-        ref={ref}
         className={`relative flex ${isCircleSelected === '/premiumframe2.png' ? 'h-[332px] w-[283px]' : 'h-[290px] w-[239px]'} justify-center`}
       >
         <Image
-          src="/resultsample.png"
+          src={imageSrc}
           alt="Sample Image"
           width={206}
           height={206}
           priority
           className="absolute mt-4"
-          onLoad={onImageLoad}
         />
         {isCircleSelected && isCircleSelected !== '' && (
           <Image
             src={isCircleSelected}
             alt="Selected Frame"
-            width={isCircleSelected === '/premiumframe2.png' ? 283 : 239}
-            height={isCircleSelected === '/premiumframe2.png' ? 332 : 290}
+            width={frameWidth}
+            height={frameHeight}
             priority
             className={`relative ${isCircleSelected === '/premiumframe2.png' ? '-mt-5 mb-6' : ''}`}
-            onLoad={onImageLoad}
           />
         )}
       </div>
@@ -163,3 +182,5 @@ export default function FrameSelectView() {
     </div>
   );
 }
+
+export default FrameSelectView;
