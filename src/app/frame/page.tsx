@@ -5,15 +5,10 @@ import Link from 'next/link';
 import { useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
+import { FrameProps } from '@/interfaces';
 import SVGDownload from '@/styles/icons/download.svg';
 import SVGGoToList from '@/styles/icons/gotolist.svg';
 import DownloadImage from './_components/DownloadImage';
-
-interface FrameProps {
-  circle: string;
-  description: string;
-  onClick: () => void;
-}
 
 function SelectFrame({ circle, description, onClick }: FrameProps) {
   return (

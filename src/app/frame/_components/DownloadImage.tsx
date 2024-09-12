@@ -1,9 +1,4 @@
-interface DownloadImageProps {
-  colorOfCircle: string;
-  imageSrc: string;
-  frameWidth: number;
-  frameHeight: number;
-}
+import { DownloadImageProps } from '@/interfaces';
 export default async function DownloadImage({
   colorOfCircle,
   imageSrc,
