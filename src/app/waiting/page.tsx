@@ -6,7 +6,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import SVGLink from '@/styles/icons/link.svg';
 
 export default function WaitingView() {
-  const [url, setUrl] = useState<string | undefined>(undefined);
+  const [url, setUrl] = useState<string>('');
   const copyRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
