@@ -8,7 +8,7 @@ import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
 import { FrameProps } from '@/interfaces';
 import SVGDownload from '@/styles/icons/download.svg';
 import SVGGoToList from '@/styles/icons/gotolist.svg';
-import DownloadImage from './_components/DownloadImage';
+import DownloadImage from '@/utils/DownloadImage';
 
 function SelectFrame({ circle, description, onClick }: FrameProps) {
   return (
@@ -25,7 +25,7 @@ function SelectFrame({ circle, description, onClick }: FrameProps) {
   );
 }
 
-function FrameSelectView() {
+export default function FrameSelectView() {
   const [colorOfCircle, setColorOfCircle] = useState<string>('');
   const [isPremiumSelected, setIsPremiumSelected] = useState<boolean>(false);
 
@@ -113,5 +113,3 @@ function FrameSelectView() {
     </div>
   );
 }
-
-export default FrameSelectView;
