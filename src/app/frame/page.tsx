@@ -5,25 +5,10 @@ import Link from 'next/link';
 import { useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
-import { FrameProps } from '@/interfaces';
 import SVGDownload from '@/styles/icons/download.svg';
 import SVGGoToList from '@/styles/icons/gotolist.svg';
 import DownloadImage from '@/utils/DownloadImage';
-
-function SelectFrame({ circle, description, onClick }: FrameProps) {
-  return (
-    <button type="button" onClick={onClick} className="cursor-pointer">
-      <Image
-        src={circle}
-        alt={description}
-        width={40}
-        height={40}
-        priority
-        className="relative"
-      />
-    </button>
-  );
-}
+import SelectFrame from './_components/SelectFrame';
 
 export default function FrameSelectView() {
   const [colorOfCircle, setColorOfCircle] = useState<string>('');
