@@ -51,33 +51,20 @@ function FrameSelectView() {
         사진과 어울리는 프레임을 선택해주세요 😀
       </h2>
       <div className="text-2sx mb-6 mt-4 flex h-[35px] w-[183px] flex-row items-center justify-evenly rounded-full bg-white font-sfpro font-bold">
-        {isPremiumSelected ? (
-          <>
-            <button
-              type="button"
-              onClick={() => setIsPremiumSelected(false)}
-              className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-white text-primary-middlegray"
-            >
-              기본
-            </button>
-            <div className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-primary-darkblue text-white">
-              프리미엄
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-primary-darkblue text-white">
-              기본
-            </div>
-            <button
-              type="button"
-              onClick={() => setIsPremiumSelected(true)}
-              className="flex h-[27px] w-[86px] items-center justify-center rounded-full bg-white text-primary-middlegray"
-            >
-              프리미엄
-            </button>
-          </>
-        )}
+        <button
+          type="button"
+          onClick={() => setIsPremiumSelected(false)}
+          className={`flex h-[27px] w-[86px] items-center justify-center rounded-full ${isPremiumSelected ? 'bg-white text-primary-middlegray' : 'bg-primary-darkblue text-white'}`}
+        >
+          기본
+        </button>
+        <button
+          type="button"
+          onClick={() => setIsPremiumSelected(true)}
+          className={`flex h-[27px] w-[86px] items-center justify-center rounded-full ${isPremiumSelected ? 'bg-primary-darkblue text-white' : 'bg-white text-primary-middlegray'}`}
+        >
+          프리미엄
+        </button>
       </div>
 
       <div
