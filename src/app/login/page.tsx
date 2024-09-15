@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import LoginButton from '@/app/login/_components/LoginButton';
 import MyButton from '@/components/MyButton';
 import { actionInsertToken } from '@/store/atoms/tokenActions';
-import login_character from '../../../public/login_page_img.png';
+import login_character from '../../../public/login-puang.png';
 
 /* 기본 글꼴은 cafe24 this is test */
 /* <div className="font-sfpro">이 글꼴은 sfpro</div> */
