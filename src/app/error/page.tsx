@@ -2,12 +2,12 @@
 
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
+import { GENERATION_ERROR_MSG } from '@/app/constants/errorMessages';
 import PreviousPage from '@/components/PreviousPage';
 import {
   errorCheckMessageAtom,
   errorMessageAtom,
 } from '@/store/atoms/errorMessageAtom';
-import { GENERATION_ERROR_MSG } from '@/store/constants/errorMessages';
 
 export default function ErrorPage() {
   const errorMessage = useAtomValue(errorMessageAtom);

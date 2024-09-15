@@ -5,6 +5,10 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import {
+  LOGIN_ERROR_CHECK_MSG,
+  LOGIN_ERROR_MSG,
+} from '@/app/constants/errorMessages';
 import LoginButton from '@/app/login/_components/LoginButton';
 import MyButton from '@/components/MyButton';
 import {
@@ -12,10 +16,6 @@ import {
   errorMessageAtom,
 } from '@/store/atoms/errorMessageAtom';
 import { actionInsertToken } from '@/store/atoms/tokenActions';
-import {
-  LOGIN_ERROR_CHECK_MSG,
-  LOGIN_ERROR_MSG,
-} from '@/store/constants/errorMessages';
 import login_character from '../../../public/login_page_img.png';
 
 /* 기본 글꼴은 cafe24 this is test */

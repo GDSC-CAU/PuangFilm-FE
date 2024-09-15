@@ -4,14 +4,14 @@ import { useSetAtom } from 'jotai';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import {
+  LOGIN_ERROR_CHECK_MSG,
+  LOGIN_ERROR_MSG,
+} from '@/app/constants/errorMessages';
+import {
   errorCheckMessageAtom,
   errorMessageAtom,
 } from '@/store/atoms/errorMessageAtom';
 import { actionInsertToken } from '@/store/atoms/tokenActions';
-import {
-  LOGIN_ERROR_CHECK_MSG,
-  LOGIN_ERROR_MSG,
-} from '@/store/constants/errorMessages';
 
 export default function LoginCodePage() {
   const router = useRouter();
