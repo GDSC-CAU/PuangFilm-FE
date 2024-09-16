@@ -1,7 +1,8 @@
 'use client';
 
-import { useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import Image from 'next/image';
+import { useEffect } from 'react';
 import { GENERATION_ERROR_MSG } from '@/app/constants/errorMessages';
 import PreviousPage from '@/components/PreviousPage';
 import {
@@ -10,8 +11,17 @@ import {
 } from '@/store/atoms/errorMessageAtom';
 
 export default function ErrorPage() {
-  const errorMessage = useAtomValue(errorMessageAtom);
-  const errorCheckMessage = useAtomValue(errorCheckMessageAtom);
+  const [errorMessage, setErrorMessage] = useAtom(errorMessageAtom);
+  const [errorCheckMessage, setErrorCheckMessage] = useAtom(
+    errorCheckMessageAtom,
+  );
+
+  useEffect(() => {
+    return () => {
+      setErrorMessage('');
+      setErrorCheckMessage('');
+    };
+  }, [setErrorMessage, setErrorCheckMessage]);
 
   return (
     <div className="flex h-640 w-360 flex-col justify-start">
