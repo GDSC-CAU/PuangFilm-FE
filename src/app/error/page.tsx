@@ -17,7 +17,7 @@ export default function ErrorPage() {
     <div className="flex h-640 w-360 flex-col justify-start">
       <div className="ml-4 mt-7">
         <PreviousPage
-          target={errorMessage === GENERATION_ERROR_MSG ? '/concept' : '/login'}
+          target={errorMessage === GENERATION_ERROR_MSG ? '/guide' : '/login'}
         />
       </div>
       <div className="mt-12 flex flex-col items-center justify-center">
