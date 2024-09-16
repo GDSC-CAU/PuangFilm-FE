@@ -1,1 +1,1 @@
-export * from './frameType';
+export * from './frameData';
