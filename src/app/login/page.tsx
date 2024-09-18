@@ -17,6 +17,8 @@ import {
   errorMessageAtom,
 } from '@/store/atoms/errorMessageAtom';
 import { actionInsertToken } from '@/store/atoms/tokenActions';
+import SVGImages from '@/styles/icons/images.svg';
+import SVGNext from '@/styles/icons/next.svg';
 import login_character from '../../../public/login-puang.png';
 
 function LoginView() {
@@ -103,6 +105,7 @@ function LoginView() {
                   target="/list"
                   name="프로필 목록"
                   iconType={ICON_TYPES.IMAGES}
+                  iconComponent={<SVGImages />}
                 />
               </div>
               <div className="w-[48%]">
@@ -110,6 +113,7 @@ function LoginView() {
                   target="/concept"
                   name="프로필 생성"
                   iconType={ICON_TYPES.NEXT}
+                  iconComponent={<SVGNext />}
                 />
               </div>
             </>
