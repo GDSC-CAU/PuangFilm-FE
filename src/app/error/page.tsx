@@ -3,8 +3,9 @@
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 import { useEffect } from 'react';
-import { GENERATION_ERROR_MSG } from '@/app/constants/errorMessages';
 import PreviousPage from '@/components/PreviousPage';
+import { GENERATION_ERROR_MSG } from '@/constants';
+import { ROUTE_TYPES } from '@/interfaces';
 import {
   errorCheckMessageAtom,
   errorMessageAtom,
@@ -27,7 +28,11 @@ export default function ErrorPage() {
     <div className="flex h-640 w-360 flex-col justify-start">
       <div className="ml-4 mt-7">
         <PreviousPage
-          target={errorMessage === GENERATION_ERROR_MSG ? '/guide' : '/login'}
+          target={
+            errorMessage === GENERATION_ERROR_MSG
+              ? ROUTE_TYPES.GUIDE
+              : ROUTE_TYPES.LOGIN
+          }
         />
       </div>
       <div className="mt-12 flex flex-col items-center justify-center">

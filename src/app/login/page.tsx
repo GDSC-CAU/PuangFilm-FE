@@ -5,13 +5,10 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import {
-  LOGIN_ERROR_CHECK_MSG,
-  LOGIN_ERROR_MSG,
-} from '@/app/constants/errorMessages';
 import LoginButton from '@/app/login/_components/LoginButton';
 import IconButton from '@/components/IconButton';
-import { ICON_TYPES } from '@/interfaces';
+import { LOGIN_ERROR_CHECK_MSG, LOGIN_ERROR_MSG } from '@/constants';
+import { ICON_TYPES, ROUTE_TYPES } from '@/interfaces';
 import {
   errorCheckMessageAtom,
   errorMessageAtom,
@@ -47,7 +44,7 @@ function LoginView() {
               setInsertToken('');
               setErrorMessage(LOGIN_ERROR_MSG);
               setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
-              router.push('/error');
+              router.push(ROUTE_TYPES.ERROR);
             }
           }
         })
@@ -55,7 +52,7 @@ function LoginView() {
           setInsertToken('');
           setErrorMessage(LOGIN_ERROR_MSG);
           setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
-          router.push('/error');
+          router.push(ROUTE_TYPES.ERROR);
         });
     } else {
       setInsertToken(storedToken);

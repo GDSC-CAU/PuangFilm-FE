@@ -3,10 +3,8 @@
 import { useSetAtom } from 'jotai';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
-import {
-  LOGIN_ERROR_CHECK_MSG,
-  LOGIN_ERROR_MSG,
-} from '@/app/constants/errorMessages';
+import { LOGIN_ERROR_CHECK_MSG, LOGIN_ERROR_MSG } from '@/constants';
+import { ROUTE_TYPES } from '@/interfaces';
 import {
   errorCheckMessageAtom,
   errorMessageAtom,
@@ -29,12 +27,12 @@ export default function LoginCodePage() {
         .then((response) => response.json())
         .then((data) => {
           setInsertToken(data.accessToken);
-          router.push('/concept');
+          router.push(ROUTE_TYPES.CONCEPT);
         })
         .catch(() => {
           setErrorMessage(LOGIN_ERROR_MSG);
           setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
-          router.push('/error');
+          router.push(ROUTE_TYPES.ERROR);
         });
     }
   }, [
