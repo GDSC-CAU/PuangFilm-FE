@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
+import { ROUTE_TYPES } from '@/interfaces';
 
 export default function EmailEnterView() {
   const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ export default function EmailEnterView() {
   const handleEmailSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isEmailValid) {
-      router.push('/waiting');
+      router.push(ROUTE_TYPES.WAITING);
     }
   };
 

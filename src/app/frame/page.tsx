@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
+import { ROUTE_TYPES } from '@/interfaces';
 import SVGDownload from '@/styles/icons/download.svg';
 import SVGGoToList from '@/styles/icons/gotolist.svg';
 import DownloadImage from '@/utils/DownloadImage';
@@ -26,7 +27,7 @@ export default function FrameSelectView() {
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex w-full flex-row justify-between px-4">
-        <PreviousPage target="/" />
+        <PreviousPage target={ROUTE_TYPES.HOME} />
         <Link href="/list" className="pr-4">
           <SVGGoToList />
         </Link>
@@ -39,14 +40,14 @@ export default function FrameSelectView() {
         <button
           type="button"
           onClick={() => setIsPremiumSelected(false)}
-          className={`flex h-[27px] w-[86px] items-center justify-center rounded-full ${isPremiumSelected ? 'text-primary-middlegray bg-white' : 'bg-primary-darkblue text-white'}`}
+          className={`flex h-[27px] w-[86px] items-center justify-center rounded-full ${isPremiumSelected ? 'bg-white text-primary-middlegray' : 'bg-primary-darkblue text-white'}`}
         >
           기본
         </button>
         <button
           type="button"
           onClick={() => setIsPremiumSelected(true)}
-          className={`flex h-[27px] w-[86px] items-center justify-center rounded-full ${isPremiumSelected ? 'bg-primary-darkblue text-white' : 'text-primary-middlegray bg-white'}`}
+          className={`flex h-[27px] w-[86px] items-center justify-center rounded-full ${isPremiumSelected ? 'bg-primary-darkblue text-white' : 'bg-white text-primary-middlegray'}`}
         >
           프리미엄
         </button>

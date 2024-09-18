@@ -3,6 +3,7 @@
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 import MyButton from '@/components/MyButton';
+import { ROUTE_TYPES } from '@/interfaces';
 import {
   gender,
   GenderStateUnion,
@@ -71,7 +72,7 @@ export default function SelectConceptView() {
       </div>
       <MyButton
         name="다 음"
-        target="/guide"
+        target={ROUTE_TYPES.GUIDE}
         enabled={selectedBox !== gender.none}
       />
 

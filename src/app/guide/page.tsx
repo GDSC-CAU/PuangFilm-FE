@@ -2,6 +2,7 @@
 
 import Modal from '@/components/Modal';
 import PreviousPage from '@/components/PreviousPage';
+import { ROUTE_TYPES } from '@/interfaces';
 import useModal from '../hooks/useModal';
 import GuideDetail from './_components/GuideDetail';
 
@@ -23,7 +24,7 @@ export default function GuideView() {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   return (
     <div className="flex w-full flex-col justify-start bg-background">
-      <PreviousPage target="/concept" />
+      <PreviousPage target={ROUTE_TYPES.CONCEPT} />
       <div className="pt-6 text-xl">
         <div>자연스러운 AI프로필을 위해</div>
         <div>
