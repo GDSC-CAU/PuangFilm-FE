@@ -1,9 +1,6 @@
 import Link from 'next/link';
+import { PreviousPageProps } from '@/interfaces';
 import SVGPrevious from '@/styles/icons/previous.svg';
-
-interface PreviousPageProps {
-  target: string;
-}
 
 export default function PreviousPage({ target }: PreviousPageProps) {
   return (
