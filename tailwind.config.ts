@@ -4,7 +4,7 @@ const config: Config = {
   mode: 'jit',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/_components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
@@ -35,6 +35,7 @@ const config: Config = {
           gray: '#E5E5EA',
           lightblue: '#5F9FC0',
           darkgray: '#3A3A3C',
+          comet: '#636366',
         },
       },
       width: {
