@@ -35,6 +35,7 @@ const config: Config = {
           gray: '#E5E5EA',
           lightblue: '#5F9FC0',
           darkgray: '#3A3A3C',
+          middlegray: '#565656',
           comet: '#636366',
         },
       },

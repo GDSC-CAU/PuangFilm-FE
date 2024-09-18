@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ImageWithDescriptionProps } from '@/interfaces';
+import { GuideDetailProps, ImageWithDescriptionProps } from '@/interfaces';
 import SVGTriangle from '@/styles/icons/triangle.svg';
 
 function ImageWithDescription({ src, description }: ImageWithDescriptionProps) {
@@ -22,14 +22,6 @@ function ImageWithDescription({ src, description }: ImageWithDescriptionProps) {
       </div>
     </div>
   );
-}
-
-interface GuideDetailProps {
-  puang: string;
-  title: string;
-  children: React.ReactNode;
-  examples: { id: string; src: string; description: string }[];
-  explanation: React.ReactNode;
 }
 
 export default function GuideDetail({
