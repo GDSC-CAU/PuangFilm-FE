@@ -1,3 +1,7 @@
+export interface IconProps {
+  bgColor: string;
+}
+
 export const ICON_TYPES = {
   IMAGES: 'images',
   NEXT: 'next',

@@ -11,10 +11,6 @@ export interface MyButtonProps extends ButtonProps {
 }
 
 export interface IconButtonProps extends ButtonProps {
-  iconType?: IconType;
-}
-
-export interface IconProps {
-  component: ReactElement;
-  bgColor: string;
+  iconType: IconType;
+  iconComponent: ReactElement;
 }
