@@ -5,7 +5,8 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import LoginButton from '@/app/login/_components/LoginButton';
-import MyButton from '@/components/MyButton';
+import IconButton from '@/components/IconButton';
+import { ICON_TYPES } from '@/interfaces';
 import { actionInsertToken } from '@/store/atoms/tokenActions';
 import login_character from '../../../public/login-puang.png';
 
@@ -73,11 +74,26 @@ function LoginView() {
             height: 'auto',
           }}
         />
-        <div className="absolute bottom-5 left-1/2 w-4/5 -translate-x-1/2">
+        <div className="absolute bottom-5 left-1/2 flex w-[90%] -translate-x-1/2 justify-between">
           {storedToken === '' ? (
             <LoginButton />
           ) : (
-            <MyButton target="/list" name="다음" />
+            <>
+              <div className="w-[48%]">
+                <IconButton
+                  target="/list"
+                  name="프로필 목록"
+                  iconType={ICON_TYPES.IMAGES}
+                />
+              </div>
+              <div className="w-[48%]">
+                <IconButton
+                  target="/concept"
+                  name="프로필 생성"
+                  iconType={ICON_TYPES.NEXT}
+                />
+              </div>
+            </>
           )}
         </div>
       </div>
