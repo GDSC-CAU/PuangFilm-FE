@@ -39,14 +39,14 @@ export default function FrameSelectView() {
         <button
           type="button"
           onClick={() => setIsPremiumSelected(false)}
-          className={`flex h-[27px] w-[86px] items-center justify-center rounded-full ${isPremiumSelected ? 'bg-white text-primary-middlegray' : 'bg-primary-darkblue text-white'}`}
+          className={`flex h-[27px] w-[86px] items-center justify-center rounded-full ${isPremiumSelected ? 'text-primary-middlegray bg-white' : 'bg-primary-darkblue text-white'}`}
         >
           기본
         </button>
         <button
           type="button"
           onClick={() => setIsPremiumSelected(true)}
-          className={`flex h-[27px] w-[86px] items-center justify-center rounded-full ${isPremiumSelected ? 'bg-primary-darkblue text-white' : 'bg-white text-primary-middlegray'}`}
+          className={`flex h-[27px] w-[86px] items-center justify-center rounded-full ${isPremiumSelected ? 'bg-primary-darkblue text-white' : 'text-primary-middlegray bg-white'}`}
         >
           프리미엄
         </button>
