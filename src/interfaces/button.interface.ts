@@ -1,9 +1,10 @@
 import { ReactElement } from 'react';
-import { IconType } from '@/interfaces/icon.interfaces';
+import { IconType } from '@/interfaces/icon.interface';
+import { RouteType } from '@/interfaces/route.interface';
 
 interface ButtonProps {
   name: string;
-  target: string;
+  target: RouteType;
 }
 
 export interface MyButtonProps extends ButtonProps {
