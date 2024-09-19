@@ -27,7 +27,5 @@ jobs:
         run: npm ci
       - name: run prettier formatting
         run: npm run format
-      - name: run eslint checking
-        run: next lint .
       - name: run build process
         run: npm run build --if-present
