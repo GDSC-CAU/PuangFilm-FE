@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import IconButton from '@/app/login/_components/IconButton';
 import LoginButton from '@/app/login/_components/LoginButton';
-import IconButton from '@/components/IconButton';
 import { LOGIN_ERROR_CHECK_MSG, LOGIN_ERROR_MSG } from '@/constants';
 import { ICON_TYPES, ROUTE_TYPES } from '@/interfaces';
 import {
@@ -99,7 +99,7 @@ function LoginView() {
             <>
               <div className="w-[48%]">
                 <IconButton
-                  target="/list"
+                  target={ROUTE_TYPES.LIST}
                   name="프로필 목록"
                   iconType={ICON_TYPES.IMAGES}
                   iconComponent={<SVGImages />}
@@ -107,7 +107,7 @@ function LoginView() {
               </div>
               <div className="w-[48%]">
                 <IconButton
-                  target="/concept"
+                  target={ROUTE_TYPES.CONCEPT}
                   name="프로필 생성"
                   iconType={ICON_TYPES.NEXT}
                   iconComponent={<SVGNext />}
