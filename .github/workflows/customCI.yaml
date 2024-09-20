@@ -21,11 +21,17 @@ jobs:
           cache: 'npm'
       - name: npm package install
         run: npm ci
-      - name: run prettier formatting
-        run: npm run format
+      - name: run eslint
+        run: npm run lint
       - name: run build process
         run: npm run build --if-present
       - name: Analyze bundle sizes
         uses: transferwise/actions-next-bundle-analyzer@v2
         with:
           comment-strategy: 'always'
+      - name: Delete merged branch
+        uses: SvanBoxel/delete-merged-branch@1.4.3
+        with:
+          exclude: [main]
+          delete_closed_pr: false
+
