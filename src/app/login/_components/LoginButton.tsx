@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import LoginImage from '@/styles/images/Kakao-Login.png';
 
 export default function LoginButton() {
   const redirectLoginPage = () => {
@@ -14,13 +13,11 @@ export default function LoginButton() {
   return (
     <button className="h-full w-full" type="button" onClick={redirectLoginPage}>
       <Image
-        src={LoginImage}
+        src="/Kakao-Login.png"
         alt="kakao login"
-        sizes="100vw"
-        style={{
-          width: '100%',
-          height: 'auto',
-        }}
+        layout="responsive"
+        width={350}
+        height={45}
       />
     </button>
   );

@@ -2,11 +2,7 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
   mode: 'jit',
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/_components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -36,6 +32,7 @@ const config: Config = {
           lightblue: '#5F9FC0',
           darkgray: '#3A3A3C',
           middlegray: '#565656',
+          comet: '#636366',
         },
       },
       width: {

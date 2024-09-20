@@ -5,18 +5,18 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import {
-  LOGIN_ERROR_CHECK_MSG,
-  LOGIN_ERROR_MSG,
-} from '@/app/constants/errorMessages';
+import IconButton from '@/app/login/_components/IconButton';
 import LoginButton from '@/app/login/_components/LoginButton';
-import MyButton from '@/components/MyButton';
+import { LOGIN_ERROR_CHECK_MSG, LOGIN_ERROR_MSG } from '@/constants';
+import { ICON_TYPES, ROUTE_TYPES } from '@/interfaces';
 import {
   errorCheckMessageAtom,
   errorMessageAtom,
 } from '@/store/atoms/errorMessageAtom';
 import { actionInsertToken } from '@/store/atoms/tokenActions';
-import login_character from '../../../public/login_page_img.png';
+import SVGImages from '@/styles/icons/images.svg';
+import SVGNext from '@/styles/icons/next.svg';
+import login_character from '../../../public/login-puang.png';
 
 function LoginView() {
   const setErrorMessage = useSetAtom(errorMessageAtom);
@@ -44,7 +44,7 @@ function LoginView() {
               setInsertToken('');
               setErrorMessage(LOGIN_ERROR_MSG);
               setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
-              router.push('/error');
+              router.push(ROUTE_TYPES.ERROR);
             }
           }
         })
@@ -52,7 +52,7 @@ function LoginView() {
           setInsertToken('');
           setErrorMessage(LOGIN_ERROR_MSG);
           setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
-          router.push('/error');
+          router.push(ROUTE_TYPES.ERROR);
         });
     } else {
       setInsertToken(storedToken);
@@ -92,11 +92,28 @@ function LoginView() {
             height: 'auto',
           }}
         />
-        <div className="absolute bottom-5 left-1/2 w-4/5 -translate-x-1/2">
+        <div className="absolute bottom-5 left-1/2 flex w-[90%] -translate-x-1/2 justify-between">
           {storedToken === '' ? (
             <LoginButton />
           ) : (
-            <MyButton target="/list" name="다음" />
+            <>
+              <div className="w-[48%]">
+                <IconButton
+                  target={ROUTE_TYPES.LIST}
+                  name="프로필 목록"
+                  iconType={ICON_TYPES.IMAGES}
+                  iconComponent={<SVGImages />}
+                />
+              </div>
+              <div className="w-[48%]">
+                <IconButton
+                  target={ROUTE_TYPES.CONCEPT}
+                  name="프로필 생성"
+                  iconType={ICON_TYPES.NEXT}
+                  iconComponent={<SVGNext />}
+                />
+              </div>
+            </>
           )}
         </div>
       </div>
