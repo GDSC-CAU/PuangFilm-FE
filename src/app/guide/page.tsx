@@ -98,6 +98,7 @@ export default function GuideView() {
           cancelLabel="동의 안함"
           comfirmFn={handleMovePage}
           cancelFn={handleCloseModal}
+          modalLocation="items-end"
         >
           <CompoundModal.Title>개인정보 수집 및 이용 동의</CompoundModal.Title>
           <CompoundModal.PrivatePolicy />

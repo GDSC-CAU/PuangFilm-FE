@@ -82,6 +82,7 @@ export default function EmailEnterView() {
             cancelLabel={'취소'}
             comfirmFn={handleMovePage}
             cancelFn={handleCloseModal}
+            modalLocation="items-center"
           >
             <CompoundModal.Title>이미지가 없으면 슬퍼</CompoundModal.Title>
             <CompoundModal.Content>
