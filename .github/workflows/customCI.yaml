@@ -32,6 +32,7 @@ jobs:
       - name: Delete merged branch
         uses: SvanBoxel/delete-merged-branch@1.4.3
         with:
-          exclude: [main]
+          exclude:
+            - main
           delete_closed_pr: false
 
