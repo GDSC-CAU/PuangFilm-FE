@@ -26,7 +26,7 @@ export default function GuideView() {
   const { navigateTo } = useNavigate();
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const handleMovePage = () => {
-    navigateTo('/upload');
+    navigateTo(ROUTE_TYPES.UPLOAD);
   };
   return (
     <div className="flex w-full flex-col justify-start bg-background">
