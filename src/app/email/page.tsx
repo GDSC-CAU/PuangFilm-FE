@@ -70,7 +70,7 @@ export default function EmailEnterView() {
 
         <div
           onClick={handleOpenModal}
-          className="text-4xs pb-4 pt-8 font-sfpro font-bold text-primary-lightblue underline underline-offset-4"
+          className="pb-4 pt-8 font-sfpro text-4xs font-bold text-primary-lightblue underline underline-offset-4"
         >
           건너뛰기 {'>'}
         </div>

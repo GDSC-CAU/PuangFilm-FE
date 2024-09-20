@@ -1,21 +1,11 @@
-import { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
+import { ModalMainProps } from '@/interfaces';
 import {
   ModalButton,
   ModalContent,
   ModalPrivacyPolicy,
   ModalTitle,
 } from './ModalSubComponents';
-
-interface ModalMainProps {
-  children?: ReactNode;
-  isOpen: boolean;
-  confirmLabel: string;
-  cancelLabel: string;
-  comfirmFn: () => void;
-  cancelFn: () => void;
-  modalLocation: string;
-}
 
 function ModalMain({
   children,

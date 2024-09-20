@@ -1,25 +1,17 @@
-import { ReactNode } from 'react';
+import {
+  ModalButtonProps,
+  ModalContentProps,
+  ModalTitleProps,
+} from '@/interfaces';
 
-interface ModalTitleProps {
-  children: ReactNode;
-}
 export function ModalTitle({ children }: ModalTitleProps) {
   return <div className="text-xl">{children}</div>;
-}
-
-interface ModalContentProps {
-  children?: ReactNode;
 }
 
 export function ModalContent({ children }: ModalContentProps) {
   return <div className="text-center font-sfpro text-3xs">{children}</div>;
 }
-interface ModalButtonProps {
-  comfirmLabel: string;
-  cancelBLabel: string;
-  comfirmFn: () => void;
-  cancelFn: () => void;
-}
+
 export function ModalButton({
   comfirmLabel,
   cancelBLabel,
