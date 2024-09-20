@@ -1,16 +1,18 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import { ROUTE_TYPES } from '@/interfaces';
+import { CompoundModal } from '@/components/Modal/ModalMain';
+import useModal from '../hooks/useModal';
+import { useNavigate } from '../hooks/useNavigate';
 
 export default function EmailEnterView() {
+  const { navigateTo } = useNavigate();
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
-  const router = useRouter();
-
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const handleEmailEntered = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
@@ -22,8 +24,12 @@ export default function EmailEnterView() {
   const handleEmailSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isEmailValid) {
-      router.push(ROUTE_TYPES.WAITING);
+      navigateTo(ROUTE_TYPES.WAITING);
     }
+  };
+
+  const handleMovePage = () => {
+    navigateTo(ROUTE_TYPES.WAITING);
   };
 
   return (
@@ -62,9 +68,27 @@ export default function EmailEnterView() {
           priority
         />
 
-        <div className="text-4xs pb-4 pt-8 font-sfpro font-bold text-primary-lightblue underline underline-offset-4">
+        <div
+          onClick={handleOpenModal}
+          className="text-4xs pb-4 pt-8 font-sfpro font-bold text-primary-lightblue underline underline-offset-4"
+        >
           건너뛰기 {'>'}
         </div>
+
+        {isOpen && (
+          <CompoundModal
+            isOpen={isOpen}
+            confirmLabel={'확인'}
+            cancelLabel={'취소'}
+            comfirmFn={handleMovePage}
+            cancelFn={handleCloseModal}
+          >
+            <CompoundModal.Title>이미지가 없으면 슬퍼</CompoundModal.Title>
+            <CompoundModal.Content>
+              이미지를 재선택 하시려면 확인을 눌러주세요
+            </CompoundModal.Content>
+          </CompoundModal>
+        )}
 
         <button
           type="submit"
