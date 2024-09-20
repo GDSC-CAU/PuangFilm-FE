@@ -29,18 +29,25 @@ export default function EmailEnterView() {
   return (
     <div className="w-full">
       <PreviousPage target="/upload" />
-      <div className="mb-8 text-center text-xl">
+      <div className="text-center text-xl">
         프로필을 생성하는데 <br />
         다소 시간이 걸릴 수 있어요!
       </div>
 
+      <div className="py-4 text-center font-sfpro text-2xs">
+        <span className="font-bold">
+          이메일을 입력하면 완료 알림을 보내드립니다. <br />
+        </span>
+        페이지를 종료하고 다른 일을 해도 괜찮아요!
+      </div>
+
       <form
         onSubmit={handleEmailSubmit}
-        className="flex w-full flex-col items-center gap-y-12"
+        className="flex w-full flex-col items-center"
       >
         <input
           placeholder="이메일을 입력해주세요"
-          className="h-12 w-full rounded-full border-2 border-primary-darkblue bg-background text-center font-sfpro text-xs font-bold placeholder-primary-darkblue placeholder-opacity-20"
+          className="mb-12 h-12 w-full rounded-full border-2 border-primary-darkblue bg-background text-center font-sfpro text-xs font-bold placeholder-primary-darkblue placeholder-opacity-20"
           type="email"
           required
           value={email}
@@ -55,11 +62,8 @@ export default function EmailEnterView() {
           priority
         />
 
-        <div className="text-center font-sfpro text-2xs text-white">
-          <span className="font-bold">
-            이메일을 입력하면 완료 알림을 보내드립니다. <br />
-          </span>
-          페이지를 종료하고 다른 일을 해도 괜찮아요!
+        <div className="text-4xs pb-4 pt-8 font-sfpro font-bold text-primary-lightblue underline underline-offset-4">
+          건너뛰기 {'>'}
         </div>
 
         <button
