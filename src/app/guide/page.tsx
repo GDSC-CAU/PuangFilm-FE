@@ -2,6 +2,7 @@
 
 import { CompoundModal } from '@/components/Modal/ModalMain';
 import PreviousPage from '@/components/PreviousPage';
+import { PRIVACY_POLICY_CONTENT, PRIVACY_POLICY_TITLE } from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
 import useModal from '../hooks/useModal';
 import { useNavigate } from '../hooks/useNavigate';
@@ -100,10 +101,10 @@ export default function GuideView() {
           cancelFn={handleCloseModal}
           modalLocation="items-end"
         >
-          <CompoundModal.Title>개인정보 수집 및 이용 동의</CompoundModal.Title>
+          <CompoundModal.Title>{PRIVACY_POLICY_TITLE}</CompoundModal.Title>
           <CompoundModal.PrivatePolicy />
           <CompoundModal.Content>
-            이미지를 재선택 하시려면 확인을 눌러주세요
+            {PRIVACY_POLICY_CONTENT}
           </CompoundModal.Content>
         </CompoundModal>
       ) : (

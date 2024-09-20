@@ -5,7 +5,7 @@ import {
 } from '@/interfaces';
 
 export function ModalTitle({ children }: ModalTitleProps) {
-  return <div className="text-xl">{children}</div>;
+  return <div className="text-center text-xl">{children}</div>;
 }
 
 export function ModalContent({ children }: ModalContentProps) {

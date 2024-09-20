@@ -7,6 +7,7 @@ import { ROUTE_TYPES } from '@/interfaces';
 import { CompoundModal } from '@/components/Modal/ModalMain';
 import useModal from '../hooks/useModal';
 import { useNavigate } from '../hooks/useNavigate';
+import { ENTER_EMAIL_TITLE } from '@/constants';
 
 export default function EmailEnterView() {
   const { navigateTo } = useNavigate();
@@ -70,7 +71,7 @@ export default function EmailEnterView() {
 
         <div
           onClick={handleOpenModal}
-          className="pb-4 pt-8 font-sfpro text-4xs font-bold text-primary-lightblue underline underline-offset-4"
+          className="text-4xs pb-4 pt-8 font-sfpro font-bold text-primary-lightblue underline underline-offset-4"
         >
           건너뛰기 {'>'}
         </div>
@@ -84,10 +85,7 @@ export default function EmailEnterView() {
             cancelFn={handleCloseModal}
             modalLocation="items-center"
           >
-            <CompoundModal.Title>이미지가 없으면 슬퍼</CompoundModal.Title>
-            <CompoundModal.Content>
-              이미지를 재선택 하시려면 확인을 눌러주세요
-            </CompoundModal.Content>
+            <CompoundModal.Title>{ENTER_EMAIL_TITLE}</CompoundModal.Title>
           </CompoundModal>
         )}
 
