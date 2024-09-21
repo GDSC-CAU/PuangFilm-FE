@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export interface ModalMainProps {
-  children?: ReactNode;
+  children: ReactNode;
   isOpen: boolean;
   confirmLabel: string;
   cancelLabel: string;
@@ -14,7 +14,7 @@ export interface ModalTitleProps {
 }
 
 export interface ModalContentProps {
-  children?: ReactNode;
+  children: ReactNode;
 }
 
 export interface ModalButtonProps {
