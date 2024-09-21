@@ -1,11 +1,11 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { CompoundModal } from '@/components/Modal/ModalMain';
 import PreviousPage from '@/components/PreviousPage';
 import { PRIVACY_POLICY_CONTENT, PRIVACY_POLICY_TITLE } from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
 import useModal from '../hooks/useModal';
-import { useNavigate } from '../hooks/useNavigate';
 import GuideDetail from './_components/GuideDetail';
 
 const goodexamples = [
@@ -23,10 +23,10 @@ const badexamples = [
 ];
 
 export default function GuideView() {
-  const { navigateTo } = useNavigate();
+  const router = useRouter();
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const handleMovePage = () => {
-    navigateTo(ROUTE_TYPES.UPLOAD);
+    router.push(ROUTE_TYPES.UPLOAD);
   };
   return (
     <div className="flex w-full flex-col justify-start bg-background">

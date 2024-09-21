@@ -2,15 +2,15 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import PreviousPage from '@/components/PreviousPage';
-import { ROUTE_TYPES } from '@/interfaces';
 import { CompoundModal } from '@/components/Modal/ModalMain';
-import useModal from '../hooks/useModal';
-import { useNavigate } from '../hooks/useNavigate';
+import PreviousPage from '@/components/PreviousPage';
 import { ENTER_EMAIL_TITLE } from '@/constants';
+import { ROUTE_TYPES } from '@/interfaces';
+import useModal from '../hooks/useModal';
+import { useRouter } from 'next/navigation';
 
 export default function EmailEnterView() {
-  const { navigateTo } = useNavigate();
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
@@ -25,12 +25,12 @@ export default function EmailEnterView() {
   const handleEmailSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isEmailValid) {
-      navigateTo(ROUTE_TYPES.WAITING);
+      router.push(ROUTE_TYPES.WAITING);
     }
   };
 
   const handleMovePage = () => {
-    navigateTo(ROUTE_TYPES.WAITING);
+    router.push(ROUTE_TYPES.WAITING);
   };
 
   return (
@@ -69,18 +69,19 @@ export default function EmailEnterView() {
           priority
         />
 
-        <div
+        <button
+          type="button"
           onClick={handleOpenModal}
           className="pb-4 pt-8 font-sfpro text-4xs font-bold text-primary-lightblue underline underline-offset-4"
         >
           건너뛰기 {'>'}
-        </div>
+        </button>
 
         {isOpen && (
           <CompoundModal
             isOpen={isOpen}
-            confirmLabel={'확인'}
-            cancelLabel={'취소'}
+            confirmLabel="확인"
+            cancelLabel="취소"
             comfirmFn={handleMovePage}
             cancelFn={handleCloseModal}
             modalLocation="items-center"
