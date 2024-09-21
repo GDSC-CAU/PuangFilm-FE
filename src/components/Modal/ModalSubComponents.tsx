@@ -5,11 +5,17 @@ import {
 } from '@/interfaces';
 
 export function ModalTitle({ children }: ModalTitleProps) {
-  return <div className="text-center text-xl">{children}</div>;
+  return (
+    <div className="whitespace-pre-line text-center text-xl">{children}</div>
+  );
 }
 
 export function ModalContent({ children }: ModalContentProps) {
-  return <div className="text-center font-sfpro text-3xs">{children}</div>;
+  return (
+    <div className="whitespace-pre-line text-center font-sfpro text-3xs">
+      {children}
+    </div>
+  );
 }
 
 export function ModalButton({
@@ -38,9 +44,9 @@ export function ModalButton({
   );
 }
 
-//개인정보보호동의 페이지 추가 예정
+// 개인정보보호동의 페이지 추가 예정
 interface ModalPrivacyPolicyProps {}
-export function ModalPrivacyPolicy({}: ModalPrivacyPolicyProps) {
+export function ModalPrivacyPolicy() {
   return (
     <span className="font-primary-lightblue inline-block border-b-2 border-[#5F9FC0] font-sfpro text-2xs font-bold opacity-20">
       개인정보 수집 및 이용 정책 {'>'}
