@@ -1,7 +1,9 @@
 'use client';
 
-import Modal from '@/components/Modal';
+import { useRouter } from 'next/navigation';
+import { CompoundModal } from '@/components/Modal/ModalMain';
 import PreviousPage from '@/components/PreviousPage';
+import { PRIVACY_POLICY_CONTENT, PRIVACY_POLICY_TITLE } from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
 import useModal from '../hooks/useModal';
 import GuideDetail from './_components/GuideDetail';
@@ -21,7 +23,11 @@ const badexamples = [
 ];
 
 export default function GuideView() {
+  const router = useRouter();
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
+  const handleMovePage = () => {
+    router.push(ROUTE_TYPES.UPLOAD);
+  };
   return (
     <div className="flex w-full flex-col justify-start bg-background">
       <PreviousPage target={ROUTE_TYPES.CONCEPT} />
@@ -87,27 +93,20 @@ export default function GuideView() {
       </div>
 
       {isOpen ? (
-        <div className="fixed inset-0 z-40 flex items-end justify-center bg-black bg-opacity-50">
-          <div className="w-full max-w-[420px] px-6">
-            <Modal
-              onClose={handleCloseModal}
-              title="개인정보 수집 및 이용 동의"
-              description={
-                <>
-                  푸앙이 사진관은 개인 정보 처리 방침에 따라
-                  <br />
-                  개인 정보를 처리하고 있습니다. 원활한 서비스
-                  <br />
-                  이용을 위해 위 내용에 동의해주세요
-                </>
-              }
-              showPolicy
-              target="/upload"
-              button1="동의"
-              button2="동의 안함"
-            />
-          </div>
-        </div>
+        <CompoundModal
+          isOpen={isOpen}
+          confirmLabel="동의"
+          cancelLabel="동의 안함"
+          comfirmFn={handleMovePage}
+          cancelFn={handleCloseModal}
+          modalLocation="items-end"
+        >
+          <CompoundModal.Title>{PRIVACY_POLICY_TITLE}</CompoundModal.Title>
+          <CompoundModal.PrivatePolicy />
+          <CompoundModal.Content>
+            {PRIVACY_POLICY_CONTENT}
+          </CompoundModal.Content>
+        </CompoundModal>
       ) : (
         <button
           type="button"

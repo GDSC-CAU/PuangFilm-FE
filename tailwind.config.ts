@@ -19,6 +19,7 @@ const config: Config = {
         xs: '1.063rem', // fontsize : 17px
         '2xs': '0.875rem', // 14px
         '3xs': '0.75rem', // 12px
+        '4xs': '0.625rem', // 10px
       },
       colors: {
         background: '#9CCEE8',
