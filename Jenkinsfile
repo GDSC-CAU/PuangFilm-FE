@@ -5,6 +5,7 @@ pipeline {
     
     environment {
         DOCKER_COMPOSE_VERSION = '1.29.2'
+        AWS_PUBLIC_URL = "43.203.237.252"
     }
     
     stages {
@@ -15,27 +16,25 @@ pipeline {
             }
         }
         
-        // stage('docker-clean-up') {
-        //     steps {
-        //         script {
-        //             sshagent(credentials: ['ec2_ssh_key']) {
+        stage('docker-clean-up') {
+            steps {
+                script {
+                    sshagent(credentials: ['EC2_SSH']) {
                     
-        //             sh '''
-        //             if test "`docker ps -aq --filter ancestor=front`"; then
+                    sh '''
+                    if test "`docker ps -aq --filter ancestor=front`"; then
                     
-		// 			ssh -o StrictHostKeyChecking=no ubuntu@{ec2 서버 도메인 or IP주소} "docker stop $(docker ps -aq --filter ancestor=front)"
-        //             // 이전 컨테이너 삭제
-        //             ssh -o StrictHostKeyChecking=no ubuntu@{ec2 서버 도메인 or IP주소} "docker rm -f $(docker ps -aq --filter ancestor=front)"
-        //             // 이전 이미지 삭제
-        //             ssh -o StrictHostKeyChecking=no ubuntu@{ec2 서버 도메인 or IP주소} "docker rmi front"
+					ssh -o StrictHostKeyChecking=no ubuntu@{AWS_PUBLIC_URL} "docker stop $(docker ps -aq --filter ancestor=front)"
+                    ssh -o StrictHostKeyChecking=no ubuntu@{AWS_PUBLIC_URL} "docker rm -f $(docker ps -aq --filter ancestor=front)"
+                    ssh -o StrictHostKeyChecking=no ubuntu@{AWS_PUBLIC_URL} "docker rmi front"
 
-        //             fi
-        //             '''
-        //             }
-        //         }
+                    fi
+                    '''
+                    }
+                }
                 
-        //     }
-        // }
+            }
+        }
         
         stage('docker-build'){
             steps {
