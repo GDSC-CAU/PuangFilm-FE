@@ -5,7 +5,7 @@ pipeline {
     
     environment {
         DOCKER_COMPOSE_VERSION = '1.29.2'
-        AWS_PUBLIC_URL = "43.203.237.252"
+        AWS_PUBLIC_URL = "ec2-43-203-237-252.ap-northeast-2.compute.amazonaws.com"
     }
     
     stages {
