@@ -50,7 +50,7 @@ pipeline {
                                 fi
                             """
                             
-                            sh 'docker-compose -f docker-compose.yml build'
+                            sh 'docker compose -f docker-compose.yml build'
                         }
                     }
                 }
@@ -61,7 +61,7 @@ pipeline {
             steps {
                 dir('ico') {
                     script {
-                        sh 'docker-compose -f docker-compose.yml up -d'
+                        sh 'docker compose -f docker-compose.yml up -d'
                     }
                 }
             }
