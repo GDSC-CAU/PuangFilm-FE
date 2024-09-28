@@ -12,7 +12,7 @@ pipeline {
         
         stage('gitlab_clone') {
             steps {
-                git branch: 'dev/ci-cd', credentialsId: 'Jenkins_token', url: 'https://github.com/falconlee236/PuangFilm-FE-local'
+                git branch: 'dev/ci-cd', credentialsId: 'github_token', url: 'https://github.com/falconlee236/PuangFilm-FE-local'
             }
         }
         
