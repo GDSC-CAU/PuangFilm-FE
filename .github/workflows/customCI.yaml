@@ -33,4 +33,17 @@ jobs:
         uses: SvanBoxel/delete-merged-branch@1.4.3
         with:
           delete_closed_pr: false
+      - name: Trigger Jenkins Multiple Jobs
+        uses: appleboy/jenkins-action@v0.0.2
+        with:
+          # jenkins base url
+          url: ${{secrets.JENKINS_URL}}
+          # jenkins username
+          user: sangylee
+          # jenkins api token
+          token: ${{secrets.JENKINS_API_TOKEN}}
+          # jenkins job
+          job: puang-web
+
+          
 
