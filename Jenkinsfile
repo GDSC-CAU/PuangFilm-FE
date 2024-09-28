@@ -5,7 +5,7 @@ pipeline {
     
     environment {
         DOCKER_COMPOSE_VERSION = '1.29.2'
-        AWS_PUBLIC_URL = "ec2-43-203-237-252.ap-northeast-2.compute.amazonaws.com"
+        AWS_PUBLIC_URL = "43.203.237.252"
     }
     
     stages {
@@ -24,9 +24,9 @@ pipeline {
                     sh '''
                     if test "`docker ps -aq --filter ancestor=front`"; then
                     
-					ssh -o StrictHostKeyChecking=no ubuntu@{env.AWS_PUBLIC_URL} "docker stop $(docker ps -aq --filter ancestor=front)"
-                    ssh -o StrictHostKeyChecking=no ubuntu@{env.AWS_PUBLIC_URL} "docker rm -f $(docker ps -aq --filter ancestor=front)"
-                    ssh -o StrictHostKeyChecking=no ubuntu@{env.AWS_PUBLIC_URL} "docker rmi front"
+					ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $(docker ps -aq --filter ancestor=front)"
+                    ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $(docker ps -aq --filter ancestor=front)"
+                    ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rmi front"
 
                     fi
                     '''
