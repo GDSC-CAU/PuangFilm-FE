@@ -40,29 +40,25 @@ pipeline {
             steps {
                 script {
                     echo 'Build Docker'
-                    dir('ico') {
-                        script {
-                            
-                            sh """
-                                if ! command -v docker > /dev/null; then
-                                    curl -fsSL https://get.docker.com -o get-docker.sh
-                                    sh get-docker.sh
-                                fi
-                            """
-                            
-                            sh 'docker compose -f docker-compose.yml build'
-                        }
-                    }
+                    sh 'docker compose -f docker-compose.yml build'
                 }
             }
         }
         
         stage('Docker run') {
             steps {
-                dir('ico') {
-                    script {
-                        sh 'docker compose -f docker-compose.yml up -d'
-                    }
+                script {
+                    sh 'docker compose -f docker-compose.yml up -d'
+                }
+            }
+        }
+
+        stage('Docker down') {
+            steps {
+                script {
+                    sh 'docker stop $(docker ps -aq --filter ancestor=front)'
+                    sh 'docker rm -f $(docker ps -aq --filter ancestor=front)'
+                    sh 'docker rmi front'
                 }
             }
         }
