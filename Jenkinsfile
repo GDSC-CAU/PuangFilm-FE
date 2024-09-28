@@ -24,9 +24,9 @@ pipeline {
                     sh '''
                     if test "`docker ps -aq --filter ancestor=front`"; then
                     
-					ssh -o StrictHostKeyChecking=no ubuntu@{AWS_PUBLIC_URL} "docker stop $(docker ps -aq --filter ancestor=front)"
-                    ssh -o StrictHostKeyChecking=no ubuntu@{AWS_PUBLIC_URL} "docker rm -f $(docker ps -aq --filter ancestor=front)"
-                    ssh -o StrictHostKeyChecking=no ubuntu@{AWS_PUBLIC_URL} "docker rmi front"
+					ssh -o StrictHostKeyChecking=no ubuntu@{env.AWS_PUBLIC_URL} "docker stop $(docker ps -aq --filter ancestor=front)"
+                    ssh -o StrictHostKeyChecking=no ubuntu@{env.AWS_PUBLIC_URL} "docker rm -f $(docker ps -aq --filter ancestor=front)"
+                    ssh -o StrictHostKeyChecking=no ubuntu@{env.AWS_PUBLIC_URL} "docker rmi front"
 
                     fi
                     '''
