@@ -3,25 +3,16 @@
 import { useRouter } from 'next/navigation';
 import { CompoundModal } from '@/components/Modal/ModalMain';
 import PreviousPage from '@/components/PreviousPage';
-import { PRIVACY_POLICY_CONTENT, PRIVACY_POLICY_TITLE } from '@/constants';
+import {
+  badexamples,
+  goodexamples,
+  PRIVACY_POLICY_CONTENT,
+  PRIVACY_POLICY_TITLE,
+} from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
 import useModal from '../hooks/useModal';
 import Example from './_components/BottomSheet';
 import GuideDetail from './_components/GuideDetail';
-
-const goodexamples = [
-  { src: '/example1.png', description: '정면에서 찍은' },
-  { src: '/example2.png', description: '얼굴 위주 사진' },
-  { src: '/example3.png', description: '배경이 단색인' },
-  { src: '/example4.png', description: '가까운 거리에서 찍은 사진' },
-];
-
-const badexamples = [
-  { src: '/example5.png', description: '얼굴 일부를 가린' },
-  { src: '/example6.png', description: '전신 사진' },
-  { src: '/example7.png', description: '단체 사진 크롭' },
-  { src: '/example8.png', description: '노출이 심한 사진' },
-];
 
 export default function GuideView() {
   const router = useRouter();
