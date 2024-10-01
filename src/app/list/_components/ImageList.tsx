@@ -1,10 +1,9 @@
 'use client';
 
-import MyButton from "@/components/MyButton";
-import { ROUTE_TYPES } from "@/interfaces";
-import { gender } from "@/store/atoms/selectedBoxAtom";
 import { useAtom } from 'jotai/index';
 import Image from 'next/image';
+import MyButton from '@/components/MyButton';
+import { ROUTE_TYPES } from '@/interfaces';
 import { selectedPhotoAtom } from '@/store/atoms/selectedPhotoAtom';
 
 interface ListWithDataProps {
@@ -32,9 +31,8 @@ export default function ImageList({ list }: ListWithDataProps): JSX.Element {
       <div className="h-96 overflow-y-auto">
         <div className="grid grid-cols-2 gap-4">
           {list.map((item) => (
-            <div>
+            <div key={item}>
               <button
-                key={item}
                 className="w-full cursor-pointer"
                 onClick={() => handlePhotoClick(item)}
                 type="button"
@@ -54,9 +52,7 @@ export default function ImageList({ list }: ListWithDataProps): JSX.Element {
                   height={200}
                 />
               </button>
-              <p className="text-right font-sfpro text-sm text-white">
-                {item}
-              </p>
+              <p className="text-right font-sfpro text-sm text-white">{item}</p>
             </div>
           ))}
         </div>
