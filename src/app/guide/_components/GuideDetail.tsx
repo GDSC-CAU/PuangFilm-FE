@@ -44,7 +44,7 @@ export default function GuideDetail({
       <div className="grid grid-cols-2 justify-center gap-x-3 gap-y-4 pt-4">
         {examples.map((example) => (
           <ImageWithDescription
-            key={`guide-detail-${example.id}`}
+            key={`guide-detail-${example}`}
             src={example.src}
             description={example.description}
           />
