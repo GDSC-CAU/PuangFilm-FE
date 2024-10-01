@@ -1,15 +1,16 @@
+import { PrivacySectionProps } from '@/interfaces';
 import React from 'react';
 
 function formatText(text: string) {
   return text.replace(/(\d+\.\s|-\s|\*\s)/g, '<br>$1');
 }
+export const PRIVACY_INTRO: string = `푸앙이 사진관(이하 “우리”라고 합니다)은 「개인정보 보호법」에 따라
+      이용자의 개인정보를 보호하고 이와 관련된 고충을 원활하게 처리할 수 있도록
+      다음과 같은 개인정보처리방침에 따라 개인정보를 처리하고 있습니다. 본
+      개인정보처리방침은 우리가 운영하는 푸앙이 사진관 서비스의
+      개인정보처리방침입니다.`;
 
-interface PrivacySection {
-  title: string;
-  content: string;
-}
-
-function Table1() {
+export function Table1() {
   return (
     <table className="my-2">
       <thead>
@@ -52,7 +53,7 @@ function Table1() {
     </table>
   );
 }
-function Table2() {
+export function Table2() {
   return (
     <table className="my-2">
       <thead>
@@ -72,32 +73,8 @@ function Table2() {
     </table>
   );
 }
-const formattedContent = (text: string) => {
-  const htmlWithLineBreaks = text
-    .replace(/([*|-])\s/g, ' $1 ')
-    .replace(/(\d+\.\s|[\u2460-\u2469]\s)/g, '<br>$1')
-    .split('<br>')
-    .map((item, idx) => {
-      const trimmedItem = item.trim();
-      let paddingLeft = '0px';
 
-      if (trimmedItem.startsWith('*')) {
-        paddingLeft = '16px';
-      } else if (trimmedItem.startsWith('-')) {
-        paddingLeft = '10px';
-      } else if (/^\d+\./.test(trimmedItem)) {
-        paddingLeft = '6px';
-      }
-      return (
-        <div key={`${item}-${idx}`} style={{ paddingLeft }}>
-          {item}
-        </div>
-      );
-    });
-  return htmlWithLineBreaks;
-};
-
-const privacySections: PrivacySection[] = [
+export const privacySections: PrivacySectionProps[] = [
   {
     title: '제1조 (개인정보의 처리 목적)',
     content:
@@ -138,7 +115,7 @@ const privacySections: PrivacySection[] = [
     content: formatText(`① 우리는 다음의 개인정보 항목을 처리하고 있습니다.`),
   },
 ];
-const privacySections2: PrivacySection[] = [
+export const privacySections2: PrivacySectionProps[] = [
   {
     title: '',
     content: formatText(`② 제3자로부터 제공받는 개인정보 항목은 다음과 같습니다.
@@ -188,7 +165,7 @@ const privacySections2: PrivacySection[] = [
     ),
   },
 ];
-const privacySections3: PrivacySection[] = [
+export const privacySections3: PrivacySectionProps[] = [
   {
     title: '',
     content:
@@ -205,39 +182,3 @@ const privacySections3: PrivacySection[] = [
     ),
   },
 ];
-function PrivacySectionComponent({ section }: { section: PrivacySection }) {
-  return (
-    <div key={section.title}>
-      <div className="pt-4 text-2xs font-bold">{section.title}</div>
-      <div>{formattedContent(section.content)}</div>
-    </div>
-  );
-}
-
-export const PRIVACY_POLICY_CONTENTS = (
-  <div className="font-sfpro text-2xs">
-    <p>
-      푸앙이 사진관(이하 “우리”라고 합니다)은 「개인정보 보호법」에 따라
-      이용자의 개인정보를 보호하고 이와 관련된 고충을 원활하게 처리할 수 있도록
-      다음과 같은 개인정보처리방침에 따라 개인정보를 처리하고 있습니다. 본
-      개인정보처리방침은 우리가 운영하는 푸앙이 사진관 서비스의
-      개인정보처리방침입니다.
-    </p>
-    {privacySections.map((section) => (
-      <PrivacySectionComponent key={section.title} section={section} />
-    ))}
-    <Table1 />
-    {privacySections2.map((section) => (
-      <PrivacySectionComponent key={section.title} section={section} />
-    ))}
-    <Table2 />
-    {privacySections3.map((section) => (
-      <PrivacySectionComponent key={section.title} section={section} />
-    ))}
-    <div className="gap-y-4 pt-8">
-      약관 시행일 2024.10.01.
-      <br /> 푸앙이 사진관 서비스에 대해 궁금하신 사항은 책임자
-      이메일(yymin1022@gmail.com)로 문의해주시기 바랍니다.
-    </div>
-  </div>
-);

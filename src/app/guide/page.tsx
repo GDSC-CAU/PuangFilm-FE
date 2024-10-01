@@ -11,8 +11,8 @@ import {
 } from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
 import useModal from '../hooks/useModal';
-import Example from './_components/BottomSheet';
 import GuideDetail from './_components/GuideDetail';
+import PrivacyPolicy from '@/components/PivacyPolicy';
 
 export default function GuideView() {
   const router = useRouter();
@@ -78,7 +78,9 @@ export default function GuideView() {
         </GuideDetail>
       </div>
 
-      <Example />
+      <div className="pb-4 pt-8">
+        <PrivacyPolicy />
+      </div>
 
       {isOpen ? (
         <CompoundModal
