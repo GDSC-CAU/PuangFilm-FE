@@ -1,17 +1,19 @@
 'use client';
 
-import { useAtomValue } from 'jotai';
-import MyButton from '@/components/MyButton';
-import { tokenAtom } from '@/store/atoms/tokenAtom';
+import PreviousPage from '@/components/PreviousPage';
+import EmptyList from './_components/EmptyList';
+import ImageList from './_components/ImageList';
 
 export default function ListView() {
-  const token = useAtomValue(tokenAtom);
-  console.log(token);
+  const list: [] = [];
 
   return (
-    <div>
-      <h1>프로필 list Page</h1>
-      <MyButton name="프로필 생성" target="/frame" />
+    <div className="flex w-full flex-col justify-start bg-background">
+      <PreviousPage target="/login" />
+      <p className="mb-3 text-center font-cafe24 text-xl text-primary-darkblue">
+        나의 프로필 목록
+      </p>
+      {list.length === 0 ? <EmptyList /> : <ImageList list={list} />}
     </div>
   );
 }
