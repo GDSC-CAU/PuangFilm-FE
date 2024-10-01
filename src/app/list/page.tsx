@@ -5,7 +5,17 @@ import EmptyList from './_components/EmptyList';
 import ImageList from './_components/ImageList';
 
 export default function ListView() {
-  const list: [] = [];
+  const list = [
+    'wowowow',
+    'wowowowowo',
+    'wowowowowowowo',
+    'wowowow',
+    'wowowowowo',
+    'wowowowowowowo',
+    'wowowow',
+    'wowowowowo',
+    'wowowowowowowo',
+  ];
 
   return (
     <div className="flex w-full flex-col justify-start bg-background">
