@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import 'react-spring-bottom-sheet/dist/style.css';
+import { PRIVACY_POLICY_CONTENTS } from '@/constants/privatePolicyContent';
 
 export default function Example() {
   const [open, setOpen] = useState(false);
@@ -18,6 +19,14 @@ export default function Example() {
         open={open}
         snapPoints={({ maxHeight }) => [maxHeight * 0.8, maxHeight]}
       >
+        <div className="p-8">
+          <div className="pb-4 text-xl">
+            푸앙이 사진관 <br />
+            개인정보 수집 및 이용 동의
+          </div>
+          {PRIVACY_POLICY_CONTENTS}
+        </div>
+
         <div>My awesome content here</div>
         <button type="button" onClick={() => setOpen(false)}>
           close
