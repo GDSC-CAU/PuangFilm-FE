@@ -9,6 +9,7 @@ interface ButtonProps {
 
 export interface MyButtonProps extends ButtonProps {
   enabled?: boolean;
+  icon?: ReactElement;
 }
 
 export interface IconButtonProps extends ButtonProps {
