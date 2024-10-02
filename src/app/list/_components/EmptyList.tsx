@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import IconButton from '@/app/login/_components/IconButton';
-import { ICON_TYPES, ROUTE_TYPES } from '@/interfaces';
+import MyButton from '@/components/MyButton';
+import { ROUTE_TYPES } from '@/interfaces';
 import SVGNext from '@/styles/icons/next.svg';
 
 export default function EmptyList() {
@@ -17,11 +17,10 @@ export default function EmptyList() {
         width={270}
         height={300}
       />
-      <IconButton
+      <MyButton
         name="프로필 생성"
         target={ROUTE_TYPES.CONCEPT}
-        iconComponent={<SVGNext />}
-        iconType={ICON_TYPES.NEXT}
+        icon={<SVGNext />}
       />
     </div>
   );
