@@ -43,7 +43,7 @@ export function Table1() {
             items: '카카오 계정 정보 ( 이용자 식별자, 이메일주소 )',
           },
         ].map((row) => (
-          <tr key={`table-${row}`}>
+          <tr key={row.items}>
             <td className="border border-black p-2">{row.purpose}</td>
             <td className="border border-black p-2">{row.necessity}</td>
             <td className="border border-black p-2">{row.items}</td>

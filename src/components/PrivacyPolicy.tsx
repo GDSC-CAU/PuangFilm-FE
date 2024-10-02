@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
+import { v4 as uuidv4 } from 'uuid';
 import {
   PRIVACY_INTRO,
   privacySections,
@@ -28,7 +29,7 @@ const formattedContent = (text: string) => {
         paddingLeft = '6px';
       }
       return (
-        <div key={`privacyContent-${item}`} style={{ paddingLeft }}>
+        <div key={uuidv4()} style={{ paddingLeft }}>
           {item}
         </div>
       );
@@ -93,16 +94,17 @@ export default function PrivacyPolicy() {
             푸앙이 사진관 <br />
             개인정보 수집 및 이용 동의
           </div>
-
+          <div className="flex justify-center p-8">
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="fixed bottom-12 flex h-12 w-full items-center justify-center rounded-full bg-primary-darkblue text-xl text-white"
+            >
+              확인
+            </button>
+          </div>
           <PrivacyPolicyBody />
         </div>
-        <button
-          type="button"
-          onClick={() => setOpen(false)}
-          className="fixed bottom-0 flex h-12 w-full items-center justify-center gap-x-4 rounded-full bg-primary-darkblue text-xl text-white"
-        >
-          확인
-        </button>
       </BottomSheet>
     </div>
   );

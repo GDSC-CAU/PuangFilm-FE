@@ -44,11 +44,11 @@ export default function GuideDetail({
       <div className="grid grid-cols-2 justify-center gap-x-3 gap-y-4 pt-4">
         {examples.map((example) => (
           <ImageWithDescription
-            key={`guide-detail-${example}`}
+            key={`guide-detail-${example.src}`}
             src={example.src}
             description={example.description}
           />
-        ))}{' '}
+        ))}
       </div>
 
       <div className="flex flex-col gap-1 py-4 font-sfpro text-3xs text-white">
