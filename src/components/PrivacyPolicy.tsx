@@ -64,7 +64,7 @@ function PrivacyPolicyBody() {
       {privacySections3.map((section) => (
         <PrivacySectionComponent key={section.title} section={section} />
       ))}
-      <div className="gap-y-4 pt-8 font-bold">
+      <div className="gap-y-4 pb-28 pt-8 font-bold">
         약관 시행일 2024.10.01.
         <br /> 푸앙이 사진관 서비스에 대해 궁금하신 사항은 책임자
         이메일(yymin1022@gmail.com)로 문의해주시기 바랍니다.
@@ -94,11 +94,11 @@ export default function PrivacyPolicy() {
             푸앙이 사진관 <br />
             개인정보 수집 및 이용 동의
           </div>
-          <div className="flex justify-center p-8">
+          <div className="flex justify-center">
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="fixed bottom-12 flex h-12 w-full items-center justify-center rounded-full bg-primary-darkblue text-xl text-white"
+              className="fixed bottom-12 flex h-12 w-[85%] items-center justify-center rounded-full bg-primary-darkblue px-8 text-xl text-white shadow-xl shadow-gray-300"
             >
               확인
             </button>
