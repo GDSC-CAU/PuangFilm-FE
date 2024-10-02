@@ -1,5 +1,5 @@
-import { PrivacySectionProps } from '@/interfaces';
 import React from 'react';
+import { PrivacySectionProps } from '@/interfaces';
 
 function formatText(text: string) {
   return text.replace(/(\d+\.\s|-\s|\*\s)/g, '<br>$1');
@@ -42,8 +42,8 @@ export function Table1() {
             necessity: '선택',
             items: '카카오 계정 정보 ( 이용자 식별자, 이메일주소 )',
           },
-        ].map((row, index) => (
-          <tr key={index}>
+        ].map((row) => (
+          <tr key={`table-${row}`}>
             <td className="border border-black p-2">{row.purpose}</td>
             <td className="border border-black p-2">{row.necessity}</td>
             <td className="border border-black p-2">{row.items}</td>
