@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { CompoundModal } from '@/components/Modal/ModalMain';
 import PreviousPage from '@/components/PreviousPage';
+import PrivacyPolicy from '@/components/PrivacyPolicy';
 import {
   badexamples,
   goodexamples,
@@ -12,7 +13,6 @@ import {
 import { ROUTE_TYPES } from '@/interfaces';
 import useModal from '../hooks/useModal';
 import GuideDetail from './_components/GuideDetail';
-import PrivacyPolicy from '@/components/PivacyPolicy';
 
 export default function GuideView() {
   const router = useRouter();

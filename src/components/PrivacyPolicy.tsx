@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { BottomSheet } from 'react-spring-bottom-sheet';
 import {
   PRIVACY_INTRO,
   privacySections,
@@ -7,8 +9,6 @@ import {
   Table2,
 } from '@/constants';
 import { PrivacySectionProps } from '@/interfaces';
-import { useState } from 'react';
-import { BottomSheet } from 'react-spring-bottom-sheet';
 import 'react-spring-bottom-sheet/dist/style.css';
 
 const formattedContent = (text: string) => {
@@ -16,7 +16,7 @@ const formattedContent = (text: string) => {
     .replace(/([*|-])\s/g, ' $1 ')
     .replace(/(\d+\.\s|[\u2460-\u2469]\s)/g, '<br>$1')
     .split('<br>')
-    .map((item, idx) => {
+    .map((item) => {
       const trimmedItem = item.trim();
       let paddingLeft = '0px';
 
@@ -28,7 +28,7 @@ const formattedContent = (text: string) => {
         paddingLeft = '6px';
       }
       return (
-        <div key={`${item}-${idx}`} style={{ paddingLeft }}>
+        <div key={`privacyContent-${item}`} style={{ paddingLeft }}>
           {item}
         </div>
       );
