@@ -87,7 +87,7 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
-                        sh 'scp docker-compose.yml ubuntu@${AWS_PUBLIC_URL}:/home/ubuntu'
+                        sh 'scp -o StrictHostKeyChecking=no docker-compose.yml ubuntu@${AWS_PUBLIC_URL}:/home/ubuntu'
                         sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker pull ${DOCKER_IMAGE}"'
                         sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker compose -f docker-compose.yml up -d"'
                     }
