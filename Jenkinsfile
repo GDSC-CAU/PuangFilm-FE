@@ -23,16 +23,15 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
-                    
-                    sh '''
-                    if test "`docker ps -aq --filter ancestor=${DOCKER_IMAGE}`"; then
-                    
-					ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})"
-                    ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})"
-                    ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rmi ${DOCKER_IMAGE}"
+                        sh '''
+                        if test "ssh ubuntu@${AWS_PUBLIC_URL} `docker ps -aq --filter ancestor=${DOCKER_IMAGE}`"; then
+                        
+                        ssh ubuntu@${AWS_PUBLIC_URL} "docker stop $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})"
+                        ssh ubuntu@${AWS_PUBLIC_URL} "docker rm -f $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})"
+                        ssh ubuntu@${AWS_PUBLIC_URL} "docker rmi ${DOCKER_IMAGE}"
 
-                    fi
-                    '''
+                        fi
+                        '''
                     }
                 }
                 
@@ -59,6 +58,7 @@ pipeline {
         stage('Deploy image') {
             steps {
                 script {
+                    // 태그를 달아서 한 레포에 2개 이상 이미지를 배포할 수 있음
                     // sh 'docker image tag $DOCKER_REPO $DOCKER_REPO:$BUILD_NUMBER'
                     sh 'docker push $DOCKER_IMAGE'
                 }
@@ -87,10 +87,10 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
-                        sh 'scp -o StrictHostKeyChecking=no docker-compose.yml ubuntu@${AWS_PUBLIC_URL}:/home/ubuntu'
-                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"'
-                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker pull ${DOCKER_IMAGE}"'
-                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker compose -f docker-compose.yml up -d"'
+                        sh 'scp docker-compose.yml ubuntu@${AWS_PUBLIC_URL}:/home/ubuntu'
+                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"'
+                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker pull ${DOCKER_IMAGE}"'
+                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker compose -f docker-compose.yml up -d"'
                     }
                 }
                 
