@@ -24,12 +24,11 @@ pipeline {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
                         sh '''
-                        if test "ssh ubuntu@${AWS_PUBLIC_URL} `docker ps -aq --filter ancestor=${DOCKER_IMAGE}`"; then
-                        
-                        ssh ubuntu@${AWS_PUBLIC_URL} "docker stop $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})"
-                        ssh ubuntu@${AWS_PUBLIC_URL} "docker rm -f $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})"
-                        ssh ubuntu@${AWS_PUBLIC_URL} "docker rmi ${DOCKER_IMAGE}"
-
+                        CONTAINER_IDS=$(ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker ps -aq --filter ancestor=${DOCKER_IMAGE}")
+                        if [ ! -z "$CONTAINER_IDS" ]; then
+                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $CONTAINER_IDS"
+                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $CONTAINER_IDS"
+                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rmi ${DOCKER_IMAGE}"
                         fi
                         '''
                     }
