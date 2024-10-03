@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { CompoundModal } from '@/components/Modal/ModalMain';
+import PolicyBottomSheet from '@/components/PolicyBottomSheet/PolicyBottonSheet';
 import PreviousPage from '@/components/PreviousPage';
-import PrivacyPolicy from '@/components/PrivacyPolicy';
 import {
   badexamples,
   goodexamples,
@@ -79,7 +79,7 @@ export default function GuideView() {
       </div>
 
       <div className="pb-4 pt-8">
-        <PrivacyPolicy />
+        <PolicyBottomSheet />
       </div>
 
       {isOpen ? (

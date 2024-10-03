@@ -3,7 +3,7 @@ import {
   ModalContentProps,
   ModalTitleProps,
 } from '@/interfaces';
-import PrivacyPolicy from '../PrivacyPolicy';
+import PrivacyPolicy from '../PolicyBottomSheet/PolicyBottonSheet';
 
 export function ModalTitle({ children }: ModalTitleProps) {
   return (
