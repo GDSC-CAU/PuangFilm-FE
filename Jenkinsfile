@@ -7,13 +7,13 @@ pipeline {
         DOCKER_COMPOSE_VERSION = '1.29.2'
         AWS_PUBLIC_URL = "43.203.237.252"
         DOCKERHUB_CREDENTIALS = credentials('dockerhub_token')
-        DOCKER_REPO = "falconlee236/puangfilm-web"
-        DOCKER_IMAGE = "puangfilm-web"
+        DOCKER_IMAGE = "falconlee236/puangfilm-web"
+        DOCKER_TAG = "latest"
     }
     
     stages {
         
-        stage('gitlab_clone') {
+        stage('github_clone') {
             steps {
                 git branch: 'dev/ci-cd', credentialsId: 'github_token', url: 'https://github.com/falconlee236/PuangFilm-FE-local'
             }
@@ -25,11 +25,11 @@ pipeline {
                     sshagent(credentials: ['EC2_SSH']) {
                     
                     sh '''
-                    if test "`docker ps -aq --filter ancestor=${DOCKER_REPO}:${BUILD_NUMBER}`"; then
+                    if test "`docker ps -aq --filter ancestor=${DOCKER_IMAGE}`"; then
                     
-					ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $(docker ps -aq --filter ancestor=${DOCKER_REPO}:${BUILD_NUMBER})"
-                    ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $(docker ps -aq --filter ancestor=${DOCKER_REPO}:${BUILD_NUMBER})"
-                    ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rmi ${DOCKER_REPO}:${BUILD_NUMBER}"
+					ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})"
+                    ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})"
+                    ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rmi ${DOCKER_IMAGE}"
 
                     fi
                     '''
@@ -59,8 +59,8 @@ pipeline {
         stage('Deploy image') {
             steps {
                 script {
-                    sh 'docker image tag $DOCKER_REPO $DOCKER_REPO:$BUILD_NUMBER'
-                    sh 'docker push $DOCKER_REPO:$BUILD_NUMBER'
+                    // sh 'docker image tag $DOCKER_REPO $DOCKER_REPO:$BUILD_NUMBER'
+                    sh 'docker push $DOCKER_IMAGE'
                 }
             }
         }
@@ -76,10 +76,23 @@ pipeline {
         stage('Docker down') {
             steps {
                 script {
-                    sh 'docker stop $(docker ps -aq --filter ancestor=${DOCKER_REPO}:${BUILD_NUMBER})'
-                    sh 'docker rm -f $(docker ps -aq --filter ancestor=${DOCKER_REPO}:${BUILD_NUMBER})'
-                    sh 'docker rmi ${DOCKER_REPO}:${BUILD_NUMBER}'
+                    sh 'docker stop $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})'
+                    sh 'docker rm -f $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})'
+                    sh 'docker rmi ${DOCKER_IMAGE}'
                 }
+            }
+        }
+
+        stage('docker-image-pull') {
+            steps {
+                script {
+                    sshagent(credentials: ['EC2_SSH']) {
+                        scp docker-compose.yml ubuntu@${AWS_PUBLIC_URL}:/home/ubuntu
+                        ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker pull ${DOCKER_IMAGE}"
+                        ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker compose -f docker-compose.yml up -d"
+                    }
+                }
+                
             }
         }
     }
