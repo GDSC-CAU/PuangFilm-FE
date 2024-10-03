@@ -1,10 +1,14 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import {
+  HEADERTITLES1,
+  HEADERTITLES2,
   PRIVACY_INTRO,
   PRIVACY_SECTION,
   PRIVACY_SECTION2,
   PRIVACY_SECTION3,
+  TABLECONTENTS1,
+  TABLECONTENTS2,
 } from '@/constants';
 import { PrivacySectionProps } from '@/interfaces';
 
@@ -13,34 +17,15 @@ export function Table1() {
     <table className="my-2">
       <thead>
         <tr>
-          <th className="border border-black p-2">수집 / 이용목적</th>
-          <th className="border border-black p-2">필수 / 선택</th>
-          <th className="border border-black p-2">수집 및 이용항목</th>
+          {HEADERTITLES1.map((title, index) => (
+            <th key={index} className="border border-black p-2">
+              {title}
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody>
-        {[
-          {
-            purpose: '회원가입 및 회원관리',
-            necessity: '필수',
-            items: '카카오 계정 정보 ( 닉네임, 이용자 식별자, 이메일주소 )',
-          },
-          {
-            purpose: '재화 또는 서비스 제공',
-            necessity: '필수',
-            items: '이용자 사진',
-          },
-          {
-            purpose: '고충처리',
-            necessity: '필수',
-            items: '이메일 주소',
-          },
-          {
-            purpose: '마케팅',
-            necessity: '선택',
-            items: '카카오 계정 정보 ( 이용자 식별자, 이메일주소 )',
-          },
-        ].map((row) => (
+        {TABLECONTENTS1.map((row) => (
           <tr key={row.items}>
             <td className="border border-black p-2">{row.purpose}</td>
             <td className="border border-black p-2">{row.necessity}</td>
@@ -56,16 +41,20 @@ export function Table2() {
     <table className="my-2">
       <thead>
         <tr>
-          <th className="border border-black p-2">이름</th>
-          <th className="border border-black p-2">담당</th>
-          <th className="border border-black p-2">연락처</th>
+          {HEADERTITLES2.map((title, index) => (
+            <th key={index} className="border border-black p-2">
+              {title}
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td className="border border-black p-2">유용민</td>
-          <td className="border border-black p-2">프로젝트 진행 담당자</td>
-          <td className="border border-black p-2">yymin1022@gmail.com</td>
+          {TABLECONTENTS2.map((row, index) => (
+            <td key={index} className="border border-black p-2">
+              {row}
+            </td>
+          ))}
         </tr>
       </tbody>
     </table>

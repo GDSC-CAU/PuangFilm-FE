@@ -1,5 +1,3 @@
-import { PrivacySectionProps } from '@/interfaces';
-
 export const PRIVACY_INTRO: string = `푸앙이 사진관(이하 “우리”라고 합니다)은 「개인정보 보호법」에 따라 이용자의 개인정보를 보호하고 이와 관련된 고충을 원활하게 처리할 수 있도록 다음과 같은 개인정보처리방침에 따라 개인정보를 처리하고 있습니다. 본 개인정보처리방침은 우리가 운영하는 푸앙이 사진관 서비스의 개인정보처리방침입니다.`;
 export const PRIVACY_SECTION = {
   TITLE1: '제1조 (개인정보의 처리 목적)',
@@ -63,7 +61,6 @@ export const PRIVACY_SECTION2 = {
   TITLE9: '제8조 (개인정보 보호책임자)',
   CONTENT9: `① 우리는 개인정보 처리에 관한 업무를 총괄하고 개인정보 처리와 관련한 이용자의 불만처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.`,
 };
-
 export const PRIVACY_SECTION3 = {
   TITLE10: '',
   CONTENT10: `② 개인정보와 관련한 문의사항 및 의견사항, 서비스 이용 중 개인정보의 유출 가능성 등 정보주체의 권익이 침해될 우려가 있는 사실을 발견하였을 경우에는 위 개인정보 보호책임자 또는 담당 부서에 연락주시면 즉시 조치하여 처리결과를 통보하겠습니다.
@@ -74,3 +71,36 @@ export const PRIVACY_SECTION3 = {
   TITLE11: '제9조 (개인정보 처리방침의 변경 및 고지)',
   CONTENT11: `본 개인정보처리방침의 변경이 있을 경우 개정 최소 7일 전에 공지를 할 예정입니다. 또한 수집하는 개인정보의 항목,이용목적의 변경 등과 같이 이용자의 중대한 변경이 발생할 필요 시 이용자의 동의를 다시 받을 수도 있습니다.`,
 };
+export const HEADERTITLES1 = [
+  '수집 / 이용목적',
+  '필수 / 선택',
+  '수집 및 이용항목',
+];
+export const TABLECONTENTS1 = [
+  {
+    purpose: '회원가입 및 회원관리',
+    necessity: '필수',
+    items: '카카오 계정 정보 ( 닉네임, 이용자 식별자, 이메일주소 )',
+  },
+  {
+    purpose: '재화 또는 서비스 제공',
+    necessity: '필수',
+    items: '이용자 사진',
+  },
+  {
+    purpose: '고충처리',
+    necessity: '필수',
+    items: '이메일 주소',
+  },
+  {
+    purpose: '마케팅',
+    necessity: '선택',
+    items: '카카오 계정 정보 ( 이용자 식별자, 이메일주소 )',
+  },
+];
+export const HEADERTITLES2 = ['이름', '담당', '연락처'];
+export const TABLECONTENTS2 = [
+  '유용민',
+  '프로젝트 진행 담당자',
+  'yymin1022@gmail.com',
+];
