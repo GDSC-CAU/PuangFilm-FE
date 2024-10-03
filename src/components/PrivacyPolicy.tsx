@@ -13,7 +13,7 @@ import { PrivacySectionProps } from '@/interfaces';
 import 'react-spring-bottom-sheet/dist/style.css';
 
 const formattedContent = (text: string) => {
-  const LineBreaks = text
+  return text
     .replace(/([*|-])\s/g, ' $1 ')
     .replace(/(\d+\.\s|[\u2460-\u2469]\s)/g, '<br>$1')
     .split('<br>')
@@ -34,7 +34,6 @@ const formattedContent = (text: string) => {
         </div>
       );
     });
-  return LineBreaks;
 };
 function PrivacySectionComponent({
   section,
