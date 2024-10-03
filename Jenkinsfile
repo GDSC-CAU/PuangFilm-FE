@@ -59,6 +59,7 @@ pipeline {
         stage('Deploy image') {
             steps {
                 script {
+                    sh 'docker image tag $DOCKER_REPO $DOCKER_REPO:$BUILD_NUMBER'
                     sh 'docker push $DOCKER_REPO:$BUILD_NUMBER'
                 }
             }
