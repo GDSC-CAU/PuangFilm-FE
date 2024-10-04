@@ -10,11 +10,11 @@ import { selectedPhotoAtom } from '@/store/atoms/selectedPhotoAtom';
 export default function ImageList({ list }: ListWithDataProps): JSX.Element {
   const [selectedPhoto, setSelectedPhoto] = useAtom(selectedPhotoAtom);
 
-  const handlePhotoClick = (box: string) => {
-    if (selectedPhoto === box) {
+  const handlePhotoClick = (selectTime: string) => {
+    if (selectedPhoto === selectTime) {
       setSelectedPhoto('');
     } else {
-      setSelectedPhoto(box);
+      setSelectedPhoto(selectTime);
     }
   };
 
