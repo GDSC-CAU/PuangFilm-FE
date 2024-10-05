@@ -17,8 +17,8 @@ export function Table1() {
     <table className="my-2">
       <thead>
         <tr>
-          {HEADERTITLES1.map((title, index) => (
-            <th key={index} className="border border-black p-2">
+          {HEADERTITLES1.map((title) => (
+            <th key={uuidv4()} className="border border-black p-2">
               {title}
             </th>
           ))}
@@ -41,8 +41,8 @@ export function Table2() {
     <table className="my-2">
       <thead>
         <tr>
-          {HEADERTITLES2.map((title, index) => (
-            <th key={index} className="border border-black p-2">
+          {HEADERTITLES2.map((title) => (
+            <th key={uuidv4()} className="border border-black p-2">
               {title}
             </th>
           ))}
@@ -50,8 +50,8 @@ export function Table2() {
       </thead>
       <tbody>
         <tr>
-          {TABLECONTENTS2.map((row, index) => (
-            <td key={index} className="border border-black p-2">
+          {TABLECONTENTS2.map((row) => (
+            <td key={uuidv4()} className="border border-black p-2">
               {row}
             </td>
           ))}
