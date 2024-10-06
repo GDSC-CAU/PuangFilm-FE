@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { CompoundModal } from '@/components/Modal/ModalMain';
 import PreviousPage from '@/components/PreviousPage';
 import { ENTER_EMAIL_TITLE } from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
 import useModal from '../hooks/useModal';
-import { useRouter } from 'next/navigation';
 
 export default function EmailEnterView() {
   const router = useRouter();
