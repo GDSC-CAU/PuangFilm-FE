@@ -2,13 +2,19 @@ FROM node:20-alpine3.19
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-
-RUN npm ci
+COPY package*.json .
 
 COPY . .
 
+RUN npm ci
+
 RUN npm run build
+
+ENV PORT=3000
+
+EXPOSE 3000
+
+
 
 
 # https://velog.io/@rungoat/CICD-Jenkins%EC%99%80-GitHub-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0

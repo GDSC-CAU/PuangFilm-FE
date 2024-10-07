@@ -5,7 +5,7 @@ services:
     build: .
     image: falconlee236/puangfilm-web
     ports:
-      - '3030:3030'
+      - '3000:3000'
     command: 'npm run start'
 
 
