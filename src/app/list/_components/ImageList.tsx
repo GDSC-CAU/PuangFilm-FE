@@ -43,7 +43,7 @@ export default function ImageList({ list }: ListWithDataProps): JSX.Element {
                 }}
               >
                 <Image
-                  src="/curious-puang.png"
+                  src={item}
                   alt=""
                   width={200}
                   height={200}
