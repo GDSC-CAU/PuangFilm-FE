@@ -19,30 +19,12 @@ pipeline {
             }
         }
         
-        stage('docker-clean-up') {
-            steps {
-                script {
-                    sshagent(credentials: ['EC2_SSH']) {
-                        sh '''
-                        CONTAINER_IDS=$(ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker ps -aq --filter ancestor=${DOCKER_IMAGE}")
-                        if [ ! -z "$CONTAINER_IDS" ]; then
-                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $CONTAINER_IDS"
-                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $CONTAINER_IDS"
-                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rmi ${DOCKER_IMAGE}"
-                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker image prune -f"
-                        fi
-                        '''
-                    }
-                }
-                
-            }
-        }
         
         stage('docker-build'){
             steps {
                 script {
                     echo 'Build Docker'
-                    sh 'docker compose -f docker-compose.yml build'
+                    sh 'docker build -t ${DOCKER_IMAGE} .'
                 }
             }
         }
@@ -64,22 +46,33 @@ pipeline {
                 }
             }
         }
-        
-        stage('Docker run') {
+
+        stage('docker-image-pull') {
             steps {
                 script {
-                    sh 'docker compose -f docker-compose.yml up -d'
+                    sshagent(credentials: ['EC2_SSH']) {
+                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"'
+                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker pull ${DOCKER_IMAGE}"'
+                    }
                 }
+                
             }
         }
 
-        stage('Docker down') {
+        stage('docker-clean-up') {
             steps {
                 script {
-                    sh 'docker stop $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})'
-                    sh 'docker rm -f $(docker ps -aq --filter ancestor=${DOCKER_IMAGE})'
-                    sh 'docker rmi ${DOCKER_IMAGE}'
+                    sshagent(credentials: ['EC2_SSH']) {
+                        sh '''
+                        CONTAINER_IDS=$(ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker ps -aq --filter ancestor=${DOCKER_IMAGE}")
+                        if [ ! -z "$CONTAINER_IDS" ]; then
+                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $CONTAINER_IDS"
+                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $CONTAINER_IDS"
+                        fi
+                        '''
+                    }
                 }
+                
             }
         }
 
@@ -87,10 +80,7 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
-                        sh 'scp docker-compose.yml ubuntu@${AWS_PUBLIC_URL}:/home/ubuntu'
-                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"'
-                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker pull ${DOCKER_IMAGE}"'
-                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker compose -f docker-compose.yml up -d"'
+                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker run -p 3030:3030 --name ${DOCKER_IMAGE} -d ${DOCKER_IMAGE}"'
                     }
                 }
                 

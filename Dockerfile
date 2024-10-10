@@ -9,8 +9,13 @@ RUN npm ci
 
 COPY . .
 
+ENV PORT=3030
+
+EXPOSE 3030
+
 RUN npm run build
 
+CMD [ "npm", "run", "start" ]
 
 
 
