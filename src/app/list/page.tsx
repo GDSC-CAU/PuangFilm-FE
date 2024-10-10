@@ -9,26 +9,27 @@ export default function ListView() {
   const [list, setList] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
+  const storedToken = window.sessionStorage.getItem('accessToken') || '';
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/photo-request/list');
-        const data = await response.json();
-
-        if (data.code === 200) {
-          setList(data.data);
-        } else {
-          console.error(data.msg);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData().then(() => {});
-  }, []);
+    if (storedToken !== '') {
+      fetch(
+        `${process.env.NEXT_PUBLIC_CLIENT_ADDRESS}:${process.env.NEXT_PUBLIC_CLIENT_PORT}/api/list?code=${storedToken}`,
+      )
+        .then((response) => response.json())
+        .then(async (data) => {
+          if (data.code === 200) {
+            setList(data.data);
+          } else {
+            console.error(data.msg);
+          }
+        })
+        .catch(() => {
+          console.error('Error fetching data:');
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [storedToken]);
 
   return (
     <div className="flex w-full flex-col justify-start bg-background">
