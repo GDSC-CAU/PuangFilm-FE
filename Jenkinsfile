@@ -18,6 +18,14 @@ pipeline {
                 git branch: 'dev/ci-cd', credentialsId: 'github_token', url: 'https://github.com/falconlee236/PuangFilm-FE-local'
             }
         }
+
+        stage('env file copy') {
+            steps {
+                script {
+                    cp /var/jenkins_home/env/.env.local .
+                }
+            }
+        }
         
         
         stage('docker-build'){
@@ -88,6 +96,3 @@ pipeline {
         }
     }
 }
-
-// https://velog.io/@imsooyeon/Jenkins-pipeline%EC%9D%84-%EA%B5%AC%EC%B6%95%ED%95%98%EC%97%AC-Docker-build-%EB%B0%8F-%EC%9D%B4%EB%AF%B8%EC%A7%80-push-%ED%95%98%EA%B8%B0
-// https://teichae.tistory.com/entry/Jenkins-Pipeline%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-Docker-Image-Push
