@@ -76,6 +76,7 @@ pipeline {
                         if [ ! -z "$CONTAINER_IDS" ]; then
                             ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $CONTAINER_IDS"
                             ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $CONTAINER_IDS"
+                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker image prune --force --all"
                         fi
                         '''
                     }
