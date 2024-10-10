@@ -76,7 +76,7 @@ pipeline {
             }
         }
 
-        stage('docker-image-pull') {
+        stage('docker-start') {
             steps {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
