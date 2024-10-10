@@ -80,7 +80,7 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
-                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker run -p 3030:3030 --name ${DOCKER_IMAGE} -d ${DOCKER_IMAGE}"'
+                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker run -p 3030:3030 -d ${DOCKER_IMAGE}"'
                     }
                 }
                 
