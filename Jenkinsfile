@@ -22,7 +22,7 @@ pipeline {
         stage('env file copy') {
             steps {
                 script {
-                    cp /var/jenkins_home/env/.env.local .
+                    sh "cp /var/jenkins_home/env/.env.local ."
                 }
             }
         }
