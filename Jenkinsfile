@@ -71,11 +71,8 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
-                        sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $CONTAINER_NAME"
-                        ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $CONTAINER_NAME"
-                        ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker image prune --force --all"
-                        '''
+                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker stop $CONTAINER_NAME"'
+                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker rm -f $CONTAINER_NAME"'
                     }
                 }
                 
@@ -87,6 +84,7 @@ pipeline {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
                         sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker run -p 3030:3030 --name $CONTAINER_NAME -d ${DOCKER_IMAGE}"'
+                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker image prune --force"'
                     }
                 }
                 
