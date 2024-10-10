@@ -16,6 +16,7 @@ export const GET = async (request: NextRequest) => {
 
   return NextResponse.json(
     {
+      code: jsonData.code,
       data: jsonData.data,
       msg: jsonData.msg,
     },
