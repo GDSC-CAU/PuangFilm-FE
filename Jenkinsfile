@@ -8,7 +8,7 @@ pipeline {
         AWS_PUBLIC_URL = "43.203.237.252"
         DOCKERHUB_CREDENTIALS = credentials('dockerhub_token')
         DOCKER_IMAGE = "falconlee236/puangfilm-web"
-        DOCKER_TAG = "latest"
+        CONTAINER_NAME = "puangfilm-web"
     }
     
     stages {
@@ -72,12 +72,9 @@ pipeline {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
                         sh '''
-                        CONTAINER_IDS=$(ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker ps -aq --filter ancestor=${DOCKER_IMAGE}")
-                        if [ ! -z "$CONTAINER_IDS" ]; then
-                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $CONTAINER_IDS"
-                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $CONTAINER_IDS"
-                            ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker image prune --force --all"
-                        fi
+                        ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $CONTAINER_NAME"
+                        ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $CONTAINER_NAME"
+                        ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker image prune --force --all"
                         '''
                     }
                 }
@@ -89,7 +86,7 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
-                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker run -p 3030:3030 -d ${DOCKER_IMAGE}"'
+                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker run -p 3030:3030 --name $CONTAINER_NAME -d ${DOCKER_IMAGE}"'
                     }
                 }
                 
