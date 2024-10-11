@@ -1,5 +1,8 @@
 'use client';
 
+import { LOGIN_ERROR_CHECK_MSG, LOGIN_ERROR_MSG } from "@/constants";
+import { errorCheckMessageAtom, errorMessageAtom } from "@/store/atoms/errorMessageAtom";
+import { useSetAtom } from "jotai/index";
 import { useEffect, useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import EmptyList from './_components/EmptyList';
@@ -8,6 +11,8 @@ import ImageList from './_components/ImageList';
 export default function ListView() {
   const [list, setList] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+  const setErrorMessage = useSetAtom(errorMessageAtom);
+  const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
 
   const storedToken = window.sessionStorage.getItem('accessToken') || '';
 
@@ -21,15 +26,17 @@ export default function ListView() {
           if (data.code === 200) {
             setList(data.data);
           } else {
-            console.error(data.msg);
+            setErrorMessage(LOGIN_ERROR_MSG);
+            setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
           }
         })
         .catch(() => {
-          console.error('Error fetching data:');
+          setErrorMessage(LOGIN_ERROR_MSG);
+          setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
         })
         .finally(() => setLoading(false));
     }
-  }, [storedToken]);
+  }, [storedToken, setErrorCheckMessage, setErrorMessage, setList]);
 
   return (
     <div className="flex w-full flex-col justify-start bg-background">
