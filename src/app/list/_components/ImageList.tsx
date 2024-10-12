@@ -9,7 +9,6 @@ import { selectedPhotoAtom } from '@/store/atoms/selectedPhotoAtom';
 
 export default function ImageList({ list }: ListWithDataProps): JSX.Element {
   const [selectedPhoto, setSelectedPhoto] = useAtom(selectedPhotoAtom);
-
   const handlePhotoClick = (selectTime: string) => {
     if (selectedPhoto === selectTime) {
       setSelectedPhoto('');
@@ -17,14 +16,12 @@ export default function ImageList({ list }: ListWithDataProps): JSX.Element {
       setSelectedPhoto(selectTime);
     }
   };
-
   return (
     <div>
       <p className="mb-5 text-center font-sfpro text-sm text-white">
         편집할 사진을 선택해서 <br />
         이미지 프레임을 선택해 주세요!
       </p>
-
       <div className="h-96 overflow-y-auto">
         <div className="grid grid-cols-2 gap-4">
           {list.map((item) => (
@@ -42,12 +39,7 @@ export default function ImageList({ list }: ListWithDataProps): JSX.Element {
                       : '4px solid transparent',
                 }}
               >
-                <Image
-                  src="/curious-puang.png"
-                  alt=""
-                  width={200}
-                  height={200}
-                />
+                <Image src={item} alt="" width={200} height={200} />
               </button>
               <p className="text-right font-sfpro text-sm text-white">{item}</p>
             </div>
