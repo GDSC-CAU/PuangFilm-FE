@@ -28,7 +28,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="kr" className={`${cafe24.variable} ${sfpro.variable}`}>
+    <html
+      lang="kr"
+      className={`${cafe24.variable} ${sfpro.variable} scrollbar-hide`}
+    >
       <body className="mx-auto flex min-h-screen min-w-[390px] max-w-[420px] flex-1 items-center justify-center overflow-y-auto bg-background px-6 pb-10 pt-8 font-cafe24 text-primary-darkblue">
         <JotaiProvider>{children}</JotaiProvider>
       </body>
