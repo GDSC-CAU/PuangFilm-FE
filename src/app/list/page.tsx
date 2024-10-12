@@ -1,10 +1,13 @@
 'use client';
 
-import { LOGIN_ERROR_CHECK_MSG, LOGIN_ERROR_MSG } from "@/constants";
-import { errorCheckMessageAtom, errorMessageAtom } from "@/store/atoms/errorMessageAtom";
-import { useSetAtom } from "jotai/index";
+import { useSetAtom } from 'jotai/index';
 import { useEffect, useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
+import { LOGIN_ERROR_CHECK_MSG, LOGIN_ERROR_MSG } from '@/constants';
+import {
+  errorCheckMessageAtom,
+  errorMessageAtom,
+} from '@/store/atoms/errorMessageAtom';
 import EmptyList from './_components/EmptyList';
 import ImageList from './_components/ImageList';
 
