@@ -1,29 +1,46 @@
 'use client';
 
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
+import { selectedPhotoAtomWithStorage } from '@/store/atoms/selectedPhotoAtomWithStorage';
 import SVGDownload from '@/styles/icons/download.svg';
 import SVGGoToList from '@/styles/icons/gotolist.svg';
 import DownloadImage from '@/utils/DownloadImage';
 import SelectFrame from './_components/SelectFrame';
 
 export default function FrameSelectView() {
+  const savedPhoto = localStorage.getItem('selectedPhoto');
   const [colorOfCircle, setColorOfCircle] = useState<string>('');
   const [isPremiumSelected, setIsPremiumSelected] = useState<boolean>(false);
-
+  const [selectedPhoto, setSelectedPhoto] = useAtom(
+    selectedPhotoAtomWithStorage,
+  );
   const frametype = isPremiumSelected ? PREMIUM_FRAME_DATA : BASIC_FRAME_DATA;
   const frameWidth = colorOfCircle === '/premiumframe2.png' ? 283 : 239;
   const frameHeight = colorOfCircle === '/premiumframe2.png' ? 332 : 290;
-  const imageSrc = '/resultsample.png'; // 생성된 이미지(임시)
+  const examplepng = '/resultsample.png'; // ai로 생성된 이미지로 변하게 될 예정
+  const imageSrc = selectedPhoto === '' ? examplepng : selectedPhoto;
+  // const path = usePathname();
 
+  // // setSelectedPhoto('/test.png');
+  // useEffect(() => {
+  //   setSelectedPhoto('');
+  // }, [path]);
+
+  useEffect(() => {
+    if (savedPhoto) {
+      setSelectedPhoto(JSON.parse(savedPhoto));
+    }
+  }, [savedPhoto, setSelectedPhoto]);
   const onCaptureClick = () => {
     DownloadImage({ colorOfCircle, imageSrc, frameWidth, frameHeight });
   };
-
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex w-full flex-row justify-between px-4">

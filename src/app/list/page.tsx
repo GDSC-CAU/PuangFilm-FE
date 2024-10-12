@@ -12,34 +12,44 @@ import EmptyList from './_components/EmptyList';
 import ImageList from './_components/ImageList';
 
 export default function ListView() {
-  const [list, setList] = useState<string[]>([]);
+  const list = [
+    '/example1.png',
+    '/example2.png',
+    '/example3.png',
+    '/example4.png',
+    '/example5.png',
+    '/example6.png',
+    '/example7.png',
+    '/example8.png',
+  ];
+  // const [list, setList] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const setErrorMessage = useSetAtom(errorMessageAtom);
   const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
 
   const storedToken = window.sessionStorage.getItem('accessToken') || '';
 
-  useEffect(() => {
-    if (storedToken !== '') {
-      fetch(
-        `${process.env.NEXT_PUBLIC_CLIENT_ADDRESS}:${process.env.NEXT_PUBLIC_CLIENT_PORT}/api/list?code=${storedToken}`,
-      )
-        .then((response) => response.json())
-        .then(async (data) => {
-          if (data.code === 200) {
-            setList(data.data);
-          } else {
-            setErrorMessage(LOGIN_ERROR_MSG);
-            setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
-          }
-        })
-        .catch(() => {
-          setErrorMessage(LOGIN_ERROR_MSG);
-          setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
-        })
-        .finally(() => setLoading(false));
-    }
-  }, [storedToken, setErrorCheckMessage, setErrorMessage, setList]);
+  // useEffect(() => {
+  //   if (storedToken !== '') {
+  //     fetch(
+  //       `${process.env.NEXT_PUBLIC_CLIENT_ADDRESS}:${process.env.NEXT_PUBLIC_CLIENT_PORT}/api/list?code=${storedToken}`,
+  //     )
+  //       .then((response) => response.json())
+  //       .then(async (data) => {
+  //         if (data.code === 200) {
+  //           setList(data.data);
+  //         } else {
+  //           setErrorMessage(LOGIN_ERROR_MSG);
+  //           setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
+  //         }
+  //       })
+  //       .catch(() => {
+  //         setErrorMessage(LOGIN_ERROR_MSG);
+  //         setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);
+  //       })
+  //       .finally(() => setLoading(false));
+  //   }
+  // }, [storedToken, setErrorCheckMessage, setErrorMessage, setList]);
 
   return (
     <div className="flex w-full flex-col justify-start bg-background">
