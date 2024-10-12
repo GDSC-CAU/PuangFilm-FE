@@ -42,12 +42,7 @@ export default function ImageList({ list }: ListWithDataProps): JSX.Element {
                       : '4px solid transparent',
                 }}
               >
-                <Image
-                  src="/curious-puang.png"
-                  alt=""
-                  width={200}
-                  height={200}
-                />
+                <Image src={item} alt="" width={200} height={200} />
               </button>
               <p className="text-right font-sfpro text-sm text-white">{item}</p>
             </div>
