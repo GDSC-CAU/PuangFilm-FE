@@ -17,6 +17,7 @@
     ]
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.670.0",
     "jotai": "^2.9.3",
     "next": "14.2.10",
     "react": "^18",
