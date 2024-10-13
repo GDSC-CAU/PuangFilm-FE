@@ -4,6 +4,7 @@ import { useSetAtom } from 'jotai/index';
 import { useEffect, useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import { LOGIN_ERROR_CHECK_MSG, LOGIN_ERROR_MSG } from '@/constants';
+import { createdPhotoAtomWithStorage } from '@/store/atoms/atomWithStorage';
 import {
   errorCheckMessageAtom,
   errorMessageAtom,
@@ -16,6 +17,8 @@ export default function ListView() {
   const [loading, setLoading] = useState(false);
   const setErrorMessage = useSetAtom(errorMessageAtom);
   const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
+  const createdPhoto = useSetAtom(createdPhotoAtomWithStorage);
+  createdPhoto(list[0]);
 
   useEffect(() => {
     const storedToken = window.sessionStorage.getItem('accessToken') || '';

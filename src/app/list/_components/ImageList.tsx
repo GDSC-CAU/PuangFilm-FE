@@ -5,7 +5,7 @@ import Image from 'next/image';
 import MyButton from '@/components/MyButton';
 import { ROUTE_TYPES } from '@/interfaces';
 import { ListWithDataProps } from '@/interfaces/profile-list.interface';
-import { selectedPhotoAtomWithStorage } from '@/store/atoms/selectedPhotoAtomWithStorage';
+import { selectedPhotoAtomWithStorage } from '@/store/atoms/atomWithStorage';
 
 export default function ImageList({ list }: ListWithDataProps): JSX.Element {
   const [selectedPhoto, setSelectedPhoto] = useAtom(

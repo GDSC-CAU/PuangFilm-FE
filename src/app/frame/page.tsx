@@ -7,7 +7,10 @@ import { useEffect, useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
-import { selectedPhotoAtomWithStorage } from '@/store/atoms/selectedPhotoAtomWithStorage';
+import {
+  createdPhotoAtomWithStorage,
+  selectedPhotoAtomWithStorage,
+} from '@/store/atoms/atomWithStorage';
 import SVGDownload from '@/styles/icons/download.svg';
 import SVGGoToList from '@/styles/icons/gotolist.svg';
 import DownloadImage from '@/utils/DownloadImage';
@@ -23,17 +26,10 @@ export default function FrameSelectView() {
   const frametype = isPremiumSelected ? PREMIUM_FRAME_DATA : BASIC_FRAME_DATA;
   const frameWidth = colorOfCircle === '/premiumframe2.png' ? 283 : 239;
   const frameHeight = colorOfCircle === '/premiumframe2.png' ? 332 : 290;
-  const examplepng = '/resultsample.png'; // ai로 생성된 이미지로 변하게 될 예정
-  const imageSrc = selectedPhoto === '' ? examplepng : selectedPhoto;
-
+  const [createdPhoto] = useAtom(createdPhotoAtomWithStorage);
+  const imageSrc = selectedPhoto === '' ? createdPhoto : selectedPhoto;
   useEffect(() => {
     setIsClient(true);
-    if (typeof window !== 'undefined') {
-      const savedPhoto = localStorage.getItem('selectedPhoto');
-      if (savedPhoto) {
-        setSelectedPhoto(JSON.parse(savedPhoto));
-      }
-    }
   }, [setSelectedPhoto]);
 
   if (!isClient) {
