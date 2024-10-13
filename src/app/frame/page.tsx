@@ -3,7 +3,6 @@
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
@@ -26,12 +25,7 @@ export default function FrameSelectView() {
   const frameHeight = colorOfCircle === '/premiumframe2.png' ? 332 : 290;
   const examplepng = '/resultsample.png'; // ai로 생성된 이미지로 변하게 될 예정
   const imageSrc = selectedPhoto === '' ? examplepng : selectedPhoto;
-  const path = usePathname();
 
-  // // setSelectedPhoto('/test.png');
-  // useEffect(() => {
-  //   setSelectedPhoto('');
-  // }, [path]);
   useEffect(() => {
     setIsClient(true);
     if (typeof window !== 'undefined') {
@@ -40,18 +34,6 @@ export default function FrameSelectView() {
         setSelectedPhoto(JSON.parse(savedPhoto));
       }
     }
-  }, [setSelectedPhoto]);
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      // 페이지를 떠나기 전에 selectedPhoto 초기화
-      setSelectedPhoto('');
-      // localStorage.setItem('selectedPhoto', JSON.stringify(''));
-    };
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
   }, [setSelectedPhoto]);
 
   if (!isClient) {
@@ -63,7 +45,11 @@ export default function FrameSelectView() {
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex w-full flex-row justify-between px-4">
-        <PreviousPage target={ROUTE_TYPES.HOME} />
+        <PreviousPage
+          target={ROUTE_TYPES.HOME}
+          onClick={() => setSelectedPhoto('')}
+        />
+
         <Link href="/list" className="pr-4">
           <SVGGoToList />
         </Link>
