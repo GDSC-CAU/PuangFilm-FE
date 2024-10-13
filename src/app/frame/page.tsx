@@ -26,7 +26,7 @@ export default function FrameSelectView() {
   const frameHeight = colorOfCircle === '/premiumframe2.png' ? 332 : 290;
   const examplepng = '/resultsample.png'; // ai로 생성된 이미지로 변하게 될 예정
   const imageSrc = selectedPhoto === '' ? examplepng : selectedPhoto;
-  // const path = usePathname();
+  const path = usePathname();
 
   // // setSelectedPhoto('/test.png');
   // useEffect(() => {
@@ -40,6 +40,18 @@ export default function FrameSelectView() {
         setSelectedPhoto(JSON.parse(savedPhoto));
       }
     }
+  }, [setSelectedPhoto]);
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      // 페이지를 떠나기 전에 selectedPhoto 초기화
+      setSelectedPhoto('');
+      // localStorage.setItem('selectedPhoto', JSON.stringify(''));
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, [setSelectedPhoto]);
 
   if (!isClient) {
