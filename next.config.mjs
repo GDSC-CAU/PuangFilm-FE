@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const { AWS_S3_BUCKET, ASW_S3_REGION } = process.env;
 
 const nextConfig = {
   reactStrictMode: false,
@@ -9,6 +10,9 @@ const nextConfig = {
     });
 
     return config;
+  },
+  images: {
+    domains: [`${AWS_S3_BUCKET}.s3.${ASW_S3_REGION}.amazonaws.com`],
   },
 };
 
