@@ -17,9 +17,9 @@ export default function ListView() {
   const setErrorMessage = useSetAtom(errorMessageAtom);
   const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
 
-  const storedToken = window.sessionStorage.getItem('accessToken') || '';
-
   useEffect(() => {
+    const storedToken = window.sessionStorage.getItem('accessToken') || '';
+
     if (storedToken !== '') {
       fetch(
         `${process.env.NEXT_PUBLIC_CLIENT_ADDRESS}:${process.env.NEXT_PUBLIC_CLIENT_PORT}/api/list?code=${storedToken}`,
@@ -39,7 +39,7 @@ export default function ListView() {
         })
         .finally(() => setLoading(false));
     }
-  }, [storedToken, setErrorCheckMessage, setErrorMessage, setList]);
+  }, [setErrorCheckMessage, setErrorMessage, setList]);
 
   return (
     <div className="flex w-full flex-col justify-start bg-background">
