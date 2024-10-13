@@ -17,11 +17,16 @@ import SVGDelete from '@/styles/icons/delete.svg';
 interface ImageUploadProps {
   images: ImageFile[];
   setImages: Dispatch<React.SetStateAction<ImageFile[]>>;
-  min?: number;
-  max?: number;
+  min: number;
+  max: number;
 }
 
-function ImageUpload({ images, setImages, min, max }: ImageUploadProps) {
+function ImageUpload({
+  images,
+  setImages,
+  min = MIN_IMAGE_NUMBER,
+  max = MAX_IMAGE_NUMBER,
+}: ImageUploadProps) {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
@@ -104,7 +109,8 @@ function ImageUpload({ images, setImages, min, max }: ImageUploadProps) {
                 {images.map((image, index) => (
                   // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                   <div
-                    key={`file-image-${image}`}
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={`file-image-${index}`}
                     className="relative aspect-square"
                     onClick={() => handleImageClick(index)}
                   >
@@ -153,10 +159,5 @@ function ImageUpload({ images, setImages, min, max }: ImageUploadProps) {
     </>
   );
 }
-
-ImageUpload.defaultProps = {
-  min: MIN_IMAGE_NUMBER,
-  max: MAX_IMAGE_NUMBER,
-};
 
 export default ImageUpload;
