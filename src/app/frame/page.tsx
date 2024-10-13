@@ -15,12 +15,12 @@ import DownloadImage from '@/utils/DownloadImage';
 import SelectFrame from './_components/SelectFrame';
 
 export default function FrameSelectView() {
-  const savedPhoto = localStorage.getItem('selectedPhoto');
   const [colorOfCircle, setColorOfCircle] = useState<string>('');
   const [isPremiumSelected, setIsPremiumSelected] = useState<boolean>(false);
   const [selectedPhoto, setSelectedPhoto] = useAtom(
     selectedPhotoAtomWithStorage,
   );
+  const [isClient, setIsClient] = useState(false);
   const frametype = isPremiumSelected ? PREMIUM_FRAME_DATA : BASIC_FRAME_DATA;
   const frameWidth = colorOfCircle === '/premiumframe2.png' ? 283 : 239;
   const frameHeight = colorOfCircle === '/premiumframe2.png' ? 332 : 290;
@@ -32,12 +32,19 @@ export default function FrameSelectView() {
   // useEffect(() => {
   //   setSelectedPhoto('');
   // }, [path]);
-
   useEffect(() => {
-    if (savedPhoto) {
-      setSelectedPhoto(JSON.parse(savedPhoto));
+    setIsClient(true);
+    if (typeof window !== 'undefined') {
+      const savedPhoto = localStorage.getItem('selectedPhoto');
+      if (savedPhoto) {
+        setSelectedPhoto(JSON.parse(savedPhoto));
+      }
     }
-  }, [savedPhoto, setSelectedPhoto]);
+  }, [setSelectedPhoto]);
+
+  if (!isClient) {
+    return null;
+  }
   const onCaptureClick = () => {
     DownloadImage({ colorOfCircle, imageSrc, frameWidth, frameHeight });
   };
