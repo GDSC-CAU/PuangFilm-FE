@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { STATUS_ERROR_MSG, STATUS_MSG } from '@/constants';
+import { GENERATION_STATUS_ERROR_MSG, IMG_NOT_READY_MSG } from '@/constants';
 import {
   errorCheckMessageAtom,
   errorMessageAtom,
@@ -42,11 +42,11 @@ export default function WaitingView() {
           if (data.code === 200) {
             setPhotoMade(data.data);
           } else {
-            setErrorMessage(STATUS_MSG);
+            setErrorMessage(IMG_NOT_READY_MSG);
           }
         })
         .catch(() => {
-          setErrorMessage(STATUS_ERROR_MSG);
+          setErrorMessage(GENERATION_STATUS_ERROR_MSG);
         });
     }
   }, [setErrorCheckMessage, setErrorMessage]);
