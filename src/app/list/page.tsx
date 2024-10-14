@@ -3,7 +3,7 @@
 import { useSetAtom } from 'jotai/index';
 import { useEffect, useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
-import { NO_GENERATED_IMAGE_MSG, IMG_LIST_ERROR_MSG } from '@/constants';
+import { IMG_LIST_ERROR_MSG, NO_GENERATED_IMAGE_MSG } from '@/constants';
 import { createdPhotoAtomWithStorage } from '@/store/atoms/atomWithStorage';
 import {
   errorCheckMessageAtom,

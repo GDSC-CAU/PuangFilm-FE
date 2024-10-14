@@ -11,6 +11,7 @@ import {
   errorMessageAtom,
 } from '@/store/atoms/errorMessageAtom';
 import SVGLink from '@/styles/icons/link.svg';
+import { ROUTE_TYPES } from '@/interfaces';
 
 export default function WaitingView() {
   const [url, setUrl] = useState<string>('');
@@ -53,7 +54,7 @@ export default function WaitingView() {
 
   useEffect(() => {
     if (photoMade !== null) {
-      router.push('/frame');
+      router.push(ROUTE_TYPES.FRAME);
     }
   }, [photoMade, router]);
   return (
