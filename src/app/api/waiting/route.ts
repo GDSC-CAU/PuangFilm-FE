@@ -14,14 +14,7 @@ export const GET = async (request: NextRequest) => {
   );
   const jsonData = await response.json();
 
-  return NextResponse.json(
-    {
-      code: jsonData.code,
-      data: jsonData.data,
-      msg: jsonData.msg,
-    },
-    {
-      status: jsonData.code,
-    },
-  );
+  return NextResponse.json(jsonData, {
+    status: jsonData.code,
+  });
 };
