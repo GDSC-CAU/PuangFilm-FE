@@ -44,7 +44,7 @@ export default function ListView() {
         })
         .finally(() => setLoading(false));
     }
-  }, [setErrorCheckMessage, setErrorMessage, setList]);
+  }, [setCreatedPhoto, setErrorCheckMessage, setErrorMessage, setList]);
 
   return (
     <div className="flex w-full flex-col justify-start bg-background">

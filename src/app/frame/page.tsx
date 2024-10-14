@@ -1,9 +1,10 @@
 'use client';
 
 import { useAtom } from 'jotai';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
@@ -16,25 +17,18 @@ import SVGGoToList from '@/styles/icons/gotolist.svg';
 import DownloadImage from '@/utils/DownloadImage';
 import SelectFrame from './_components/SelectFrame';
 
-export default function FrameSelectView() {
+export function FrameSelectView() {
   const [colorOfCircle, setColorOfCircle] = useState<string>('');
   const [isPremiumSelected, setIsPremiumSelected] = useState<boolean>(false);
   const [selectedPhoto, setSelectedPhoto] = useAtom(
     selectedPhotoAtomWithStorage,
   );
-  const [isClient, setIsClient] = useState(false);
   const frametype = isPremiumSelected ? PREMIUM_FRAME_DATA : BASIC_FRAME_DATA;
   const frameWidth = colorOfCircle === '/premiumframe2.png' ? 283 : 239;
   const frameHeight = colorOfCircle === '/premiumframe2.png' ? 332 : 290;
   const [createdPhoto] = useAtom(createdPhotoAtomWithStorage);
   const imageSrc = selectedPhoto === '' ? createdPhoto : selectedPhoto;
-  useEffect(() => {
-    setIsClient(true);
-  }, [setSelectedPhoto]);
 
-  if (!isClient) {
-    return null;
-  }
   const onCaptureClick = () => {
     DownloadImage({ colorOfCircle, imageSrc, frameWidth, frameHeight });
   };
@@ -119,3 +113,6 @@ export default function FrameSelectView() {
     </div>
   );
 }
+export default dynamic(() => Promise.resolve(FrameSelectView), {
+  ssr: false,
+});
