@@ -17,8 +17,7 @@ export default function ListView() {
   const [loading, setLoading] = useState(false);
   const setErrorMessage = useSetAtom(errorMessageAtom);
   const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
-  const createdPhoto = useSetAtom(createdPhotoAtomWithStorage);
-  createdPhoto(list[0]);
+  const setCreatedPhoto = useSetAtom(createdPhotoAtomWithStorage);
 
   useEffect(() => {
     const storedToken = window.sessionStorage.getItem('accessToken') || '';
@@ -31,6 +30,9 @@ export default function ListView() {
         .then(async (data) => {
           if (data.code === 200) {
             setList(data.data);
+            if (data.data.length > 0) {
+              setCreatedPhoto(data.data[0]);
+            }
           } else {
             setErrorMessage(LOGIN_ERROR_MSG);
             setErrorCheckMessage(LOGIN_ERROR_CHECK_MSG);

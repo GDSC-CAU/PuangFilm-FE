@@ -74,14 +74,16 @@ export default function FrameSelectView() {
       <div
         className={`relative flex ${colorOfCircle === '/premiumframe2.png' ? 'h-[332px] w-[283px]' : 'h-[290px] w-[239px]'} justify-center`}
       >
-        <Image
-          src={imageSrc}
-          alt="Sample Image"
-          width={206}
-          height={206}
-          priority
-          className="absolute mt-4"
-        />
+        {imageSrc && (
+          <Image
+            src={imageSrc}
+            alt="Sample Image"
+            width={206}
+            height={206}
+            priority
+            className="absolute mt-4"
+          />
+        )}
         {colorOfCircle && colorOfCircle !== '' && (
           <Image
             src={colorOfCircle}
