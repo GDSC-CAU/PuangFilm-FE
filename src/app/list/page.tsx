@@ -3,7 +3,11 @@
 import { useSetAtom } from 'jotai/index';
 import { useEffect, useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
-import { IMG_LIST_ERROR_MSG, NO_GENERATED_IMAGE_MSG } from '@/constants';
+import {
+  GENERATION_ERROR_CHECK_MSG,
+  IMG_LIST_ERROR_MSG,
+  NO_GENERATED_IMAGE_MSG,
+} from '@/constants';
 import { createdPhotoAtomWithStorage } from '@/store/atoms/atomWithStorage';
 import {
   errorCheckMessageAtom,
@@ -35,10 +39,12 @@ export default function ListView() {
             }
           } else {
             setErrorMessage(NO_GENERATED_IMAGE_MSG);
+            setErrorCheckMessage(GENERATION_ERROR_CHECK_MSG);
           }
         })
         .catch(() => {
           setErrorMessage(IMG_LIST_ERROR_MSG);
+          setErrorCheckMessage(GENERATION_ERROR_CHECK_MSG);
         })
         .finally(() => setLoading(false));
     }

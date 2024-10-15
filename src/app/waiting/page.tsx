@@ -5,13 +5,17 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { GENERATION_STATUS_ERROR_MSG, IMG_NOT_READY_MSG } from '@/constants';
+import {
+  GENERATION_ERROR_CHECK_MSG,
+  GENERATION_STATUS_ERROR_MSG,
+  IMG_NOT_READY_MSG,
+} from '@/constants';
+import { ROUTE_TYPES } from '@/interfaces';
 import {
   errorCheckMessageAtom,
   errorMessageAtom,
 } from '@/store/atoms/errorMessageAtom';
 import SVGLink from '@/styles/icons/link.svg';
-import { ROUTE_TYPES } from '@/interfaces';
 
 export default function WaitingView() {
   const [url, setUrl] = useState<string>('');
@@ -44,10 +48,12 @@ export default function WaitingView() {
             setPhotoMade(data.data);
           } else {
             setErrorMessage(IMG_NOT_READY_MSG);
+            setErrorCheckMessage(GENERATION_ERROR_CHECK_MSG);
           }
         })
         .catch(() => {
           setErrorMessage(GENERATION_STATUS_ERROR_MSG);
+          setErrorCheckMessage(GENERATION_ERROR_CHECK_MSG);
         });
     }
   }, [setErrorCheckMessage, setErrorMessage]);
