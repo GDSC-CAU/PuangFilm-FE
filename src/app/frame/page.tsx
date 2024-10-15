@@ -1,33 +1,45 @@
 'use client';
 
+import { useAtom } from 'jotai';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import { BASIC_FRAME_DATA, PREMIUM_FRAME_DATA } from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
+import {
+  createdPhotoAtomWithStorage,
+  selectedPhotoAtomWithStorage,
+} from '@/store/atoms/atomWithStorage';
 import SVGDownload from '@/styles/icons/download.svg';
 import SVGGoToList from '@/styles/icons/gotolist.svg';
 import DownloadImage from '@/utils/DownloadImage';
 import SelectFrame from './_components/SelectFrame';
 
-export default function FrameSelectView() {
+export function FrameSelectView() {
   const [colorOfCircle, setColorOfCircle] = useState<string>('');
   const [isPremiumSelected, setIsPremiumSelected] = useState<boolean>(false);
-
+  const [selectedPhoto, setSelectedPhoto] = useAtom(
+    selectedPhotoAtomWithStorage,
+  );
   const frametype = isPremiumSelected ? PREMIUM_FRAME_DATA : BASIC_FRAME_DATA;
   const frameWidth = colorOfCircle === '/premiumframe2.png' ? 283 : 239;
   const frameHeight = colorOfCircle === '/premiumframe2.png' ? 332 : 290;
-  const imageSrc = '/resultsample.png'; // 생성된 이미지(임시)
+  const [createdPhoto] = useAtom(createdPhotoAtomWithStorage);
+  const imageSrc = selectedPhoto === '' ? createdPhoto : selectedPhoto;
 
   const onCaptureClick = () => {
     DownloadImage({ colorOfCircle, imageSrc, frameWidth, frameHeight });
   };
-
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex w-full flex-row justify-between px-4">
-        <PreviousPage target={ROUTE_TYPES.HOME} />
+        <PreviousPage
+          target={ROUTE_TYPES.HOME}
+          onClick={() => setSelectedPhoto('')}
+        />
+
         <Link href="/list" className="pr-4">
           <SVGGoToList />
         </Link>
@@ -56,14 +68,16 @@ export default function FrameSelectView() {
       <div
         className={`relative flex ${colorOfCircle === '/premiumframe2.png' ? 'h-[332px] w-[283px]' : 'h-[290px] w-[239px]'} justify-center`}
       >
-        <Image
-          src={imageSrc}
-          alt="Sample Image"
-          width={206}
-          height={206}
-          priority
-          className="absolute mt-4"
-        />
+        {imageSrc && (
+          <Image
+            src={imageSrc}
+            alt="Sample Image"
+            width={206}
+            height={206}
+            priority
+            className="absolute mt-4"
+          />
+        )}
         {colorOfCircle && colorOfCircle !== '' && (
           <Image
             src={colorOfCircle}
@@ -99,3 +113,6 @@ export default function FrameSelectView() {
     </div>
   );
 }
+export default dynamic(() => Promise.resolve(FrameSelectView), {
+  ssr: false,
+});

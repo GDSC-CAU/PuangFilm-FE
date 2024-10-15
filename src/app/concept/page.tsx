@@ -12,7 +12,6 @@ import {
 
 export default function SelectConceptView() {
   const [selectedBox, setSelectedBox] = useAtom(selectedBoxAtom);
-
   const handleBoxClick = (box: GenderStateUnion) => {
     if (selectedBox === box) {
       setSelectedBox(gender.none);
