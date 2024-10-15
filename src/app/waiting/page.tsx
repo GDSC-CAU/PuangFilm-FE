@@ -28,9 +28,7 @@ export function WaitingView() {
   const storedToken = window.sessionStorage.getItem('accessToken') || '';
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setUrl(window.location.href);
-    }
+    setUrl(window.location.href);
   }, []);
 
   const copyToClipboardFunc = () => {
