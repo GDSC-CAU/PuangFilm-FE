@@ -1,6 +1,7 @@
 'use client';
 
 import { useSetAtom } from 'jotai';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -17,13 +18,15 @@ import {
 } from '@/store/atoms/errorMessageAtom';
 import SVGLink from '@/styles/icons/link.svg';
 
-export default function WaitingView() {
+export function WaitingView() {
   const [url, setUrl] = useState<string>('');
   const copyRef = useRef<HTMLButtonElement>(null);
   const setErrorMessage = useSetAtom(errorMessageAtom);
   const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
   const [photoMade, setPhotoMade] = useState<string | null>(null);
   const router = useRouter();
+  const storedToken = window.sessionStorage.getItem('accessToken') || '';
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setUrl(window.location.href);
@@ -36,8 +39,6 @@ export default function WaitingView() {
     }
   };
   useEffect(() => {
-    const storedToken = window.sessionStorage.getItem('accessToken') || '';
-
     if (storedToken !== '') {
       fetch(
         `${process.env.NEXT_PUBLIC_CLIENT_ADDRESS}:${process.env.NEXT_PUBLIC_CLIENT_PORT}/api/status?code=${storedToken}`,
@@ -56,7 +57,7 @@ export default function WaitingView() {
           setErrorCheckMessage(GENERATION_ERROR_CHECK_MSG);
         });
     }
-  }, [setErrorCheckMessage, setErrorMessage]);
+  }, [setErrorCheckMessage, setErrorMessage, storedToken]);
 
   useEffect(() => {
     if (photoMade !== null) {
@@ -116,3 +117,6 @@ export default function WaitingView() {
     </div>
   );
 }
+export default dynamic(() => Promise.resolve(WaitingView), {
+  ssr: false,
+});

@@ -1,6 +1,7 @@
 'use client';
 
 import { useSetAtom } from 'jotai/index';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import {
@@ -16,16 +17,15 @@ import {
 import EmptyList from './_components/EmptyList';
 import ImageList from './_components/ImageList';
 
-export default function ListView() {
+export function ListView() {
   const [list, setList] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const setErrorMessage = useSetAtom(errorMessageAtom);
   const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
   const setCreatedPhoto = useSetAtom(createdPhotoAtomWithStorage);
+  const storedToken = window.sessionStorage.getItem('accessToken') || '';
 
   useEffect(() => {
-    const storedToken = window.sessionStorage.getItem('accessToken') || '';
-
     if (storedToken !== '') {
       fetch(
         `${process.env.NEXT_PUBLIC_CLIENT_ADDRESS}:${process.env.NEXT_PUBLIC_CLIENT_PORT}/api/list?code=${storedToken}`,
@@ -48,7 +48,13 @@ export default function ListView() {
         })
         .finally(() => setLoading(false));
     }
-  }, [setCreatedPhoto, setErrorCheckMessage, setErrorMessage, setList]);
+  }, [
+    setCreatedPhoto,
+    setErrorCheckMessage,
+    setErrorMessage,
+    setList,
+    storedToken,
+  ]);
 
   return (
     <div className="flex w-full flex-col justify-start bg-background">
@@ -61,3 +67,6 @@ export default function ListView() {
     </div>
   );
 }
+export default dynamic(() => Promise.resolve(ListView), {
+  ssr: false,
+});
