@@ -23,14 +23,15 @@ import useModal from '../hooks/useModal';
 
 export function EmailEnterView() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState<string | null>('');
   const [isEmailValid, setIsEmailValid] = useState(false);
-  const [gender] = useAtom(selectedBoxAtom);
+  const [genderString] = useAtom(selectedBoxAtom);
   const [photoOriginUrls] = useAtom(imageUrlsAtom);
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const setErrorMessage = useSetAtom(errorMessageAtom);
   const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
   const storedToken = window.sessionStorage.getItem('accessToken') || '';
+  const gender = genderString === 'female' ? 1 : 0;
   const handleEmailEntered = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
@@ -38,46 +39,40 @@ export function EmailEnterView() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIsEmailValid(emailPattern.test(emailValue));
   };
-
-  const handleEmailSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const postData = {
-      email,
-      gender,
-      photoOriginUrls,
-    };
-
+  const submitPhotoData = async () => {
     if (storedToken !== '') {
-      fetch(`/api/email?code=${storedToken}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${storedToken}`,
-        },
-        body: JSON.stringify(postData),
-      })
-        .then((response) => {
-          return response
-            .json()
-            .then((data) => ({ status: response.status, data }));
-        })
-        .then(({ status }) => {
-          if (status === 200) {
-            router.push(ROUTE_TYPES.WAITING);
-          } else {
-            setErrorMessage(IMG_GENERATED_ERROR_MSG);
-            setErrorCheckMessage(IMG_GENERATED_ERROR_CHECK_MSG);
-          }
-        })
-        .catch(() => {
+      try {
+        const response = await fetch(`/api/email?code=${storedToken}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${storedToken}`,
+          },
+          body: JSON.stringify({ email, gender, photoOriginUrls }),
+        });
+
+        if (response.status === 200) {
+          router.push(ROUTE_TYPES.WAITING);
+        } else {
           setErrorMessage(IMG_GENERATED_ERROR_MSG);
           setErrorCheckMessage(IMG_GENERATED_ERROR_CHECK_MSG);
-        });
+        }
+      } catch (error) {
+        setErrorMessage(IMG_GENERATED_ERROR_MSG);
+        setErrorCheckMessage(IMG_GENERATED_ERROR_CHECK_MSG);
+      }
     }
   };
 
-  const handleMovePage = () => {
+  const handleEmailSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    await submitPhotoData();
+  };
+
+  const handleMovePage = async () => {
     router.push(ROUTE_TYPES.WAITING);
+    setEmail(null);
+    await submitPhotoData();
   };
 
   return (
@@ -104,7 +99,7 @@ export function EmailEnterView() {
           className="mb-12 h-12 w-full rounded-full border-2 border-primary-darkblue bg-background text-center font-sfpro text-xs font-bold placeholder-primary-darkblue placeholder-opacity-20"
           type="email"
           required
-          value={email}
+          value={email ?? ''}
           onChange={handleEmailEntered}
         />
 
