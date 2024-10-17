@@ -4,3 +4,4 @@ export * from './errorMessages';
 export * from './modalText';
 export * from './guideImage';
 export * from './privatePolicyContent';
+export * from './image';

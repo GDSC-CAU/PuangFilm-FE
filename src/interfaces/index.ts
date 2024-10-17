@@ -6,3 +6,4 @@ export * from './frame.interface';
 export * from './route.interface';
 export * from './previous-page.interface';
 export * from './policy.interface';
+export * from './image-file.interface';
