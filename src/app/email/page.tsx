@@ -17,20 +17,8 @@ export function EmailEnterView() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
-  // const gender = useAtom(selectedBoxAtom);
-  const gender = 1;
-  // const photoOriginUrls = useAtom(imageUrlsAtom);
-  const photoOriginUrls = [
-    '/example1.png',
-    '/example2.png',
-    '/example1.png',
-    '/example2.png',
-    '/example1.png',
-    '/example2.png',
-    '/example1.png',
-    '/example2.png',
-  ];
-  // alert(`gender : ${gender} photourl : ${photoOriginUrls}`);
+  const [gender] = useAtom(selectedBoxAtom);
+  const [photoOriginUrls] = useAtom(imageUrlsAtom);
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const storedToken = window.sessionStorage.getItem('accessToken') || '';
   const handleEmailEntered = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,18 +54,13 @@ export function EmailEnterView() {
             .then((data) => ({ status: response.status, data }));
         })
         .then(({ status, data }) => {
-          console.log('Response Data:', data);
           if (status === 200) {
-            console.log('yeaf');
             router.push(ROUTE_TYPES.WAITING);
           } else {
             console.log('else');
           }
         })
-        .catch((error) => {
-          console.error('Error in fetch:', error);
-        })
-        .finally(() => console.log('finally'));
+        .catch((error) => {});
     }
   };
 
