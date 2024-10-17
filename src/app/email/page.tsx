@@ -1,5 +1,7 @@
 'use client';
 
+import { useAtom, useSetAtom } from 'jotai';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -7,13 +9,30 @@ import { CompoundModal } from '@/components/Modal/ModalMain';
 import PreviousPage from '@/components/PreviousPage';
 import { ENTER_EMAIL_TITLE } from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
+import { imageUrlsAtom } from '@/store/atoms/imageUrlAtom';
+import { selectedBoxAtom } from '@/store/atoms/selectedBoxAtom';
 import useModal from '../hooks/useModal';
 
-export default function EmailEnterView() {
+export function EmailEnterView() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
+  // const gender = useAtom(selectedBoxAtom);
+  const gender = 1;
+  // const photoOriginUrls = useAtom(imageUrlsAtom);
+  const photoOriginUrls = [
+    '/example1.png',
+    '/example2.png',
+    '/example1.png',
+    '/example2.png',
+    '/example1.png',
+    '/example2.png',
+    '/example1.png',
+    '/example2.png',
+  ];
+  // alert(`gender : ${gender} photourl : ${photoOriginUrls}`);
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
+  const storedToken = window.sessionStorage.getItem('accessToken') || '';
   const handleEmailEntered = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
@@ -22,10 +41,43 @@ export default function EmailEnterView() {
     setIsEmailValid(emailPattern.test(emailValue));
   };
 
-  const handleEmailSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleEmailSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (isEmailValid) {
-      router.push(ROUTE_TYPES.WAITING);
+
+    const postData = {
+      email,
+      gender,
+      photoOriginUrls,
+    };
+
+    if (storedToken !== '') {
+      fetch(`/api/email?code=${storedToken}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${storedToken}`,
+        },
+        body: JSON.stringify(postData),
+      })
+        .then((response) => {
+          console.log('Response Status:', response.status);
+          return response
+            .json()
+            .then((data) => ({ status: response.status, data }));
+        })
+        .then(({ status, data }) => {
+          console.log('Response Data:', data);
+          if (status === 200) {
+            console.log('yeaf');
+            router.push(ROUTE_TYPES.WAITING);
+          } else {
+            console.log('else');
+          }
+        })
+        .catch((error) => {
+          console.error('Error in fetch:', error);
+        })
+        .finally(() => console.log('finally'));
     }
   };
 
@@ -105,3 +157,6 @@ export default function EmailEnterView() {
     </div>
   );
 }
+export default dynamic(() => Promise.resolve(EmailEnterView), {
+  ssr: false,
+});
