@@ -7,8 +7,16 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { CompoundModal } from '@/components/Modal/ModalMain';
 import PreviousPage from '@/components/PreviousPage';
-import { ENTER_EMAIL_TITLE } from '@/constants';
+import {
+  ENTER_EMAIL_TITLE,
+  IMG_GENERATED_ERROR_CHECK_MSG,
+  IMG_GENERATED_ERROR_MSG,
+} from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
+import {
+  errorCheckMessageAtom,
+  errorMessageAtom,
+} from '@/store/atoms/errorMessageAtom';
 import { imageUrlsAtom } from '@/store/atoms/imageUrlAtom';
 import { selectedBoxAtom } from '@/store/atoms/selectedBoxAtom';
 import useModal from '../hooks/useModal';
@@ -20,6 +28,8 @@ export function EmailEnterView() {
   const [gender] = useAtom(selectedBoxAtom);
   const [photoOriginUrls] = useAtom(imageUrlsAtom);
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
+  const setErrorMessage = useSetAtom(errorMessageAtom);
+  const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
   const storedToken = window.sessionStorage.getItem('accessToken') || '';
   const handleEmailEntered = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value;
@@ -31,7 +41,6 @@ export function EmailEnterView() {
 
   const handleEmailSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const postData = {
       email,
       gender,
@@ -48,19 +57,22 @@ export function EmailEnterView() {
         body: JSON.stringify(postData),
       })
         .then((response) => {
-          console.log('Response Status:', response.status);
           return response
             .json()
             .then((data) => ({ status: response.status, data }));
         })
-        .then(({ status, data }) => {
+        .then(({ status }) => {
           if (status === 200) {
             router.push(ROUTE_TYPES.WAITING);
           } else {
-            console.log('else');
+            setErrorMessage(IMG_GENERATED_ERROR_MSG);
+            setErrorCheckMessage(IMG_GENERATED_ERROR_CHECK_MSG);
           }
         })
-        .catch((error) => {});
+        .catch(() => {
+          setErrorMessage(IMG_GENERATED_ERROR_MSG);
+          setErrorCheckMessage(IMG_GENERATED_ERROR_CHECK_MSG);
+        });
     }
   };
 
