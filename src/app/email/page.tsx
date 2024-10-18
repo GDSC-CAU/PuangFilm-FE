@@ -23,7 +23,7 @@ import useModal from '../hooks/useModal';
 
 export function EmailEnterView() {
   const router = useRouter();
-  const [email, setEmail] = useState<string | null>('');
+  const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [genderString] = useAtom(selectedBoxAtom);
   const [photoOriginUrls] = useAtom(imageUrlsAtom);
@@ -48,7 +48,11 @@ export function EmailEnterView() {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${storedToken}`,
           },
-          body: JSON.stringify({ email, gender, photoOriginUrls }),
+          body: JSON.stringify({
+            email: email || null,
+            gender,
+            photoOriginUrls,
+          }),
         });
 
         if (response.status === 200) {
@@ -71,7 +75,6 @@ export function EmailEnterView() {
 
   const handleMovePage = async () => {
     router.push(ROUTE_TYPES.WAITING);
-    setEmail(null);
     await submitPhotoData();
   };
 
@@ -99,7 +102,7 @@ export function EmailEnterView() {
           className="mb-12 h-12 w-full rounded-full border-2 border-primary-darkblue bg-background text-center font-sfpro text-xs font-bold placeholder-primary-darkblue placeholder-opacity-20"
           type="email"
           required
-          value={email ?? ''}
+          value={email}
           onChange={handleEmailEntered}
         />
 
