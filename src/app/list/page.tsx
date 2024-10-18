@@ -2,6 +2,7 @@
 
 import { useSetAtom } from 'jotai/index';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import PreviousPage from '@/components/PreviousPage';
 import {
@@ -16,6 +17,7 @@ import {
 } from '@/store/atoms/errorMessageAtom';
 import EmptyList from './_components/EmptyList';
 import ImageList from './_components/ImageList';
+import { ROUTE_TYPES } from '@/interfaces';
 
 export function ListView() {
   const [list, setList] = useState<string[]>([]);
@@ -24,6 +26,7 @@ export function ListView() {
   const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
   const setCreatedPhoto = useSetAtom(createdPhotoAtomWithStorage);
   const storedToken = window.sessionStorage.getItem('accessToken') || '';
+  const router = useRouter();
 
   useEffect(() => {
     if (storedToken !== '') {
@@ -40,11 +43,13 @@ export function ListView() {
           } else {
             setErrorMessage(NO_GENERATED_IMAGE_MSG);
             setErrorCheckMessage(GENERATION_ERROR_CHECK_MSG);
+            router.push(ROUTE_TYPES.ERROR);
           }
         })
         .catch(() => {
           setErrorMessage(IMG_LIST_ERROR_MSG);
           setErrorCheckMessage(GENERATION_ERROR_CHECK_MSG);
+          router.push(ROUTE_TYPES.ERROR);
         })
         .finally(() => setLoading(false));
     }

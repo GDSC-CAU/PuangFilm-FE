@@ -10,4 +10,7 @@ export const GENERATION_ERROR_MSG: string = '프로필을 생성하는 실패했
 export const GENERATION_ERROR_CHECK_MSG: string = '이미지를 다시 확인해주세요';
 export const UPLOAD_ERROR_MSG: string = '이미지 업로드에 실패했습니다.';
 export const UPLOAD_ERROR_CHECK_MSG: string = '이미지를 다시 확인해주세요';
-
+export const IMG_GENERATED_ERROR_CHECK_MSG: string =
+  '이미지 데이터를 처리하는 중 오류가 발생했습니다';
+export const IMG_GENERATED_ERROR_MSG: string =
+  '정보를 올바르게 입력하셨는지 확인해주세요';
