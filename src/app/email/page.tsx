@@ -60,10 +60,12 @@ export function EmailEnterView() {
         } else {
           setErrorMessage(IMG_GENERATED_ERROR_MSG);
           setErrorCheckMessage(IMG_GENERATED_ERROR_CHECK_MSG);
+          router.push(ROUTE_TYPES.ERROR);
         }
       } catch (error) {
         setErrorMessage(IMG_GENERATED_ERROR_MSG);
         setErrorCheckMessage(IMG_GENERATED_ERROR_CHECK_MSG);
+        router.push(ROUTE_TYPES.ERROR);
       }
     }
   };

@@ -48,11 +48,13 @@ export function WaitingView() {
           } else {
             setErrorMessage(IMG_NOT_READY_MSG);
             setErrorCheckMessage(GENERATION_ERROR_CHECK_MSG);
+            router.push(ROUTE_TYPES.ERROR);
           }
         })
         .catch(() => {
           setErrorMessage(GENERATION_STATUS_ERROR_MSG);
           setErrorCheckMessage(GENERATION_ERROR_CHECK_MSG);
+          router.push(ROUTE_TYPES.ERROR);
         });
     }
   }, [setErrorCheckMessage, setErrorMessage, storedToken]);
