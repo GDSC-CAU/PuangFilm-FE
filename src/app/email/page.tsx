@@ -9,6 +9,8 @@ import { CompoundModal } from '@/components/Modal/ModalMain';
 import PreviousPage from '@/components/PreviousPage';
 import {
   ENTER_EMAIL_TITLE,
+  GENDER_FEMALE,
+  GENDER_MALE,
   IMG_GENERATED_ERROR_CHECK_MSG,
   IMG_GENERATED_ERROR_MSG,
 } from '@/constants';
@@ -31,7 +33,7 @@ export function EmailEnterView() {
   const setErrorMessage = useSetAtom(errorMessageAtom);
   const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
   const storedToken = window.sessionStorage.getItem('accessToken') || '';
-  const gender = genderString === 'female' ? 1 : 0;
+  const gender = genderString === 'female' ? GENDER_FEMALE : GENDER_MALE;
   const handleEmailEntered = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
