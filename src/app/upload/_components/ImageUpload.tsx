@@ -24,6 +24,7 @@ interface ImageUploadProps {
 function ImageUpload({
   images,
   setImages,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   min = MIN_IMAGE_NUMBER,
   max = MAX_IMAGE_NUMBER,
 }: ImageUploadProps) {
