@@ -16,7 +16,7 @@ const client = new S3Client({
 });
 
 // 이미지를 S3에 업로드하는 함수
-export const POST = async (request: NextRequest): Promise<string | unknown> => {
+export const POST = async (request: NextRequest) => {
   const formData = await request.formData();
   const files = formData.getAll('files') as File[];
 
