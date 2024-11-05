@@ -17,7 +17,7 @@ import SVGGoToList from '@/styles/icons/gotolist.svg';
 import DownloadImage from '@/utils/DownloadImage';
 import SelectFrame from './_components/SelectFrame';
 
-export function FrameSelectView() {
+function FrameSelectView() {
   const [colorOfCircle, setColorOfCircle] = useState<string>('');
   const [isPremiumSelected, setIsPremiumSelected] = useState<boolean>(false);
   const [selectedPhoto, setSelectedPhoto] = useAtom(
