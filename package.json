@@ -8,7 +8,7 @@
     "start": "next start",
     "format": "prettier --cache --write .",
     "prepare": "husky install",
-    "lint": "next lint --cache ."
+    "lint": "next lint ."
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,scss}": [
@@ -23,6 +23,7 @@
     "react": "^18",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18",
+    "sharp": "^0.33.5",
     "react-spring-bottom-sheet": "^3.4.1",
     "uuid": "^10.0.0"
   },

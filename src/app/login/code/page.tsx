@@ -2,7 +2,7 @@
 
 import { useSetAtom } from 'jotai';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { LOGIN_ERROR_CHECK_MSG, LOGIN_ERROR_MSG } from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
 import {
@@ -11,7 +11,7 @@ import {
 } from '@/store/atoms/errorMessageAtom';
 import { actionInsertToken } from '@/store/atoms/tokenActions';
 
-export default function LoginCodePage() {
+function LoginCodeHandler() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const setErrorMessage = useSetAtom(errorMessageAtom);
@@ -42,6 +42,13 @@ export default function LoginCodePage() {
     setErrorCheckMessage,
     setErrorMessage,
   ]);
-
   return <div>로그인 처리중..</div>;
+}
+
+export default function LoginCodePage() {
+  return (
+    <Suspense>
+      <LoginCodeHandler />
+    </Suspense>
+  );
 }

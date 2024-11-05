@@ -1,0 +1,49 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: CI
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: npm package install
+        run: npm ci
+      - name: run eslint
+        run: npm run lint
+      - name: run build process
+        run: npm run build --if-present
+      - name: Analyze bundle sizes
+        uses: transferwise/actions-next-bundle-analyzer@v2
+        with:
+          comment-strategy: 'always'
+      - name: Delete merged branch
+        uses: SvanBoxel/delete-merged-branch@1.4.3
+        with:
+          delete_closed_pr: false
+      - name: Trigger Jenkins Multiple Jobs
+        uses: appleboy/jenkins-action@v0.0.2
+        with:
+          # jenkins base url
+          url: ${{secrets.JENKINS_URL}}
+          # jenkins username
+          user: sangylee
+          # jenkins api token
+          token: ${{secrets.JENKINS_API_TOKEN}}
+          # jenkins job
+          job: puang-web
+
+          
+
