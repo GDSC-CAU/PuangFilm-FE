@@ -61,8 +61,8 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
-                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"'
-                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker pull ${DOCKER_IMAGE}"'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker pull ${DOCKER_IMAGE}"'
                     }
                 }
                 
@@ -73,8 +73,8 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
-                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker stop $CONTAINER_NAME"'
-                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker rm -f $CONTAINER_NAME"'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker stop $CONTAINER_NAME"'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker rm -f $CONTAINER_NAME"'
                     }
                 }
                 
@@ -85,8 +85,8 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
-                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker run -p 3030:3030 --name $CONTAINER_NAME -d ${DOCKER_IMAGE}"'
-                        sh 'ssh ubuntu@${AWS_PUBLIC_URL} "docker image prune --force"'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker run -p 3030:3030 --name $CONTAINER_NAME -d ${DOCKER_IMAGE}"'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker image prune --force"'
                     }
                 }
                 
