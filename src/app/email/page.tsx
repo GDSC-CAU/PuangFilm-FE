@@ -1,19 +1,39 @@
 'use client';
 
+import { useAtom, useSetAtom } from 'jotai';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { CompoundModal } from '@/components/Modal/ModalMain';
 import PreviousPage from '@/components/PreviousPage';
-import { ENTER_EMAIL_TITLE } from '@/constants';
+import {
+  ENTER_EMAIL_TITLE,
+  GENDER_FEMALE,
+  GENDER_MALE,
+  IMG_GENERATED_ERROR_CHECK_MSG,
+  IMG_GENERATED_ERROR_MSG,
+} from '@/constants';
 import { ROUTE_TYPES } from '@/interfaces';
+import {
+  errorCheckMessageAtom,
+  errorMessageAtom,
+} from '@/store/atoms/errorMessageAtom';
+import { imageUrlsAtom } from '@/store/atoms/imageUrlAtom';
+import { selectedBoxAtom } from '@/store/atoms/selectedBoxAtom';
 import useModal from '../hooks/useModal';
 
-export default function EmailEnterView() {
+export function EmailEnterView() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [genderString] = useAtom(selectedBoxAtom);
+  const [photoOriginUrls] = useAtom(imageUrlsAtom);
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
+  const setErrorMessage = useSetAtom(errorMessageAtom);
+  const setErrorCheckMessage = useSetAtom(errorCheckMessageAtom);
+  const storedToken = window.sessionStorage.getItem('accessToken') || '';
+  const gender = genderString === 'female' ? GENDER_FEMALE : GENDER_MALE;
   const handleEmailEntered = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
@@ -21,16 +41,45 @@ export default function EmailEnterView() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIsEmailValid(emailPattern.test(emailValue));
   };
+  const submitPhotoData = async () => {
+    if (storedToken !== '') {
+      try {
+        const response = await fetch(`/api/email?code=${storedToken}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${storedToken}`,
+          },
+          body: JSON.stringify({
+            email: email || null,
+            gender,
+            photoOriginUrls,
+          }),
+        });
 
-  const handleEmailSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (isEmailValid) {
-      router.push(ROUTE_TYPES.WAITING);
+        if (response.status === 200) {
+          router.push(ROUTE_TYPES.WAITING);
+        } else {
+          setErrorMessage(IMG_GENERATED_ERROR_MSG);
+          setErrorCheckMessage(IMG_GENERATED_ERROR_CHECK_MSG);
+          router.push(ROUTE_TYPES.ERROR);
+        }
+      } catch (error) {
+        setErrorMessage(IMG_GENERATED_ERROR_MSG);
+        setErrorCheckMessage(IMG_GENERATED_ERROR_CHECK_MSG);
+        router.push(ROUTE_TYPES.ERROR);
+      }
     }
   };
 
-  const handleMovePage = () => {
+  const handleEmailSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    await submitPhotoData();
+  };
+
+  const handleMovePage = async () => {
     router.push(ROUTE_TYPES.WAITING);
+    await submitPhotoData();
   };
 
   return (
@@ -105,3 +154,6 @@ export default function EmailEnterView() {
     </div>
   );
 }
+export default dynamic(() => Promise.resolve(EmailEnterView), {
+  ssr: false,
+});
