@@ -9,6 +9,8 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub_token')
         DOCKER_IMAGE = "falconlee236/puangfilm-web"
         CONTAINER_NAME = "puangfilm-web"
+        DOCKERHUB_CREDENTIALS_PSW = credentials('DOCKERHUB_pwd')
+        DOCKERHUB_CREDENTIALS_USR = credentials('DOCKERHUB_id')
     }
     
     stages {
