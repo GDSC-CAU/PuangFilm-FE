@@ -17,12 +17,15 @@
     ]
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.670.0",
     "jotai": "^2.9.3",
-    "next": "14.2.5",
+    "next": "14.2.10",
     "react": "^18",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "react-spring-bottom-sheet": "^3.4.1",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
@@ -30,6 +33,7 @@
     "@types/react": "^18",
     "@types/react-copy-to-clipboard": "^5.0.7",
     "@types/react-dom": "^18",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
     "@typescript-eslint/parser": "^7.16.1",
     "autoprefixer": "^10.4.19",
