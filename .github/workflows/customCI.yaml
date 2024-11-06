@@ -6,11 +6,12 @@ name: CI
 on:
   push:
     branches: ['main']
-  pull_request:
+  pull_request_target:
     branches: ['main']
 
 jobs:
   build:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,6 +41,7 @@ jobs:
         uses: transferwise/actions-next-bundle-analyzer@v2
         with:
           comment-strategy: 'always'
+          create-issue: false
       - name: Delete merged branch
         uses: SvanBoxel/delete-merged-branch@1.4.3
         with:

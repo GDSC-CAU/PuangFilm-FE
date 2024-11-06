@@ -17,7 +17,7 @@ pipeline {
         
         stage('github_clone') {
             steps {
-                git branch: 'dev/ci-cd', credentialsId: 'github_token', url: 'https://github.com/falconlee236/PuangFilm-FE-local'
+                git branch: 'main', credentialsId: 'github_token', url: 'https://github.com/GDSC-CAU/PuangFilm-FE'
             }
         }
 
