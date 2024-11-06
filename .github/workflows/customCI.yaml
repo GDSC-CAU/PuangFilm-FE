@@ -10,8 +10,7 @@ on:
     branches: ['main']
 
 permissions:
-    actions: write
-    deployments: write
+    actions: "write"
 
 jobs:
   build:
