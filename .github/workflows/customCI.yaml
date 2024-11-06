@@ -6,12 +6,11 @@ name: CI
 on:
   push:
     branches: ['main']
-  pull_request:
+  pull_request_target:
     branches: ['main']
 
 jobs:
   build:
-    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
