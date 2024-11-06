@@ -18,7 +18,7 @@ import {
 } from '@/store/atoms/errorMessageAtom';
 import SVGLink from '@/styles/icons/link.svg';
 
-export function WaitingView() {
+function WaitingView() {
   const [url, setUrl] = useState<string>('');
   const copyRef = useRef<HTMLButtonElement>(null);
   const setErrorMessage = useSetAtom(errorMessageAtom);

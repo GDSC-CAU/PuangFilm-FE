@@ -17,7 +17,7 @@ import {
 import EmptyList from './_components/EmptyList';
 import ImageList from './_components/ImageList';
 
-export function ListView() {
+function ListView() {
   const [list, setList] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const setErrorMessage = useSetAtom(errorMessageAtom);
