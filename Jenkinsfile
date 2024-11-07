@@ -86,7 +86,7 @@ pipeline {
                 script {
                     sshagent(credentials: ['EC2_SSH']) {
                         sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker run -p 3030:3030 --name $CONTAINER_NAME -d ${DOCKER_IMAGE}"'
-                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker image prune --force"'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@${AWS_PUBLIC_URL} "docker system prune --force --all --volumes"'
                     }
                 }
                 
